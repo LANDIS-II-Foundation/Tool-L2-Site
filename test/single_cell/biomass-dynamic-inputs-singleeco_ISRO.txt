@@ -1,0 +1,7 @@
+LandisData  "Dynamic Input Data"
+>> Year Ecoregion Species ProbEst MaxANPP MaxB
+>> -----------------------------------------
+0	eco1	BF		0.075	700	8885 << ISRO eco1
+0	eco1	PB		0.073	529	17377 << ISRO eco2
+0	eco1	QA		0.057	610	11954 << ISRO eco1
+0	eco1	WS		0.062	617	15443 << ISRO eco1

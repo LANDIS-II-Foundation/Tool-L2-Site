@@ -1,0 +1,55 @@
+LandisData  "Dynamic Ungulate Browse"
+
+Timestep 1
+
+<< Species Inputs >>
+SpeciesTable
+>>				--GrowthReduction--	----Mortality-----
+>> Name		Preference	Threshold	Max	Threshold	Max
+>> --------	----------	---------	---	---------	---
+BF		0.15		0.2	0.6		0.8	0.1
+SM		0.15		0.2	0.6		0.8	0.1
+YB 	0.15		0.2	0.6		0.8	0.1
+PB 		0.25		0.5	0.4		0.9	0.1
+BA		0		0	1		0.8	0.1
+S	0.25		0.5	0.4		0.9	0.1
+JP		0		0	1		0.8	0.1
+WS		0		0	1		0.8	0.1
+BS 		0		0	1		0.8	0.1
+QA		0.30		0.5	0.4		0.9	0.1
+NWC 	0.05		0.2	0.6		0.8	0.1
+
+<< Browser population Inputs >>
+ZoneMap  single1.img
+PopulationFile	DefinedUngulatePopulation.txt  << User-defined population
+<< DynamicPopulationFile  DynamicUngulatePopulation.txt  << Dynamic population - Optional
+ConsumptionRate  893  << kg/yr/individual
+
+<< Forage Inputs >>
+ANPPForageProp		0.66	<<Prop of ANPP that counts as forage
+MinBrowsePropinReach	0.50	<<Min prop of browse within reach for a cohort to be browsed
+BrowseBiomassThreshold	0.05	<<Proportion of ecoregion max biomass when cohort begins to escape browse
+EscapeBrowsePropLong	0.57	<<Prop of longevity when browse is escaped
+
+<< Options >>
+<<GrowthReduction	OFF  << Default is ON
+<<Mortality	OFF  << Default is ON
+<<CountNonForageinSitePref	TRUE	<< Default is FALSE
+<<UseInitBiomassAsForage		FALSE << Default is FALSE
+
+<< HSI Inputs >>
+<< Component		Neighborhood radius (m)  >>
+<< ---------		------------
+ForageQuantity		         321		<< ForageQuantity and/or SitePreference
+SitePreference		        1284
+
+
+<< Output Maps >>
+SitePrefMapNames  		browse/SitePref_{timestep}.gis
+SiteForageMapNames  		browse/SiteForage_{timestep}.gis
+SiteHSIMapNames			browse/HSI_{timestep}.gis
+SitePopulationMapNames		browse/Pop_{timestep}.gis
+BiomassRemovedMapNames  	browse/BioRemoved_{timestep}.gis
+
+<< Output Logs >>
+LogFile  browse/browse_log.csv

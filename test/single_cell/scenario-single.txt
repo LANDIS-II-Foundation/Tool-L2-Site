@@ -1,0 +1,26 @@
+LandisData  Scenario
+
+Duration                          200        <<years
+
+Species                           "species_ISRO.txt"
+
+Ecoregions                        "ecoregions_single1.txt"
+
+EcoregionsMap                     "single1.IMG"
+
+CellLength                        100 <<meters, so cell area = 1 ha
+
+>> Succession Extension     	Initialization File
+>>     --------------------             -------------------
+   "Biomass Succession vBrowse"      	"biomass-succession-single1-QA10.txt"
+
+
+>> Disturbance Extensions   Initialization File
+>> ----------------------              -------------------
+"Deer Browse"			"DynamicUngulateBrowse.txt"  
+         
+
+>> Output Extensions        Initialization File
+>> -----------------                   -------------------
+  "Output Biomass vBrowse"		"output-biomass.txt"
+

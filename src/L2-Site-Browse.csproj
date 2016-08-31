@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SiteVegCalc</RootNamespace>
-    <AssemblyName>LANDIS-II-Site_V2.4</AssemblyName>
+    <AssemblyName>L2-Site-Browse</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>

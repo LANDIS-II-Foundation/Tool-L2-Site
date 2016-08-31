@@ -3894,6 +3894,7 @@ namespace SiteVegCalcV2_3
 
                                             double[] firstPassRemovalList = new double[cohortList.Count];
                                             double firstPassRemoval = 0;
+                                            double firstPassRemovalInt = 0;
                                             int cohortLoop = 0;
                                             foreach (Cohort cohort in cohortList)
                                             {
@@ -3924,6 +3925,7 @@ namespace SiteVegCalcV2_3
                                                 }
                                                 double availForage = currentForageList[cohortLoop];
                                                 firstPassRemoval += availForage * browsePref;
+                                                firstPassRemovalInt += Math.Round(availForage * browsePref);
                                                 firstPassRemovalList[cohortLoop] = availForage * browsePref;
 
                                                 cohortLoop++;
@@ -3934,9 +3936,11 @@ namespace SiteVegCalcV2_3
                                             double[] adjFirstPassRemovalList = new double[cohortList.Count];
                                             double[] remainingBrowseList = new double[cohortList.Count];
                                             double adjFirstPassRemoval = firstPassRemoval;
+                                            double adjFirstPassRemovalInt = firstPassRemovalInt;
                                             if (firstPassRemoval > siteBrowseRemoved)
                                             {
                                                 adjFirstPassRemoval = 0;
+                                                adjFirstPassRemovalInt = 0;
                                                 int removalIndex = 0;
                                                 foreach (var i in firstPassRemovalList)
                                                 {
@@ -3944,6 +3948,7 @@ namespace SiteVegCalcV2_3
                                                     double adjFirstRemoval = firstRemoval * siteBrowseRemoved / firstPassRemoval;
                                                     adjFirstPassRemovalList[removalIndex] = adjFirstRemoval;
                                                     adjFirstPassRemoval += adjFirstRemoval;
+                                                    adjFirstPassRemovalInt += Math.Round(adjFirstRemoval);
                                                     removalIndex++;
                                                 }
                                             }
@@ -3957,7 +3962,7 @@ namespace SiteVegCalcV2_3
                                                 remainingBrowseList[adjIndex] = currentForageList[adjIndex] - adjFirstPassRemovalList[adjIndex];
                                                 adjIndex++;
                                             }
-                                            double unallocatedBrowse = siteBrowseRemoved - firstPassRemoval;
+                                            double unallocatedBrowse = siteBrowseToBeRemoved - adjFirstPassRemovalInt;
                                             //Browse - allocate second pass of browse removal to cohorts
                                             // second pass removes all of most preferred before moving down in preference
                                             double[] secondPassRemovalList = new double[cohortList.Count];
