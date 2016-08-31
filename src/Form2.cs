@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace SiteVegCalc
+namespace SiteVegCalcV2_3
 {
     public partial class Form2 : Form
     {

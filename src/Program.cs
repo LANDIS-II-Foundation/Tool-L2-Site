@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace SiteVegCalc
+namespace SiteVegCalcV2_3
 {
     static class Program
     {

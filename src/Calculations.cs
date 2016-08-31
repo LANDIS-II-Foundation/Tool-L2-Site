@@ -7,9 +7,10 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using Landis.Biomass;
+using System.Linq;
 
 
-namespace SiteVegCalc
+namespace SiteVegCalcV2_3
 {
     public class Calculations
     {
@@ -113,10 +114,6 @@ namespace SiteVegCalc
             M_BIO = actualANPP * (2.0 * B_AP) / (1.0 + B_AP) * B_PM;
             //  Mortality should not exceed the amount of living biomass
             M_BIO = Math.Min(bio, M_BIO);
-            
-            //  Age-related mortality is discounted from growth-related
-            //  mortality to prevent the under-estimation of mortality.  Cannot be negative.
-            M_BIO = Math.Max(0, M_BIO - mortalityAge);
 
             return M_BIO;
         }
@@ -145,7 +142,72 @@ namespace SiteVegCalc
             //PlugIn.ModelCore.Log.WriteLine("Competition:  spp={0}, age={1}, CMultiplier={2:0}, CMultTotal={3:0}, CI={4:0.00}.", cohort.Species.Name, cohort.Age, CMultiplier, CMultTotal, Cfraction);
 
             return Cfraction;
+        }
 
+        public static List<double> CalculateCohortPropInReach(List<Cohort> cohortList, double biomassThreshold, double minBrowseProp, double maxBrowseAge)
+        {
+            List<double> propInReachList = new List<double>(cohortList.Count);
+
+            //List<double> sortedBiomass = new List<double>(cohortList.Count);
+           double[] sortedProportion = new double[cohortList.Count];
+
+            //List<Cohort> sortedCohortList = cohortList;
+            //sortedCohortList.OrderBy(cohort => cohort.Biomass);
+           var sortedCohortList = cohortList.OrderBy(cohort => cohort.Biomass).ToList();
+
+            int sortedBioIndex = 0;
+            double remainingThreshold = biomassThreshold;
+            foreach (ICohort cohort in sortedCohortList)
+            {
+                double propInReach = 0;
+                if (cohort.Age < (cohort.Species.Longevity * maxBrowseAge))
+                {
+                    //sortedBiomass[sortedBioIndex] = cohort.Biomass;
+                    if (cohort.Biomass <= remainingThreshold)
+                    {
+                        propInReach = 1.0;
+                        remainingThreshold -= cohort.Biomass;
+                    }
+                    else
+                    {
+                        double tempPropInReach = (remainingThreshold / cohort.Biomass);
+                        if (tempPropInReach < minBrowseProp)
+                            propInReach = 0;
+                        else
+                            propInReach = tempPropInReach;
+                        remainingThreshold = 0;
+                    }
+                }
+                sortedProportion[sortedBioIndex] = propInReach;
+                sortedBioIndex++;
+            }
+
+            int cohortIndex = 0;
+            foreach(ICohort cohort in cohortList)
+            {
+                int sortedIndex = 0;
+                foreach (ICohort xcohort in sortedCohortList)
+                {
+                    if (xcohort == cohort)
+                    {
+                        propInReachList.Add(sortedProportion[sortedIndex]);
+                    }
+                    sortedIndex++;
+                }
+                cohortIndex++;
+            }
+
+            return propInReachList;
+        }
+
+        public static double CalculateReduction(double threshold, double max, double propBrowse)
+        {
+            double reduction = 0;
+            if(propBrowse > threshold)
+            {
+                reduction = (max/(1.0-threshold))*propBrowse-threshold*(max/(1-threshold));
+            }
+            return reduction;
 
         }
     }

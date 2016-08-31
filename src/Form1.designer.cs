@@ -1,4 +1,4 @@
-namespace SiteVegCalc
+namespace SiteVegCalcV2_3
 {
     partial class Form1
     {
@@ -56,8 +56,8 @@ namespace SiteVegCalc
             this.buttonRUN = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.rbAgeList = new System.Windows.Forms.RadioButton();
-            this.rbV3 = new System.Windows.Forms.RadioButton();
-            this.rbV2 = new System.Windows.Forms.RadioButton();
+            this.rbV35 = new System.Windows.Forms.RadioButton();
+            this.rbV30 = new System.Windows.Forms.RadioButton();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.graph1 = new ZedGraph.ZedGraphControl();
             this.tab1 = new System.Windows.Forms.TabControl();
@@ -74,6 +74,18 @@ namespace SiteVegCalc
             this.graph9 = new ZedGraph.ZedGraphControl();
             this.tabPage12 = new System.Windows.Forms.TabPage();
             this.graph10 = new ZedGraph.ZedGraphControl();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.graph11 = new ZedGraph.ZedGraphControl();
+            this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.graph12 = new ZedGraph.ZedGraphControl();
+            this.tabPage13 = new System.Windows.Forms.TabPage();
+            this.graph13 = new ZedGraph.ZedGraphControl();
+            this.tabPage14 = new System.Windows.Forms.TabPage();
+            this.graph14 = new ZedGraph.ZedGraphControl();
+            this.tab15 = new System.Windows.Forms.TabPage();
+            this.graph15 = new ZedGraph.ZedGraphControl();
+            this.tabPage15 = new System.Windows.Forms.TabPage();
+            this.graph16 = new ZedGraph.ZedGraphControl();
             this.buttonClear = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
@@ -266,8 +278,21 @@ namespace SiteVegCalc
             this.tbPlant6 = new System.Windows.Forms.TextBox();
             this.tbSeedYear6 = new System.Windows.Forms.TextBox();
             this.tbSEC6 = new System.Windows.Forms.TextBox();
+            this.tbPref6 = new System.Windows.Forms.TextBox();
+            this.tbPref5 = new System.Windows.Forms.TextBox();
+            this.tbPref4 = new System.Windows.Forms.TextBox();
+            this.tbPref3 = new System.Windows.Forms.TextBox();
+            this.tbPref2 = new System.Windows.Forms.TextBox();
+            this.tbPref1 = new System.Windows.Forms.TextBox();
+            this.label47 = new System.Windows.Forms.Label();
+            this.tbMast6 = new System.Windows.Forms.TextBox();
+            this.tbMast5 = new System.Windows.Forms.TextBox();
+            this.tbMast4 = new System.Windows.Forms.TextBox();
+            this.tbMast3 = new System.Windows.Forms.TextBox();
+            this.tbMast2 = new System.Windows.Forms.TextBox();
+            this.tbMast1 = new System.Windows.Forms.TextBox();
+            this.label48 = new System.Windows.Forms.Label();
             this.label99 = new System.Windows.Forms.Label();
-            this.tbRandSeed = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.tbOutputFolder = new System.Windows.Forms.TextBox();
             this.cbOutputFolder = new System.Windows.Forms.CheckBox();
@@ -339,7 +364,99 @@ namespace SiteVegCalc
             this.label31 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.tbMortMax6 = new System.Windows.Forms.TextBox();
+            this.tbMortMax5 = new System.Windows.Forms.TextBox();
+            this.tbMortMax4 = new System.Windows.Forms.TextBox();
+            this.tbMortMax3 = new System.Windows.Forms.TextBox();
+            this.tbMortMax2 = new System.Windows.Forms.TextBox();
+            this.tbMortMax1 = new System.Windows.Forms.TextBox();
+            this.label83 = new System.Windows.Forms.Label();
+            this.tbMortThresh6 = new System.Windows.Forms.TextBox();
+            this.tbMortThresh5 = new System.Windows.Forms.TextBox();
+            this.tbMortThresh4 = new System.Windows.Forms.TextBox();
+            this.tbMortThresh3 = new System.Windows.Forms.TextBox();
+            this.tbMortThresh2 = new System.Windows.Forms.TextBox();
+            this.tbMortThresh1 = new System.Windows.Forms.TextBox();
+            this.label84 = new System.Windows.Forms.Label();
+            this.tbGrowRedMax6 = new System.Windows.Forms.TextBox();
+            this.tbGrowRedMax5 = new System.Windows.Forms.TextBox();
+            this.tbGrowRedMax4 = new System.Windows.Forms.TextBox();
+            this.tbGrowRedMax3 = new System.Windows.Forms.TextBox();
+            this.tbGrowRedMax2 = new System.Windows.Forms.TextBox();
+            this.tbGrowRedMax1 = new System.Windows.Forms.TextBox();
+            this.label82 = new System.Windows.Forms.Label();
+            this.tbGrowRedThresh6 = new System.Windows.Forms.TextBox();
+            this.tbGrowRedThresh5 = new System.Windows.Forms.TextBox();
+            this.tbGrowRedThresh4 = new System.Windows.Forms.TextBox();
+            this.tbGrowRedThresh3 = new System.Windows.Forms.TextBox();
+            this.tbGrowRedThresh2 = new System.Windows.Forms.TextBox();
+            this.tbGrowRedThresh1 = new System.Windows.Forms.TextBox();
+            this.label52 = new System.Windows.Forms.Label();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.label61 = new System.Windows.Forms.Label();
+            this.cbMortality = new System.Windows.Forms.CheckBox();
+            this.cbGrowthReduction = new System.Windows.Forms.CheckBox();
+            this.label85 = new System.Windows.Forms.Label();
+            this.cbANPPOnly = new System.Windows.Forms.CheckBox();
+            this.cbNonForageSitePref = new System.Windows.Forms.CheckBox();
+            this.label80 = new System.Windows.Forms.Label();
+            this.label79 = new System.Windows.Forms.Label();
+            this.label75 = new System.Windows.Forms.Label();
+            this.tbMinPropBrowse = new System.Windows.Forms.TextBox();
+            this.label78 = new System.Windows.Forms.Label();
+            this.tbFracANPPBrowse = new System.Windows.Forms.TextBox();
+            this.label77 = new System.Windows.Forms.Label();
+            this.label74 = new System.Windows.Forms.Label();
+            this.label73 = new System.Windows.Forms.Label();
+            this.tbAgeBrowseEscape = new System.Windows.Forms.TextBox();
+            this.label72 = new System.Windows.Forms.Label();
+            this.label71 = new System.Windows.Forms.Label();
+            this.label70 = new System.Windows.Forms.Label();
+            this.label69 = new System.Windows.Forms.Label();
+            this.label68 = new System.Windows.Forms.Label();
+            this.tbBrowseBioThresh_prop = new System.Windows.Forms.TextBox();
+            this.tbBrowseBioThresh_bio = new System.Windows.Forms.TextBox();
+            this.label67 = new System.Windows.Forms.Label();
+            this.label66 = new System.Windows.Forms.Label();
+            this.tbBDI = new System.Windows.Forms.TextBox();
+            this.cbBDI = new System.Windows.Forms.CheckBox();
+            this.label65 = new System.Windows.Forms.Label();
+            this.label62 = new System.Windows.Forms.Label();
+            this.label76 = new System.Windows.Forms.Label();
+            this.tbInitPop = new System.Windows.Forms.TextBox();
+            this.label60 = new System.Windows.Forms.Label();
+            this.tbBrowseStart = new System.Windows.Forms.TextBox();
+            this.label59 = new System.Windows.Forms.Label();
+            this.tbAvgSiteForage = new System.Windows.Forms.TextBox();
+            this.label58 = new System.Windows.Forms.Label();
+            this.tbPopHarv = new System.Windows.Forms.TextBox();
+            this.label57 = new System.Windows.Forms.Label();
+            this.tbPopPred = new System.Windows.Forms.TextBox();
+            this.label56 = new System.Windows.Forms.Label();
+            this.tbPopMort = new System.Windows.Forms.TextBox();
+            this.label55 = new System.Windows.Forms.Label();
+            this.tbPopR = new System.Windows.Forms.TextBox();
+            this.label54 = new System.Windows.Forms.Label();
+            this.tbAvgSitePref = new System.Windows.Forms.TextBox();
+            this.label53 = new System.Windows.Forms.Label();
+            this.rbSameAsTarget = new System.Windows.Forms.RadioButton();
+            this.rbNotSameAsTarget = new System.Windows.Forms.RadioButton();
+            this.tbCellSize = new System.Windows.Forms.TextBox();
+            this.label51 = new System.Windows.Forms.Label();
+            this.tbLandscapeSize = new System.Windows.Forms.TextBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.tbConsume = new System.Windows.Forms.TextBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.label81 = new System.Windows.Forms.Label();
+            this.tbPrefNbrRad = new System.Windows.Forms.TextBox();
+            this.tbQuantityNbrRad = new System.Windows.Forms.TextBox();
+            this.rbHSIBoth = new System.Windows.Forms.RadioButton();
+            this.rbHSIQuantity = new System.Windows.Forms.RadioButton();
+            this.rbHSIPref = new System.Windows.Forms.RadioButton();
             this.cbRandSeed = new System.Windows.Forms.CheckBox();
+            this.tbRandSeed = new System.Windows.Forms.TextBox();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbNumberSpp)).BeginInit();
@@ -352,6 +469,12 @@ namespace SiteVegCalc
             this.tabPage7.SuspendLayout();
             this.tabPage11.SuspendLayout();
             this.tabPage12.SuspendLayout();
+            this.tabPage8.SuspendLayout();
+            this.tabPage10.SuspendLayout();
+            this.tabPage13.SuspendLayout();
+            this.tabPage14.SuspendLayout();
+            this.tab15.SuspendLayout();
+            this.tabPage15.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -360,6 +483,9 @@ namespace SiteVegCalc
             this.groupBox8.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox7.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            this.groupBox10.SuspendLayout();
+            this.groupBox11.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox4
@@ -408,7 +534,7 @@ namespace SiteVegCalc
             this.tbLandMaxBio.Name = "tbLandMaxBio";
             this.tbLandMaxBio.Size = new System.Drawing.Size(50, 20);
             this.tbLandMaxBio.TabIndex = 26;
-            this.tbLandMaxBio.Text = "25535";
+            this.tbLandMaxBio.Text = "20000";
             this.tbLandMaxBio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbLandMaxBio, "Maximum aboveground biomass (kg/ha)");
             // 
@@ -585,7 +711,7 @@ namespace SiteVegCalc
             this.tbTimestep.Name = "tbTimestep";
             this.tbTimestep.Size = new System.Drawing.Size(40, 20);
             this.tbTimestep.TabIndex = 7;
-            this.tbTimestep.Text = "10";
+            this.tbTimestep.Text = "1";
             this.tbTimestep.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbTimestep, "Length of simulation in years");
             // 
@@ -642,8 +768,8 @@ namespace SiteVegCalc
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.rbAgeList);
-            this.groupBox5.Controls.Add(this.rbV3);
-            this.groupBox5.Controls.Add(this.rbV2);
+            this.groupBox5.Controls.Add(this.rbV35);
+            this.groupBox5.Controls.Add(this.rbV30);
             this.groupBox5.Location = new System.Drawing.Point(16, 237);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(115, 94);
@@ -662,31 +788,30 @@ namespace SiteVegCalc
             this.rbAgeList.UseVisualStyleBackColor = true;
             this.rbAgeList.CheckedChanged += new System.EventHandler(this.rbVer_CheckedChanged);
             // 
-            // rbV3
+            // rbV35
             // 
-            this.rbV3.Enabled = false;
-            this.rbV3.Location = new System.Drawing.Point(6, 69);
-            this.rbV3.Name = "rbV3";
-            this.rbV3.Size = new System.Drawing.Size(104, 19);
-            this.rbV3.TabIndex = 2;
-            this.rbV3.Text = "Biomass V3.5";
-            this.toolTip1.SetToolTip(this.rbV3, "Biomass Succession V2.1");
-            this.rbV3.UseVisualStyleBackColor = true;
-            this.rbV3.Visible = false;
-            this.rbV3.CheckedChanged += new System.EventHandler(this.rbVer_CheckedChanged);
+            this.rbV35.Location = new System.Drawing.Point(6, 69);
+            this.rbV35.Name = "rbV35";
+            this.rbV35.Size = new System.Drawing.Size(104, 19);
+            this.rbV35.TabIndex = 2;
+            this.rbV35.Text = "Biomass V3.5";
+            this.toolTip1.SetToolTip(this.rbV35, "Biomass Succession V2.1");
+            this.rbV35.UseVisualStyleBackColor = true;
+            this.rbV35.Visible = false;
+            this.rbV35.CheckedChanged += new System.EventHandler(this.rbVer_CheckedChanged);
             // 
-            // rbV2
+            // rbV30
             // 
-            this.rbV2.Checked = true;
-            this.rbV2.Location = new System.Drawing.Point(6, 48);
-            this.rbV2.Name = "rbV2";
-            this.rbV2.Size = new System.Drawing.Size(104, 19);
-            this.rbV2.TabIndex = 0;
-            this.rbV2.TabStop = true;
-            this.rbV2.Text = "Biomass V3.2";
-            this.toolTip1.SetToolTip(this.rbV2, "Biomass Succession V3.2");
-            this.rbV2.UseVisualStyleBackColor = true;
-            this.rbV2.CheckedChanged += new System.EventHandler(this.rbVer_CheckedChanged);
+            this.rbV30.Checked = true;
+            this.rbV30.Location = new System.Drawing.Point(6, 48);
+            this.rbV30.Name = "rbV30";
+            this.rbV30.Size = new System.Drawing.Size(104, 19);
+            this.rbV30.TabIndex = 0;
+            this.rbV30.TabStop = true;
+            this.rbV30.Text = "Biomass V3.2";
+            this.toolTip1.SetToolTip(this.rbV30, "Biomass Succession V3.0");
+            this.rbV30.UseVisualStyleBackColor = true;
+            this.rbV30.CheckedChanged += new System.EventHandler(this.rbVer_CheckedChanged);
             // 
             // buttonCancel
             // 
@@ -722,7 +847,13 @@ namespace SiteVegCalc
             this.tab1.Controls.Add(this.tabPage7);
             this.tab1.Controls.Add(this.tabPage11);
             this.tab1.Controls.Add(this.tabPage12);
-            this.tab1.Location = new System.Drawing.Point(16, 544);
+            this.tab1.Controls.Add(this.tabPage8);
+            this.tab1.Controls.Add(this.tabPage10);
+            this.tab1.Controls.Add(this.tabPage13);
+            this.tab1.Controls.Add(this.tabPage14);
+            this.tab1.Controls.Add(this.tab15);
+            this.tab1.Controls.Add(this.tabPage15);
+            this.tab1.Location = new System.Drawing.Point(16, 706);
             this.tab1.Name = "tab1";
             this.tab1.SelectedIndex = 0;
             this.tab1.Size = new System.Drawing.Size(683, 330);
@@ -887,6 +1018,156 @@ namespace SiteVegCalc
             this.graph10.ScrollMinY2 = 0D;
             this.graph10.Size = new System.Drawing.Size(673, 300);
             this.graph10.TabIndex = 1;
+            // 
+            // tabPage8
+            // 
+            this.tabPage8.Controls.Add(this.graph11);
+            this.tabPage8.Location = new System.Drawing.Point(4, 22);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(675, 304);
+            this.tabPage8.TabIndex = 10;
+            this.tabPage8.Text = "Population";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // graph11
+            // 
+            this.graph11.Location = new System.Drawing.Point(1, 2);
+            this.graph11.Name = "graph11";
+            this.graph11.ScrollGrace = 0D;
+            this.graph11.ScrollMaxX = 0D;
+            this.graph11.ScrollMaxY = 0D;
+            this.graph11.ScrollMaxY2 = 0D;
+            this.graph11.ScrollMinX = 0D;
+            this.graph11.ScrollMinY = 0D;
+            this.graph11.ScrollMinY2 = 0D;
+            this.graph11.Size = new System.Drawing.Size(673, 300);
+            this.graph11.TabIndex = 2;
+            // 
+            // tabPage10
+            // 
+            this.tabPage10.Controls.Add(this.graph12);
+            this.tabPage10.Location = new System.Drawing.Point(4, 22);
+            this.tabPage10.Name = "tabPage10";
+            this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage10.Size = new System.Drawing.Size(675, 304);
+            this.tabPage10.TabIndex = 11;
+            this.tabPage10.Text = "HSI";
+            this.tabPage10.UseVisualStyleBackColor = true;
+            // 
+            // graph12
+            // 
+            this.graph12.Location = new System.Drawing.Point(1, 2);
+            this.graph12.Name = "graph12";
+            this.graph12.ScrollGrace = 0D;
+            this.graph12.ScrollMaxX = 0D;
+            this.graph12.ScrollMaxY = 0D;
+            this.graph12.ScrollMaxY2 = 0D;
+            this.graph12.ScrollMinX = 0D;
+            this.graph12.ScrollMinY = 0D;
+            this.graph12.ScrollMinY2 = 0D;
+            this.graph12.Size = new System.Drawing.Size(673, 300);
+            this.graph12.TabIndex = 3;
+            // 
+            // tabPage13
+            // 
+            this.tabPage13.Controls.Add(this.graph13);
+            this.tabPage13.Location = new System.Drawing.Point(4, 22);
+            this.tabPage13.Name = "tabPage13";
+            this.tabPage13.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage13.Size = new System.Drawing.Size(675, 304);
+            this.tabPage13.TabIndex = 12;
+            this.tabPage13.Text = "Site Preference";
+            this.tabPage13.UseVisualStyleBackColor = true;
+            // 
+            // graph13
+            // 
+            this.graph13.Location = new System.Drawing.Point(1, 2);
+            this.graph13.Name = "graph13";
+            this.graph13.ScrollGrace = 0D;
+            this.graph13.ScrollMaxX = 0D;
+            this.graph13.ScrollMaxY = 0D;
+            this.graph13.ScrollMaxY2 = 0D;
+            this.graph13.ScrollMinX = 0D;
+            this.graph13.ScrollMinY = 0D;
+            this.graph13.ScrollMinY2 = 0D;
+            this.graph13.Size = new System.Drawing.Size(673, 300);
+            this.graph13.TabIndex = 4;
+            // 
+            // tabPage14
+            // 
+            this.tabPage14.Controls.Add(this.graph14);
+            this.tabPage14.Location = new System.Drawing.Point(4, 22);
+            this.tabPage14.Name = "tabPage14";
+            this.tabPage14.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage14.Size = new System.Drawing.Size(675, 304);
+            this.tabPage14.TabIndex = 13;
+            this.tabPage14.Text = "Forage";
+            this.tabPage14.UseVisualStyleBackColor = true;
+            // 
+            // graph14
+            // 
+            this.graph14.Location = new System.Drawing.Point(1, 2);
+            this.graph14.Name = "graph14";
+            this.graph14.ScrollGrace = 0D;
+            this.graph14.ScrollMaxX = 0D;
+            this.graph14.ScrollMaxY = 0D;
+            this.graph14.ScrollMaxY2 = 0D;
+            this.graph14.ScrollMinX = 0D;
+            this.graph14.ScrollMinY = 0D;
+            this.graph14.ScrollMinY2 = 0D;
+            this.graph14.Size = new System.Drawing.Size(673, 300);
+            this.graph14.TabIndex = 5;
+            // 
+            // tab15
+            // 
+            this.tab15.Controls.Add(this.graph15);
+            this.tab15.Location = new System.Drawing.Point(4, 22);
+            this.tab15.Name = "tab15";
+            this.tab15.Padding = new System.Windows.Forms.Padding(3);
+            this.tab15.Size = new System.Drawing.Size(675, 304);
+            this.tab15.TabIndex = 14;
+            this.tab15.Text = "Forage in Reach";
+            this.tab15.UseVisualStyleBackColor = true;
+            // 
+            // graph15
+            // 
+            this.graph15.Location = new System.Drawing.Point(1, 2);
+            this.graph15.Name = "graph15";
+            this.graph15.ScrollGrace = 0D;
+            this.graph15.ScrollMaxX = 0D;
+            this.graph15.ScrollMaxY = 0D;
+            this.graph15.ScrollMaxY2 = 0D;
+            this.graph15.ScrollMinX = 0D;
+            this.graph15.ScrollMinY = 0D;
+            this.graph15.ScrollMinY2 = 0D;
+            this.graph15.Size = new System.Drawing.Size(673, 300);
+            this.graph15.TabIndex = 6;
+            // 
+            // tabPage15
+            // 
+            this.tabPage15.Controls.Add(this.graph16);
+            this.tabPage15.Location = new System.Drawing.Point(4, 22);
+            this.tabPage15.Name = "tabPage15";
+            this.tabPage15.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage15.Size = new System.Drawing.Size(675, 304);
+            this.tabPage15.TabIndex = 15;
+            this.tabPage15.Text = "Browsed";
+            this.tabPage15.UseVisualStyleBackColor = true;
+            // 
+            // graph16
+            // 
+            this.graph16.Location = new System.Drawing.Point(1, 2);
+            this.graph16.Name = "graph16";
+            this.graph16.ScrollGrace = 0D;
+            this.graph16.ScrollMaxX = 0D;
+            this.graph16.ScrollMaxY = 0D;
+            this.graph16.ScrollMaxY2 = 0D;
+            this.graph16.ScrollMinX = 0D;
+            this.graph16.ScrollMinY = 0D;
+            this.graph16.ScrollMinY2 = 0D;
+            this.graph16.Size = new System.Drawing.Size(673, 300);
+            this.graph16.TabIndex = 7;
             // 
             // buttonClear
             // 
@@ -1122,7 +1403,7 @@ namespace SiteVegCalc
             this.tbLongevity.Name = "tbLongevity";
             this.tbLongevity.Size = new System.Drawing.Size(40, 20);
             this.tbLongevity.TabIndex = 11;
-            this.tbLongevity.Text = "130";
+            this.tbLongevity.Text = "170";
             this.tbLongevity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbLongevity, "Species longevity in years");
             this.tbLongevity.Leave += new System.EventHandler(this.tbLongevity_Leave);
@@ -1144,7 +1425,7 @@ namespace SiteVegCalc
             this.tbLongevity2.Name = "tbLongevity2";
             this.tbLongevity2.Size = new System.Drawing.Size(40, 20);
             this.tbLongevity2.TabIndex = 20;
-            this.tbLongevity2.Text = "160";
+            this.tbLongevity2.Text = "200";
             this.tbLongevity2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbLongevity2, "Species longevity in years");
             this.tbLongevity2.Leave += new System.EventHandler(this.tbLongevity_Leave);
@@ -1166,7 +1447,7 @@ namespace SiteVegCalc
             this.tbPower3.Name = "tbPower3";
             this.tbPower3.Size = new System.Drawing.Size(40, 20);
             this.tbPower3.TabIndex = 44;
-            this.tbPower3.Text = "1.0";
+            this.tbPower3.Text = "0.9";
             this.tbPower3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbPower3, "Power coefficient that regulates the steepness of ANPP curve.  A lower value resu" +
         "lts in maximum ANPP being reached faster.");
@@ -1177,7 +1458,7 @@ namespace SiteVegCalc
             this.tbLongevity3.Name = "tbLongevity3";
             this.tbLongevity3.Size = new System.Drawing.Size(40, 20);
             this.tbLongevity3.TabIndex = 29;
-            this.tbLongevity3.Text = "175";
+            this.tbLongevity3.Text = "200";
             this.tbLongevity3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbLongevity3, "Species longevity in years");
             this.tbLongevity3.Leave += new System.EventHandler(this.tbLongevity_Leave);
@@ -1188,7 +1469,7 @@ namespace SiteVegCalc
             this.tbPower2.Name = "tbPower2";
             this.tbPower2.Size = new System.Drawing.Size(40, 20);
             this.tbPower2.TabIndex = 29;
-            this.tbPower2.Text = "0.7";
+            this.tbPower2.Text = "1.0";
             this.tbPower2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbPower2, "Power coefficient that regulates the steepness of ANPP curve.  A lower value resu" +
         "lts in maximum ANPP being reached faster.");
@@ -1221,7 +1502,7 @@ namespace SiteVegCalc
             this.tbPower1.Name = "tbPower1";
             this.tbPower1.Size = new System.Drawing.Size(40, 20);
             this.tbPower1.TabIndex = 14;
-            this.tbPower1.Text = "1.0";
+            this.tbPower1.Text = "0.85";
             this.tbPower1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbPower1, "Power coefficient that regulates the steepness of ANPP curve.  A lower value resu" +
         "lts in maximum ANPP being reached faster.");
@@ -1280,7 +1561,6 @@ namespace SiteVegCalc
             this.label6.Text = "Age Mort";
             this.toolTip1.SetToolTip(this.label6, "Proportion (0-1) of longevity at which age-related mortality removes 5% of biomas" +
         "s and ANPP");
-            this.label6.Visible = false;
             // 
             // tbANPPmax
             // 
@@ -1288,7 +1568,7 @@ namespace SiteVegCalc
             this.tbANPPmax.Name = "tbANPPmax";
             this.tbANPPmax.Size = new System.Drawing.Size(40, 20);
             this.tbANPPmax.TabIndex = 9;
-            this.tbANPPmax.Text = "550";
+            this.tbANPPmax.Text = "583";
             this.tbANPPmax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbANPPmax, "Maximum annual net primary productivity (kg/ha/year)");
             this.tbANPPmax.Leave += new System.EventHandler(this.tbANPPMax_Leave);
@@ -1304,7 +1584,6 @@ namespace SiteVegCalc
             this.tbAgeMort1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbAgeMort1, "Proportion (0-1) of longevity at which age-related mortality removes 5% of biomas" +
         "s and ANPP");
-            this.tbAgeMort1.Visible = false;
             this.tbAgeMort1.Leave += new System.EventHandler(this.tbD_Leave);
             // 
             // tbANPPmax2
@@ -1313,7 +1592,7 @@ namespace SiteVegCalc
             this.tbANPPmax2.Name = "tbANPPmax2";
             this.tbANPPmax2.Size = new System.Drawing.Size(40, 20);
             this.tbANPPmax2.TabIndex = 24;
-            this.tbANPPmax2.Text = "580";
+            this.tbANPPmax2.Text = "672";
             this.tbANPPmax2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbANPPmax2, "Maximum annual net primary productivity (kg/ha/year)");
             this.tbANPPmax2.Leave += new System.EventHandler(this.tbANPPMax_Leave);
@@ -1324,7 +1603,7 @@ namespace SiteVegCalc
             this.tbBioMax2.Name = "tbBioMax2";
             this.tbBioMax2.Size = new System.Drawing.Size(50, 20);
             this.tbBioMax2.TabIndex = 27;
-            this.tbBioMax2.Text = "25320";
+            this.tbBioMax2.Text = "14717";
             this.tbBioMax2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbBioMax2, "Maximum aboveground biomass (kg/ha)");
             this.tbBioMax2.Leave += new System.EventHandler(this.tbBiomassMax_Leave);
@@ -1340,7 +1619,6 @@ namespace SiteVegCalc
             this.tbAgeMort2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbAgeMort2, "Proportion (0-1) of longevity at which age-related mortality removes 5% of biomas" +
         "s and ANPP");
-            this.tbAgeMort2.Visible = false;
             this.tbAgeMort2.Leave += new System.EventHandler(this.tbD_Leave);
             // 
             // tbANPPmax3
@@ -1349,7 +1627,7 @@ namespace SiteVegCalc
             this.tbANPPmax3.Name = "tbANPPmax3";
             this.tbANPPmax3.Size = new System.Drawing.Size(40, 20);
             this.tbANPPmax3.TabIndex = 39;
-            this.tbANPPmax3.Text = "750";
+            this.tbANPPmax3.Text = "674";
             this.tbANPPmax3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbANPPmax3, "Maximum annual net primary productivity (kg/ha/year)");
             this.tbANPPmax3.Leave += new System.EventHandler(this.tbANPPMax_Leave);
@@ -1360,7 +1638,7 @@ namespace SiteVegCalc
             this.tbBioMax3.Name = "tbBioMax3";
             this.tbBioMax3.Size = new System.Drawing.Size(50, 20);
             this.tbBioMax3.TabIndex = 42;
-            this.tbBioMax3.Text = "25535";
+            this.tbBioMax3.Text = "14760";
             this.tbBioMax3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbBioMax3, "Maximum aboveground biomass (kg/ha)");
             this.tbBioMax3.Leave += new System.EventHandler(this.tbBiomassMax_Leave);
@@ -1376,7 +1654,6 @@ namespace SiteVegCalc
             this.tbAgeMort3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbAgeMort3, "Proportion (0-1) of longevity at which age-related mortality removes 5% of biomas" +
         "s and ANPP");
-            this.tbAgeMort3.Visible = false;
             this.tbAgeMort3.Leave += new System.EventHandler(this.tbD_Leave);
             // 
             // label5
@@ -1395,7 +1672,7 @@ namespace SiteVegCalc
             this.tbBioMax.Name = "tbBioMax";
             this.tbBioMax.Size = new System.Drawing.Size(50, 20);
             this.tbBioMax.TabIndex = 12;
-            this.tbBioMax.Text = "17091";
+            this.tbBioMax.Text = "13228";
             this.tbBioMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbBioMax, "Maximum aboveground biomass (kg/ha)");
             this.tbBioMax.Leave += new System.EventHandler(this.tbBiomassMax_Leave);
@@ -1505,7 +1782,7 @@ namespace SiteVegCalc
             this.tbSppName3.Name = "tbSppName3";
             this.tbSppName3.Size = new System.Drawing.Size(60, 20);
             this.tbSppName3.TabIndex = 27;
-            this.tbSppName3.Text = "BS";
+            this.tbSppName3.Text = "Black Spruce";
             this.toolTip1.SetToolTip(this.tbSppName3, "Species name (no restrictions)");
             // 
             // tbSppName2
@@ -1514,7 +1791,7 @@ namespace SiteVegCalc
             this.tbSppName2.Name = "tbSppName2";
             this.tbSppName2.Size = new System.Drawing.Size(60, 20);
             this.tbSppName2.TabIndex = 18;
-            this.tbSppName2.Text = "BF";
+            this.tbSppName2.Text = "Balsam Fir";
             this.toolTip1.SetToolTip(this.tbSppName2, "Species name (no restrictions)");
             // 
             // tbSppName
@@ -1552,7 +1829,7 @@ namespace SiteVegCalc
             this.tbDecay1.Name = "tbDecay1";
             this.tbDecay1.Size = new System.Drawing.Size(40, 20);
             this.tbDecay1.TabIndex = 14;
-            this.tbDecay1.Text = "0.080";
+            this.tbDecay1.Text = "0.096";
             this.tbDecay1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbDecay1, "Woody biomass decay rate (proportion/year)");
             // 
@@ -1596,7 +1873,6 @@ namespace SiteVegCalc
             this.tbMortMod1.Text = "0.20";
             this.tbMortMod1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMortMod1, "Max proportion of biomass removed per year (at longevity)");
-            this.tbMortMod1.Visible = false;
             // 
             // label29
             // 
@@ -1609,7 +1885,6 @@ namespace SiteVegCalc
             this.label29.Text = "Prop Mort";
             this.label29.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolTip1.SetToolTip(this.label29, "Max proportion of biomass removed per year (at longevity)");
-            this.label29.Visible = false;
             // 
             // label25
             // 
@@ -1718,7 +1993,6 @@ namespace SiteVegCalc
             this.tbMortMod2.Text = "0.14";
             this.tbMortMod2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMortMod2, "Max proportion of biomass removed per year (at longevity)");
-            this.tbMortMod2.Visible = false;
             // 
             // tbMortMod3
             // 
@@ -1730,7 +2004,6 @@ namespace SiteVegCalc
             this.tbMortMod3.Text = "0.075";
             this.tbMortMod3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMortMod3, "Max proportion of biomass removed per year (at longevity)");
-            this.tbMortMod3.Visible = false;
             // 
             // addRefButton
             // 
@@ -1770,7 +2043,7 @@ namespace SiteVegCalc
             this.tbShadeTol4.Name = "tbShadeTol4";
             this.tbShadeTol4.Size = new System.Drawing.Size(40, 20);
             this.tbShadeTol4.TabIndex = 38;
-            this.tbShadeTol4.Text = "2";
+            this.tbShadeTol4.Text = "1";
             this.tbShadeTol4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbShadeTol4, "Shade tolerance class (1-5)");
             this.tbShadeTol4.Leave += new System.EventHandler(this.tbShadeTol_Leave);
@@ -1781,7 +2054,7 @@ namespace SiteVegCalc
             this.tbLongevity4.Name = "tbLongevity4";
             this.tbLongevity4.Size = new System.Drawing.Size(40, 20);
             this.tbLongevity4.TabIndex = 37;
-            this.tbLongevity4.Text = "60";
+            this.tbLongevity4.Text = "140";
             this.tbLongevity4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbLongevity4, "Species longevity in years");
             this.tbLongevity4.Leave += new System.EventHandler(this.tbLongevity_Leave);
@@ -1792,7 +2065,7 @@ namespace SiteVegCalc
             this.tbSppName4.Name = "tbSppName4";
             this.tbSppName4.Size = new System.Drawing.Size(60, 20);
             this.tbSppName4.TabIndex = 35;
-            this.tbSppName4.Text = "Shrub";
+            this.tbSppName4.Text = "Tremb Aspen";
             this.toolTip1.SetToolTip(this.tbSppName4, "Species name (no restrictions)");
             // 
             // tbLeaf4
@@ -1816,7 +2089,6 @@ namespace SiteVegCalc
             this.tbMortMod4.Text = "0.30";
             this.tbMortMod4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMortMod4, "Max proportion of biomass removed per year (at longevity)");
-            this.tbMortMod4.Visible = false;
             // 
             // tbAgeMort4
             // 
@@ -1829,7 +2101,6 @@ namespace SiteVegCalc
             this.tbAgeMort4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbAgeMort4, "Proportion (0-1) of longevity at which age-related mortality removes 5% of biomas" +
         "s and ANPP");
-            this.tbAgeMort4.Visible = false;
             this.tbAgeMort4.Leave += new System.EventHandler(this.tbD_Leave);
             // 
             // tbBioMax4
@@ -1838,7 +2109,7 @@ namespace SiteVegCalc
             this.tbBioMax4.Name = "tbBioMax4";
             this.tbBioMax4.Size = new System.Drawing.Size(50, 20);
             this.tbBioMax4.TabIndex = 57;
-            this.tbBioMax4.Text = "475";
+            this.tbBioMax4.Text = "13398";
             this.tbBioMax4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbBioMax4, "Maximum aboveground biomass (kg/ha)");
             this.tbBioMax4.Leave += new System.EventHandler(this.tbBiomassMax_Leave);
@@ -1849,7 +2120,7 @@ namespace SiteVegCalc
             this.tbANPPmax4.Name = "tbANPPmax4";
             this.tbANPPmax4.Size = new System.Drawing.Size(40, 20);
             this.tbANPPmax4.TabIndex = 54;
-            this.tbANPPmax4.Text = "35";
+            this.tbANPPmax4.Text = "593";
             this.tbANPPmax4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbANPPmax4, "Maximum annual net primary productivity (kg/ha/year)");
             this.tbANPPmax4.Leave += new System.EventHandler(this.tbANPPMax_Leave);
@@ -1860,7 +2131,7 @@ namespace SiteVegCalc
             this.tbPower4.Name = "tbPower4";
             this.tbPower4.Size = new System.Drawing.Size(40, 20);
             this.tbPower4.TabIndex = 59;
-            this.tbPower4.Text = "1.0";
+            this.tbPower4.Text = "0.8";
             this.tbPower4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbPower4, "Power coefficient that regulates the steepness of ANPP curve.  A lower value resu" +
         "lts in maximum ANPP being reached faster.");
@@ -1923,7 +2194,7 @@ namespace SiteVegCalc
             this.tbMortShape4.Name = "tbMortShape4";
             this.tbMortShape4.Size = new System.Drawing.Size(40, 20);
             this.tbMortShape4.TabIndex = 76;
-            this.tbMortShape4.Text = "10";
+            this.tbMortShape4.Text = "6.0";
             this.tbMortShape4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMortShape4, "Mortality Curve Shape Parameter (5-25); Determines how quickly age-related mortal" +
         "ity begins");
@@ -1934,7 +2205,7 @@ namespace SiteVegCalc
             this.tbMortShape3.Name = "tbMortShape3";
             this.tbMortShape3.Size = new System.Drawing.Size(40, 20);
             this.tbMortShape3.TabIndex = 74;
-            this.tbMortShape3.Text = "10";
+            this.tbMortShape3.Text = "6.1";
             this.tbMortShape3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMortShape3, "Mortality Curve Shape Parameter (5-25); Determines how quickly age-related mortal" +
         "ity begins");
@@ -1945,7 +2216,7 @@ namespace SiteVegCalc
             this.tbMortShape2.Name = "tbMortShape2";
             this.tbMortShape2.Size = new System.Drawing.Size(40, 20);
             this.tbMortShape2.TabIndex = 72;
-            this.tbMortShape2.Text = "10";
+            this.tbMortShape2.Text = "6.1";
             this.tbMortShape2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMortShape2, "Mortality Curve Shape Parameter (5-25); Determines how quickly age-related mortal" +
         "ity begins");
@@ -1956,7 +2227,7 @@ namespace SiteVegCalc
             this.tbMortShape1.Name = "tbMortShape1";
             this.tbMortShape1.Size = new System.Drawing.Size(40, 20);
             this.tbMortShape1.TabIndex = 70;
-            this.tbMortShape1.Text = "10";
+            this.tbMortShape1.Text = "6.1";
             this.tbMortShape1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMortShape1, "Mortality Curve Shape Parameter (5-25); Determines how quickly age-related mortal" +
         "ity begins");
@@ -1990,7 +2261,7 @@ namespace SiteVegCalc
             this.tbMatAge4.Name = "tbMatAge4";
             this.tbMatAge4.Size = new System.Drawing.Size(40, 20);
             this.tbMatAge4.TabIndex = 45;
-            this.tbMatAge4.Text = "5";
+            this.tbMatAge4.Text = "15";
             this.tbMatAge4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMatAge4, "Reproductive Maturity Age");
             // 
@@ -2023,7 +2294,7 @@ namespace SiteVegCalc
             this.tbMatAge1.Name = "tbMatAge1";
             this.tbMatAge1.Size = new System.Drawing.Size(40, 20);
             this.tbMatAge1.TabIndex = 42;
-            this.tbMatAge1.Text = "30";
+            this.tbMatAge1.Text = "20";
             this.tbMatAge1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMatAge1, "Reproductive Maturity Age");
             // 
@@ -2333,7 +2604,7 @@ namespace SiteVegCalc
             this.tbVegProb4.Name = "tbVegProb4";
             this.tbVegProb4.Size = new System.Drawing.Size(40, 20);
             this.tbVegProb4.TabIndex = 50;
-            this.tbVegProb4.Text = "1.0";
+            this.tbVegProb4.Text = "0.8";
             this.tbVegProb4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbVegProb4, "Vegetative Reproduction Probability (0-1)");
             // 
@@ -2373,7 +2644,7 @@ namespace SiteVegCalc
             this.tbVegProb3.Name = "tbVegProb3";
             this.tbVegProb3.Size = new System.Drawing.Size(40, 20);
             this.tbVegProb3.TabIndex = 49;
-            this.tbVegProb3.Text = "0.1";
+            this.tbVegProb3.Text = "0.0";
             this.tbVegProb3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbVegProb3, "Vegetative Reproduction Probability (0-1)");
             // 
@@ -2433,7 +2704,7 @@ namespace SiteVegCalc
             this.tbMaxVegAge4.Name = "tbMaxVegAge4";
             this.tbMaxVegAge4.Size = new System.Drawing.Size(40, 20);
             this.tbMaxVegAge4.TabIndex = 60;
-            this.tbMaxVegAge4.Text = "60";
+            this.tbMaxVegAge4.Text = "140";
             this.tbMaxVegAge4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMaxVegAge4, "Maximum Age of Vegetative Reproduction (Resprout)");
             // 
@@ -2443,7 +2714,7 @@ namespace SiteVegCalc
             this.tbMaxVegAge3.Name = "tbMaxVegAge3";
             this.tbMaxVegAge3.Size = new System.Drawing.Size(40, 20);
             this.tbMaxVegAge3.TabIndex = 59;
-            this.tbMaxVegAge3.Text = "175";
+            this.tbMaxVegAge3.Text = "0";
             this.tbMaxVegAge3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMaxVegAge3, "Maximum Age of Vegetative Reproduction (Resprout)");
             // 
@@ -2463,7 +2734,7 @@ namespace SiteVegCalc
             this.tbMaxVegAge1.Name = "tbMaxVegAge1";
             this.tbMaxVegAge1.Size = new System.Drawing.Size(40, 20);
             this.tbMaxVegAge1.TabIndex = 57;
-            this.tbMaxVegAge1.Text = "130";
+            this.tbMaxVegAge1.Text = "170";
             this.tbMaxVegAge1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMaxVegAge1, "Maximum Age of Vegetative Reproduction (Resprout)");
             // 
@@ -2483,7 +2754,7 @@ namespace SiteVegCalc
             this.tbMaxVegAge5.Name = "tbMaxVegAge5";
             this.tbMaxVegAge5.Size = new System.Drawing.Size(40, 20);
             this.tbMaxVegAge5.TabIndex = 70;
-            this.tbMaxVegAge5.Text = "100";
+            this.tbMaxVegAge5.Text = "140";
             this.tbMaxVegAge5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMaxVegAge5, "Maximum Age of Vegetative Reproduction (Resprout)");
             // 
@@ -2514,7 +2785,7 @@ namespace SiteVegCalc
             this.tbMatAge5.Name = "tbMatAge5";
             this.tbMatAge5.Size = new System.Drawing.Size(40, 20);
             this.tbMatAge5.TabIndex = 67;
-            this.tbMatAge5.Text = "25";
+            this.tbMatAge5.Text = "10";
             this.tbMatAge5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMatAge5, "Reproductive Maturity Age");
             // 
@@ -2524,7 +2795,7 @@ namespace SiteVegCalc
             this.tbDecay5.Name = "tbDecay5";
             this.tbDecay5.Size = new System.Drawing.Size(40, 20);
             this.tbDecay5.TabIndex = 66;
-            this.tbDecay5.Text = "0.080";
+            this.tbDecay5.Text = "0.084";
             this.tbDecay5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbDecay5, "Woody biomass decay rate (proportion/year)");
             // 
@@ -2545,7 +2816,7 @@ namespace SiteVegCalc
             this.tbShadeTol5.Name = "tbShadeTol5";
             this.tbShadeTol5.Size = new System.Drawing.Size(40, 20);
             this.tbShadeTol5.TabIndex = 64;
-            this.tbShadeTol5.Text = "2";
+            this.tbShadeTol5.Text = "3";
             this.tbShadeTol5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbShadeTol5, "Shade tolerance class (1-5)");
             this.tbShadeTol5.Leave += new System.EventHandler(this.tbShadeTol_Leave);
@@ -2556,7 +2827,7 @@ namespace SiteVegCalc
             this.tbLongevity5.Name = "tbLongevity5";
             this.tbLongevity5.Size = new System.Drawing.Size(40, 20);
             this.tbLongevity5.TabIndex = 63;
-            this.tbLongevity5.Text = "100";
+            this.tbLongevity5.Text = "200";
             this.tbLongevity5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbLongevity5, "Species longevity in years");
             this.tbLongevity5.Leave += new System.EventHandler(this.tbLongevity_Leave);
@@ -2567,7 +2838,7 @@ namespace SiteVegCalc
             this.tbSppName5.Name = "tbSppName5";
             this.tbSppName5.Size = new System.Drawing.Size(60, 20);
             this.tbSppName5.TabIndex = 61;
-            this.tbSppName5.Text = "Spp5";
+            this.tbSppName5.Text = "Red Maple";
             this.toolTip1.SetToolTip(this.tbSppName5, "Species name (no restrictions)");
             // 
             // tbLeaf5
@@ -2691,7 +2962,7 @@ namespace SiteVegCalc
             this.tbMortShape5.Name = "tbMortShape5";
             this.tbMortShape5.Size = new System.Drawing.Size(40, 20);
             this.tbMortShape5.TabIndex = 87;
-            this.tbMortShape5.Text = "10";
+            this.tbMortShape5.Text = "6.1";
             this.tbMortShape5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMortShape5, "Mortality Curve Shape Parameter (5-25); Determines how quickly age-related mortal" +
         "ity begins");
@@ -2706,7 +2977,6 @@ namespace SiteVegCalc
             this.tbMortMod5.Text = "0.30";
             this.tbMortMod5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMortMod5, "Max proportion of biomass removed per year (at longevity)");
-            this.tbMortMod5.Visible = false;
             // 
             // tbAgeMort5
             // 
@@ -2719,7 +2989,6 @@ namespace SiteVegCalc
             this.tbAgeMort5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbAgeMort5, "Proportion (0-1) of longevity at which age-related mortality removes 5% of biomas" +
         "s and ANPP");
-            this.tbAgeMort5.Visible = false;
             this.tbAgeMort5.Leave += new System.EventHandler(this.tbD_Leave);
             // 
             // tbBioMax5
@@ -2728,7 +2997,7 @@ namespace SiteVegCalc
             this.tbBioMax5.Name = "tbBioMax5";
             this.tbBioMax5.Size = new System.Drawing.Size(50, 20);
             this.tbBioMax5.TabIndex = 79;
-            this.tbBioMax5.Text = "20000";
+            this.tbBioMax5.Text = "15748";
             this.tbBioMax5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbBioMax5, "Maximum aboveground biomass (kg/ha)");
             this.tbBioMax5.Leave += new System.EventHandler(this.tbBiomassMax_Leave);
@@ -2739,7 +3008,7 @@ namespace SiteVegCalc
             this.tbANPPmax5.Name = "tbANPPmax5";
             this.tbANPPmax5.Size = new System.Drawing.Size(40, 20);
             this.tbANPPmax5.TabIndex = 78;
-            this.tbANPPmax5.Text = "500";
+            this.tbANPPmax5.Text = "736";
             this.tbANPPmax5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbANPPmax5, "Maximum annual net primary productivity (kg/ha/year)");
             this.tbANPPmax5.Leave += new System.EventHandler(this.tbANPPMax_Leave);
@@ -2750,7 +3019,7 @@ namespace SiteVegCalc
             this.tbPower5.Name = "tbPower5";
             this.tbPower5.Size = new System.Drawing.Size(40, 20);
             this.tbPower5.TabIndex = 81;
-            this.tbPower5.Text = "1.0";
+            this.tbPower5.Text = "0.9";
             this.tbPower5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbPower5, "Power coefficient that regulates the steepness of ANPP curve.  A lower value resu" +
         "lts in maximum ANPP being reached faster.");
@@ -2776,7 +3045,6 @@ namespace SiteVegCalc
             this.tbMortMod6.Text = "0.30";
             this.tbMortMod6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMortMod6, "Max proportion of biomass removed per year (at longevity)");
-            this.tbMortMod6.Visible = false;
             // 
             // tbAgeMort6
             // 
@@ -2789,7 +3057,6 @@ namespace SiteVegCalc
             this.tbAgeMort6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbAgeMort6, "Proportion (0-1) of longevity at which age-related mortality removes 5% of biomas" +
         "s and ANPP");
-            this.tbAgeMort6.Visible = false;
             this.tbAgeMort6.Leave += new System.EventHandler(this.tbD_Leave);
             // 
             // tbBioMax6
@@ -2929,26 +3196,157 @@ namespace SiteVegCalc
             this.toolTip1.SetToolTip(this.tbSEC6, "Species establishment probability (0-1)");
             this.tbSEC6.Leave += new System.EventHandler(this.tbEstab_Leave);
             // 
+            // tbPref6
+            // 
+            this.tbPref6.Location = new System.Drawing.Point(441, 15);
+            this.tbPref6.Name = "tbPref6";
+            this.tbPref6.Size = new System.Drawing.Size(40, 20);
+            this.tbPref6.TabIndex = 37;
+            this.tbPref6.Text = "0.0";
+            this.tbPref6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.tbPref6, "Species establishment probability (0-1)");
+            // 
+            // tbPref5
+            // 
+            this.tbPref5.Location = new System.Drawing.Point(375, 15);
+            this.tbPref5.Name = "tbPref5";
+            this.tbPref5.Size = new System.Drawing.Size(40, 20);
+            this.tbPref5.TabIndex = 36;
+            this.tbPref5.Text = "0.0";
+            this.tbPref5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.tbPref5, "Species establishment probability (0-1)");
+            // 
+            // tbPref4
+            // 
+            this.tbPref4.Location = new System.Drawing.Point(308, 15);
+            this.tbPref4.Name = "tbPref4";
+            this.tbPref4.Size = new System.Drawing.Size(40, 20);
+            this.tbPref4.TabIndex = 35;
+            this.tbPref4.Text = "0.4";
+            this.tbPref4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.tbPref4, "Species establishment probability (0-1)");
+            // 
+            // tbPref3
+            // 
+            this.tbPref3.Location = new System.Drawing.Point(239, 15);
+            this.tbPref3.Name = "tbPref3";
+            this.tbPref3.Size = new System.Drawing.Size(40, 20);
+            this.tbPref3.TabIndex = 34;
+            this.tbPref3.Text = "0.0";
+            this.tbPref3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.tbPref3, "Species establishment probability (0-1)");
+            // 
+            // tbPref2
+            // 
+            this.tbPref2.Location = new System.Drawing.Point(169, 15);
+            this.tbPref2.Margin = new System.Windows.Forms.Padding(0);
+            this.tbPref2.Name = "tbPref2";
+            this.tbPref2.Size = new System.Drawing.Size(40, 20);
+            this.tbPref2.TabIndex = 33;
+            this.tbPref2.Text = "0.3";
+            this.tbPref2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.tbPref2, "Species establishment probability (0-1)");
+            // 
+            // tbPref1
+            // 
+            this.tbPref1.Location = new System.Drawing.Point(94, 15);
+            this.tbPref1.Name = "tbPref1";
+            this.tbPref1.Size = new System.Drawing.Size(40, 20);
+            this.tbPref1.TabIndex = 32;
+            this.tbPref1.Text = "0.6";
+            this.tbPref1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.tbPref1, "Species establishment probability (0-1)");
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(5, 21);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(59, 13);
+            this.label47.TabIndex = 31;
+            this.label47.Text = "Preference";
+            this.toolTip1.SetToolTip(this.label47, "Species establishment probability (0-1)");
+            // 
+            // tbMast6
+            // 
+            this.tbMast6.Location = new System.Drawing.Point(442, 35);
+            this.tbMast6.Name = "tbMast6";
+            this.tbMast6.Size = new System.Drawing.Size(40, 20);
+            this.tbMast6.TabIndex = 44;
+            this.tbMast6.Text = "0.0";
+            this.tbMast6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.tbMast6, "Species establishment probability (0-1)");
+            // 
+            // tbMast5
+            // 
+            this.tbMast5.Location = new System.Drawing.Point(376, 35);
+            this.tbMast5.Name = "tbMast5";
+            this.tbMast5.Size = new System.Drawing.Size(40, 20);
+            this.tbMast5.TabIndex = 43;
+            this.tbMast5.Text = "0.0";
+            this.tbMast5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.tbMast5, "Species establishment probability (0-1)");
+            // 
+            // tbMast4
+            // 
+            this.tbMast4.Location = new System.Drawing.Point(309, 35);
+            this.tbMast4.Name = "tbMast4";
+            this.tbMast4.Size = new System.Drawing.Size(40, 20);
+            this.tbMast4.TabIndex = 42;
+            this.tbMast4.Text = "0.0";
+            this.tbMast4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.tbMast4, "Species establishment probability (0-1)");
+            // 
+            // tbMast3
+            // 
+            this.tbMast3.Location = new System.Drawing.Point(240, 35);
+            this.tbMast3.Name = "tbMast3";
+            this.tbMast3.Size = new System.Drawing.Size(40, 20);
+            this.tbMast3.TabIndex = 41;
+            this.tbMast3.Text = "0.0";
+            this.tbMast3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.tbMast3, "Species establishment probability (0-1)");
+            // 
+            // tbMast2
+            // 
+            this.tbMast2.Location = new System.Drawing.Point(170, 35);
+            this.tbMast2.Margin = new System.Windows.Forms.Padding(0);
+            this.tbMast2.Name = "tbMast2";
+            this.tbMast2.Size = new System.Drawing.Size(40, 20);
+            this.tbMast2.TabIndex = 40;
+            this.tbMast2.Text = "0.0";
+            this.tbMast2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.tbMast2, "Species establishment probability (0-1)");
+            // 
+            // tbMast1
+            // 
+            this.tbMast1.Location = new System.Drawing.Point(95, 35);
+            this.tbMast1.Name = "tbMast1";
+            this.tbMast1.Size = new System.Drawing.Size(40, 20);
+            this.tbMast1.TabIndex = 39;
+            this.tbMast1.Text = "0.0";
+            this.tbMast1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.tbMast1, "Species establishment probability (0-1)");
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(6, 41);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(30, 13);
+            this.label48.TabIndex = 38;
+            this.label48.Text = "Mast";
+            this.toolTip1.SetToolTip(this.label48, "Species establishment probability (0-1)");
+            // 
             // label99
             // 
             this.label99.Enabled = false;
-            this.label99.Location = new System.Drawing.Point(689, 494);
+            this.label99.Location = new System.Drawing.Point(680, 494);
             this.label99.Name = "label99";
             this.label99.Size = new System.Drawing.Size(72, 30);
-            this.label99.TabIndex = 98;
+            this.label99.TabIndex = 117;
             this.label99.Text = "Random Number Seed";
             this.toolTip1.SetToolTip(this.label99, "Maximum aboveground biomass (kg/ha)");
-            // 
-            // tbRandSeed
-            // 
-            this.tbRandSeed.Enabled = false;
-            this.tbRandSeed.Location = new System.Drawing.Point(766, 497);
-            this.tbRandSeed.Name = "tbRandSeed";
-            this.tbRandSeed.Size = new System.Drawing.Size(94, 20);
-            this.tbRandSeed.TabIndex = 97;
-            this.tbRandSeed.Text = "617788279";
-            this.tbRandSeed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.toolTip1.SetToolTip(this.tbRandSeed, "Maximum aboveground biomass (kg/ha)");
             // 
             // groupBox6
             // 
@@ -2995,7 +3393,7 @@ namespace SiteVegCalc
             this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(881, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1062, 24);
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -3844,25 +4242,970 @@ namespace SiteVegCalc
             this.label33.TabIndex = 19;
             this.label33.Text = "Class 1";
             // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.tbMortMax6);
+            this.groupBox9.Controls.Add(this.tbMortMax5);
+            this.groupBox9.Controls.Add(this.tbMortMax4);
+            this.groupBox9.Controls.Add(this.tbMortMax3);
+            this.groupBox9.Controls.Add(this.tbMortMax2);
+            this.groupBox9.Controls.Add(this.tbMortMax1);
+            this.groupBox9.Controls.Add(this.label83);
+            this.groupBox9.Controls.Add(this.tbMortThresh6);
+            this.groupBox9.Controls.Add(this.tbMortThresh5);
+            this.groupBox9.Controls.Add(this.tbMortThresh4);
+            this.groupBox9.Controls.Add(this.tbMortThresh3);
+            this.groupBox9.Controls.Add(this.tbMortThresh2);
+            this.groupBox9.Controls.Add(this.tbMortThresh1);
+            this.groupBox9.Controls.Add(this.label84);
+            this.groupBox9.Controls.Add(this.tbGrowRedMax6);
+            this.groupBox9.Controls.Add(this.tbGrowRedMax5);
+            this.groupBox9.Controls.Add(this.tbGrowRedMax4);
+            this.groupBox9.Controls.Add(this.tbGrowRedMax3);
+            this.groupBox9.Controls.Add(this.tbGrowRedMax2);
+            this.groupBox9.Controls.Add(this.tbGrowRedMax1);
+            this.groupBox9.Controls.Add(this.label82);
+            this.groupBox9.Controls.Add(this.tbGrowRedThresh6);
+            this.groupBox9.Controls.Add(this.tbGrowRedThresh5);
+            this.groupBox9.Controls.Add(this.tbGrowRedThresh4);
+            this.groupBox9.Controls.Add(this.tbGrowRedThresh3);
+            this.groupBox9.Controls.Add(this.tbGrowRedThresh2);
+            this.groupBox9.Controls.Add(this.tbGrowRedThresh1);
+            this.groupBox9.Controls.Add(this.label52);
+            this.groupBox9.Controls.Add(this.tbMast6);
+            this.groupBox9.Controls.Add(this.tbMast5);
+            this.groupBox9.Controls.Add(this.tbMast4);
+            this.groupBox9.Controls.Add(this.tbMast3);
+            this.groupBox9.Controls.Add(this.tbMast2);
+            this.groupBox9.Controls.Add(this.tbMast1);
+            this.groupBox9.Controls.Add(this.label48);
+            this.groupBox9.Controls.Add(this.tbPref6);
+            this.groupBox9.Controls.Add(this.tbPref5);
+            this.groupBox9.Controls.Add(this.tbPref4);
+            this.groupBox9.Controls.Add(this.tbPref3);
+            this.groupBox9.Controls.Add(this.tbPref2);
+            this.groupBox9.Controls.Add(this.tbPref1);
+            this.groupBox9.Controls.Add(this.label47);
+            this.groupBox9.Location = new System.Drawing.Point(137, 548);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(488, 140);
+            this.groupBox9.TabIndex = 16;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Browse Extension";
+            // 
+            // tbMortMax6
+            // 
+            this.tbMortMax6.Location = new System.Drawing.Point(442, 116);
+            this.tbMortMax6.Name = "tbMortMax6";
+            this.tbMortMax6.Size = new System.Drawing.Size(40, 20);
+            this.tbMortMax6.TabIndex = 72;
+            this.tbMortMax6.Text = "0.1";
+            this.tbMortMax6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbMortMax5
+            // 
+            this.tbMortMax5.Location = new System.Drawing.Point(376, 116);
+            this.tbMortMax5.Name = "tbMortMax5";
+            this.tbMortMax5.Size = new System.Drawing.Size(40, 20);
+            this.tbMortMax5.TabIndex = 71;
+            this.tbMortMax5.Text = "0.1";
+            this.tbMortMax5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbMortMax4
+            // 
+            this.tbMortMax4.Location = new System.Drawing.Point(309, 116);
+            this.tbMortMax4.Name = "tbMortMax4";
+            this.tbMortMax4.Size = new System.Drawing.Size(40, 20);
+            this.tbMortMax4.TabIndex = 70;
+            this.tbMortMax4.Text = "0.1";
+            this.tbMortMax4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbMortMax3
+            // 
+            this.tbMortMax3.Location = new System.Drawing.Point(240, 116);
+            this.tbMortMax3.Name = "tbMortMax3";
+            this.tbMortMax3.Size = new System.Drawing.Size(40, 20);
+            this.tbMortMax3.TabIndex = 69;
+            this.tbMortMax3.Text = "0.1";
+            this.tbMortMax3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbMortMax2
+            // 
+            this.tbMortMax2.Location = new System.Drawing.Point(170, 116);
+            this.tbMortMax2.Margin = new System.Windows.Forms.Padding(0);
+            this.tbMortMax2.Name = "tbMortMax2";
+            this.tbMortMax2.Size = new System.Drawing.Size(40, 20);
+            this.tbMortMax2.TabIndex = 68;
+            this.tbMortMax2.Text = "0.1";
+            this.tbMortMax2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbMortMax1
+            // 
+            this.tbMortMax1.Location = new System.Drawing.Point(95, 116);
+            this.tbMortMax1.Name = "tbMortMax1";
+            this.tbMortMax1.Size = new System.Drawing.Size(40, 20);
+            this.tbMortMax1.TabIndex = 67;
+            this.tbMortMax1.Text = "0.1";
+            this.tbMortMax1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label83
+            // 
+            this.label83.AutoSize = true;
+            this.label83.Location = new System.Drawing.Point(6, 122);
+            this.label83.Name = "label83";
+            this.label83.Size = new System.Drawing.Size(69, 13);
+            this.label83.TabIndex = 66;
+            this.label83.Text = "Max Mortality";
+            // 
+            // tbMortThresh6
+            // 
+            this.tbMortThresh6.Location = new System.Drawing.Point(442, 96);
+            this.tbMortThresh6.Name = "tbMortThresh6";
+            this.tbMortThresh6.Size = new System.Drawing.Size(40, 20);
+            this.tbMortThresh6.TabIndex = 65;
+            this.tbMortThresh6.Text = "0.5";
+            this.tbMortThresh6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbMortThresh5
+            // 
+            this.tbMortThresh5.Location = new System.Drawing.Point(376, 96);
+            this.tbMortThresh5.Name = "tbMortThresh5";
+            this.tbMortThresh5.Size = new System.Drawing.Size(40, 20);
+            this.tbMortThresh5.TabIndex = 64;
+            this.tbMortThresh5.Text = "0.5";
+            this.tbMortThresh5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbMortThresh4
+            // 
+            this.tbMortThresh4.Location = new System.Drawing.Point(309, 96);
+            this.tbMortThresh4.Name = "tbMortThresh4";
+            this.tbMortThresh4.Size = new System.Drawing.Size(40, 20);
+            this.tbMortThresh4.TabIndex = 63;
+            this.tbMortThresh4.Text = "0.5";
+            this.tbMortThresh4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbMortThresh3
+            // 
+            this.tbMortThresh3.Location = new System.Drawing.Point(240, 96);
+            this.tbMortThresh3.Name = "tbMortThresh3";
+            this.tbMortThresh3.Size = new System.Drawing.Size(40, 20);
+            this.tbMortThresh3.TabIndex = 62;
+            this.tbMortThresh3.Text = "0.5";
+            this.tbMortThresh3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbMortThresh2
+            // 
+            this.tbMortThresh2.Location = new System.Drawing.Point(170, 96);
+            this.tbMortThresh2.Margin = new System.Windows.Forms.Padding(0);
+            this.tbMortThresh2.Name = "tbMortThresh2";
+            this.tbMortThresh2.Size = new System.Drawing.Size(40, 20);
+            this.tbMortThresh2.TabIndex = 61;
+            this.tbMortThresh2.Text = "0.5";
+            this.tbMortThresh2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbMortThresh1
+            // 
+            this.tbMortThresh1.Location = new System.Drawing.Point(95, 96);
+            this.tbMortThresh1.Name = "tbMortThresh1";
+            this.tbMortThresh1.Size = new System.Drawing.Size(40, 20);
+            this.tbMortThresh1.TabIndex = 60;
+            this.tbMortThresh1.Text = "0.5";
+            this.tbMortThresh1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label84
+            // 
+            this.label84.AutoSize = true;
+            this.label84.Location = new System.Drawing.Point(6, 102);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(76, 13);
+            this.label84.TabIndex = 59;
+            this.label84.Text = "Mortality Thrsh";
+            // 
+            // tbGrowRedMax6
+            // 
+            this.tbGrowRedMax6.Location = new System.Drawing.Point(442, 75);
+            this.tbGrowRedMax6.Name = "tbGrowRedMax6";
+            this.tbGrowRedMax6.Size = new System.Drawing.Size(40, 20);
+            this.tbGrowRedMax6.TabIndex = 58;
+            this.tbGrowRedMax6.Text = "0.4";
+            this.tbGrowRedMax6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbGrowRedMax5
+            // 
+            this.tbGrowRedMax5.Location = new System.Drawing.Point(376, 75);
+            this.tbGrowRedMax5.Name = "tbGrowRedMax5";
+            this.tbGrowRedMax5.Size = new System.Drawing.Size(40, 20);
+            this.tbGrowRedMax5.TabIndex = 57;
+            this.tbGrowRedMax5.Text = "0.4";
+            this.tbGrowRedMax5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbGrowRedMax4
+            // 
+            this.tbGrowRedMax4.Location = new System.Drawing.Point(309, 75);
+            this.tbGrowRedMax4.Name = "tbGrowRedMax4";
+            this.tbGrowRedMax4.Size = new System.Drawing.Size(40, 20);
+            this.tbGrowRedMax4.TabIndex = 56;
+            this.tbGrowRedMax4.Text = "0.4";
+            this.tbGrowRedMax4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbGrowRedMax3
+            // 
+            this.tbGrowRedMax3.Location = new System.Drawing.Point(240, 75);
+            this.tbGrowRedMax3.Name = "tbGrowRedMax3";
+            this.tbGrowRedMax3.Size = new System.Drawing.Size(40, 20);
+            this.tbGrowRedMax3.TabIndex = 55;
+            this.tbGrowRedMax3.Text = "0.4";
+            this.tbGrowRedMax3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbGrowRedMax2
+            // 
+            this.tbGrowRedMax2.Location = new System.Drawing.Point(170, 75);
+            this.tbGrowRedMax2.Margin = new System.Windows.Forms.Padding(0);
+            this.tbGrowRedMax2.Name = "tbGrowRedMax2";
+            this.tbGrowRedMax2.Size = new System.Drawing.Size(40, 20);
+            this.tbGrowRedMax2.TabIndex = 54;
+            this.tbGrowRedMax2.Text = "0.4";
+            this.tbGrowRedMax2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbGrowRedMax1
+            // 
+            this.tbGrowRedMax1.Location = new System.Drawing.Point(95, 75);
+            this.tbGrowRedMax1.Name = "tbGrowRedMax1";
+            this.tbGrowRedMax1.Size = new System.Drawing.Size(40, 20);
+            this.tbGrowRedMax1.TabIndex = 53;
+            this.tbGrowRedMax1.Text = "0.4";
+            this.tbGrowRedMax1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label82
+            // 
+            this.label82.AutoSize = true;
+            this.label82.Location = new System.Drawing.Point(6, 81);
+            this.label82.Name = "label82";
+            this.label82.Size = new System.Drawing.Size(76, 13);
+            this.label82.TabIndex = 52;
+            this.label82.Text = "Max GrReduct";
+            // 
+            // tbGrowRedThresh6
+            // 
+            this.tbGrowRedThresh6.Location = new System.Drawing.Point(442, 55);
+            this.tbGrowRedThresh6.Name = "tbGrowRedThresh6";
+            this.tbGrowRedThresh6.Size = new System.Drawing.Size(40, 20);
+            this.tbGrowRedThresh6.TabIndex = 51;
+            this.tbGrowRedThresh6.Text = "0.5";
+            this.tbGrowRedThresh6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbGrowRedThresh5
+            // 
+            this.tbGrowRedThresh5.Location = new System.Drawing.Point(376, 55);
+            this.tbGrowRedThresh5.Name = "tbGrowRedThresh5";
+            this.tbGrowRedThresh5.Size = new System.Drawing.Size(40, 20);
+            this.tbGrowRedThresh5.TabIndex = 50;
+            this.tbGrowRedThresh5.Text = "0.5";
+            this.tbGrowRedThresh5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbGrowRedThresh4
+            // 
+            this.tbGrowRedThresh4.Location = new System.Drawing.Point(309, 55);
+            this.tbGrowRedThresh4.Name = "tbGrowRedThresh4";
+            this.tbGrowRedThresh4.Size = new System.Drawing.Size(40, 20);
+            this.tbGrowRedThresh4.TabIndex = 49;
+            this.tbGrowRedThresh4.Text = "0.5";
+            this.tbGrowRedThresh4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbGrowRedThresh3
+            // 
+            this.tbGrowRedThresh3.Location = new System.Drawing.Point(240, 55);
+            this.tbGrowRedThresh3.Name = "tbGrowRedThresh3";
+            this.tbGrowRedThresh3.Size = new System.Drawing.Size(40, 20);
+            this.tbGrowRedThresh3.TabIndex = 48;
+            this.tbGrowRedThresh3.Text = "0.5";
+            this.tbGrowRedThresh3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbGrowRedThresh2
+            // 
+            this.tbGrowRedThresh2.Location = new System.Drawing.Point(170, 55);
+            this.tbGrowRedThresh2.Margin = new System.Windows.Forms.Padding(0);
+            this.tbGrowRedThresh2.Name = "tbGrowRedThresh2";
+            this.tbGrowRedThresh2.Size = new System.Drawing.Size(40, 20);
+            this.tbGrowRedThresh2.TabIndex = 47;
+            this.tbGrowRedThresh2.Text = "0.5";
+            this.tbGrowRedThresh2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbGrowRedThresh1
+            // 
+            this.tbGrowRedThresh1.Location = new System.Drawing.Point(95, 55);
+            this.tbGrowRedThresh1.Name = "tbGrowRedThresh1";
+            this.tbGrowRedThresh1.Size = new System.Drawing.Size(40, 20);
+            this.tbGrowRedThresh1.TabIndex = 46;
+            this.tbGrowRedThresh1.Text = "0.5";
+            this.tbGrowRedThresh1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(6, 61);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(83, 13);
+            this.label52.TabIndex = 45;
+            this.label52.Text = "GrReduct Thrsh";
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.label61);
+            this.groupBox10.Controls.Add(this.cbMortality);
+            this.groupBox10.Controls.Add(this.cbGrowthReduction);
+            this.groupBox10.Controls.Add(this.label85);
+            this.groupBox10.Controls.Add(this.cbANPPOnly);
+            this.groupBox10.Controls.Add(this.cbNonForageSitePref);
+            this.groupBox10.Controls.Add(this.label80);
+            this.groupBox10.Controls.Add(this.label79);
+            this.groupBox10.Controls.Add(this.label75);
+            this.groupBox10.Controls.Add(this.tbMinPropBrowse);
+            this.groupBox10.Controls.Add(this.label78);
+            this.groupBox10.Controls.Add(this.tbFracANPPBrowse);
+            this.groupBox10.Controls.Add(this.label77);
+            this.groupBox10.Controls.Add(this.label74);
+            this.groupBox10.Controls.Add(this.label73);
+            this.groupBox10.Controls.Add(this.tbAgeBrowseEscape);
+            this.groupBox10.Controls.Add(this.label72);
+            this.groupBox10.Controls.Add(this.label71);
+            this.groupBox10.Controls.Add(this.label70);
+            this.groupBox10.Controls.Add(this.label69);
+            this.groupBox10.Controls.Add(this.label68);
+            this.groupBox10.Controls.Add(this.tbBrowseBioThresh_prop);
+            this.groupBox10.Controls.Add(this.tbBrowseBioThresh_bio);
+            this.groupBox10.Controls.Add(this.label67);
+            this.groupBox10.Controls.Add(this.label66);
+            this.groupBox10.Controls.Add(this.tbBDI);
+            this.groupBox10.Controls.Add(this.cbBDI);
+            this.groupBox10.Controls.Add(this.label65);
+            this.groupBox10.Controls.Add(this.label62);
+            this.groupBox10.Controls.Add(this.label76);
+            this.groupBox10.Controls.Add(this.tbInitPop);
+            this.groupBox10.Controls.Add(this.label60);
+            this.groupBox10.Controls.Add(this.tbBrowseStart);
+            this.groupBox10.Controls.Add(this.label59);
+            this.groupBox10.Controls.Add(this.tbAvgSiteForage);
+            this.groupBox10.Controls.Add(this.label58);
+            this.groupBox10.Controls.Add(this.tbPopHarv);
+            this.groupBox10.Controls.Add(this.label57);
+            this.groupBox10.Controls.Add(this.tbPopPred);
+            this.groupBox10.Controls.Add(this.label56);
+            this.groupBox10.Controls.Add(this.tbPopMort);
+            this.groupBox10.Controls.Add(this.label55);
+            this.groupBox10.Controls.Add(this.tbPopR);
+            this.groupBox10.Controls.Add(this.label54);
+            this.groupBox10.Controls.Add(this.tbAvgSitePref);
+            this.groupBox10.Controls.Add(this.label53);
+            this.groupBox10.Controls.Add(this.rbSameAsTarget);
+            this.groupBox10.Controls.Add(this.rbNotSameAsTarget);
+            this.groupBox10.Controls.Add(this.tbCellSize);
+            this.groupBox10.Controls.Add(this.label51);
+            this.groupBox10.Controls.Add(this.tbLandscapeSize);
+            this.groupBox10.Controls.Add(this.label50);
+            this.groupBox10.Controls.Add(this.tbConsume);
+            this.groupBox10.Controls.Add(this.label49);
+            this.groupBox10.Location = new System.Drawing.Point(877, 27);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(188, 809);
+            this.groupBox10.TabIndex = 17;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Browse Extension";
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(6, 109);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(107, 13);
+            this.label61.TabIndex = 117;
+            this.label61.Text = "Landscape Attributes";
+            // 
+            // cbMortality
+            // 
+            this.cbMortality.Location = new System.Drawing.Point(7, 778);
+            this.cbMortality.Name = "cbMortality";
+            this.cbMortality.Size = new System.Drawing.Size(168, 22);
+            this.cbMortality.TabIndex = 116;
+            this.cbMortality.Text = "Mortality";
+            this.cbMortality.UseVisualStyleBackColor = true;
+            // 
+            // cbGrowthReduction
+            // 
+            this.cbGrowthReduction.Location = new System.Drawing.Point(7, 751);
+            this.cbGrowthReduction.Name = "cbGrowthReduction";
+            this.cbGrowthReduction.Size = new System.Drawing.Size(168, 21);
+            this.cbGrowthReduction.TabIndex = 115;
+            this.cbGrowthReduction.Text = "Growth Reduction";
+            this.cbGrowthReduction.UseVisualStyleBackColor = true;
+            // 
+            // label85
+            // 
+            this.label85.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label85.Location = new System.Drawing.Point(10, 746);
+            this.label85.Name = "label85";
+            this.label85.Size = new System.Drawing.Size(170, 2);
+            this.label85.TabIndex = 114;
+            // 
+            // cbANPPOnly
+            // 
+            this.cbANPPOnly.Checked = true;
+            this.cbANPPOnly.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbANPPOnly.Location = new System.Drawing.Point(8, 664);
+            this.cbANPPOnly.Name = "cbANPPOnly";
+            this.cbANPPOnly.Size = new System.Drawing.Size(168, 33);
+            this.cbANPPOnly.TabIndex = 113;
+            this.cbANPPOnly.Text = "Use only ANPP for forage (not initial biomass)";
+            this.cbANPPOnly.UseVisualStyleBackColor = true;
+            // 
+            // cbNonForageSitePref
+            // 
+            this.cbNonForageSitePref.Location = new System.Drawing.Point(8, 710);
+            this.cbNonForageSitePref.Name = "cbNonForageSitePref";
+            this.cbNonForageSitePref.Size = new System.Drawing.Size(168, 33);
+            this.cbNonForageSitePref.TabIndex = 112;
+            this.cbNonForageSitePref.Text = "Include non-forage cohorts in site preference calculation";
+            this.cbNonForageSitePref.UseVisualStyleBackColor = true;
+            // 
+            // label80
+            // 
+            this.label80.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label80.Location = new System.Drawing.Point(8, 704);
+            this.label80.Name = "label80";
+            this.label80.Size = new System.Drawing.Size(170, 2);
+            this.label80.TabIndex = 111;
+            // 
+            // label79
+            // 
+            this.label79.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label79.Location = new System.Drawing.Point(6, 615);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(170, 2);
+            this.label79.TabIndex = 110;
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.Location = new System.Drawing.Point(63, 588);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(85, 13);
+            this.label75.TabIndex = 109;
+            this.label75.Text = "Prop. of biomass";
+            // 
+            // tbMinPropBrowse
+            // 
+            this.tbMinPropBrowse.Location = new System.Drawing.Point(11, 586);
+            this.tbMinPropBrowse.Name = "tbMinPropBrowse";
+            this.tbMinPropBrowse.Size = new System.Drawing.Size(42, 20);
+            this.tbMinPropBrowse.TabIndex = 108;
+            this.tbMinPropBrowse.Text = "0.5";
+            this.tbMinPropBrowse.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label78
+            // 
+            this.label78.AutoSize = true;
+            this.label78.Location = new System.Drawing.Point(5, 568);
+            this.label78.Name = "label78";
+            this.label78.Size = new System.Drawing.Size(132, 13);
+            this.label78.TabIndex = 107;
+            this.label78.Text = "Min. browse prop. in reach";
+            // 
+            // tbFracANPPBrowse
+            // 
+            this.tbFracANPPBrowse.Location = new System.Drawing.Point(11, 638);
+            this.tbFracANPPBrowse.Name = "tbFracANPPBrowse";
+            this.tbFracANPPBrowse.Size = new System.Drawing.Size(42, 20);
+            this.tbFracANPPBrowse.TabIndex = 106;
+            this.tbFracANPPBrowse.Text = "0.66";
+            this.tbFracANPPBrowse.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label77
+            // 
+            this.label77.AutoSize = true;
+            this.label77.Location = new System.Drawing.Point(5, 620);
+            this.label77.Name = "label77";
+            this.label77.Size = new System.Drawing.Size(136, 13);
+            this.label77.TabIndex = 105;
+            this.label77.Text = "Fraction of ANPP as forage";
+            // 
+            // label74
+            // 
+            this.label74.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label74.Location = new System.Drawing.Point(8, 562);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(170, 2);
+            this.label74.TabIndex = 104;
+            // 
+            // label73
+            // 
+            this.label73.AutoSize = true;
+            this.label73.Location = new System.Drawing.Point(63, 539);
+            this.label73.Name = "label73";
+            this.label73.Size = new System.Drawing.Size(89, 13);
+            this.label73.TabIndex = 103;
+            this.label73.Text = "Prop. of longevity";
+            // 
+            // tbAgeBrowseEscape
+            // 
+            this.tbAgeBrowseEscape.Location = new System.Drawing.Point(11, 537);
+            this.tbAgeBrowseEscape.Name = "tbAgeBrowseEscape";
+            this.tbAgeBrowseEscape.Size = new System.Drawing.Size(42, 20);
+            this.tbAgeBrowseEscape.TabIndex = 102;
+            this.tbAgeBrowseEscape.Text = "0.57";
+            this.tbAgeBrowseEscape.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label72
+            // 
+            this.label72.AutoSize = true;
+            this.label72.Location = new System.Drawing.Point(5, 519);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(113, 13);
+            this.label72.TabIndex = 101;
+            this.label72.Text = "Age to escape browse";
+            // 
+            // label71
+            // 
+            this.label71.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label71.Location = new System.Drawing.Point(6, 512);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(170, 2);
+            this.label71.TabIndex = 100;
+            // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.Location = new System.Drawing.Point(111, 495);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(67, 13);
+            this.label70.TabIndex = 99;
+            this.label70.Text = "Prop. of Max";
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Location = new System.Drawing.Point(88, 475);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(23, 13);
+            this.label69.TabIndex = 98;
+            this.label69.Text = "OR";
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Location = new System.Drawing.Point(39, 494);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(32, 13);
+            this.label68.TabIndex = 97;
+            this.label68.Text = "g/m2";
+            // 
+            // tbBrowseBioThresh_prop
+            // 
+            this.tbBrowseBioThresh_prop.Location = new System.Drawing.Point(123, 471);
+            this.tbBrowseBioThresh_prop.Name = "tbBrowseBioThresh_prop";
+            this.tbBrowseBioThresh_prop.Size = new System.Drawing.Size(42, 20);
+            this.tbBrowseBioThresh_prop.TabIndex = 96;
+            this.tbBrowseBioThresh_prop.Text = "0.05";
+            this.tbBrowseBioThresh_prop.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbBrowseBioThresh_prop.TextChanged += new System.EventHandler(this.tbBrowseBioThresh_prop_TextChanged);
+            // 
+            // tbBrowseBioThresh_bio
+            // 
+            this.tbBrowseBioThresh_bio.Location = new System.Drawing.Point(34, 471);
+            this.tbBrowseBioThresh_bio.Name = "tbBrowseBioThresh_bio";
+            this.tbBrowseBioThresh_bio.Size = new System.Drawing.Size(42, 20);
+            this.tbBrowseBioThresh_bio.TabIndex = 95;
+            this.tbBrowseBioThresh_bio.Text = "1200";
+            this.tbBrowseBioThresh_bio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbBrowseBioThresh_bio.TextChanged += new System.EventHandler(this.tbBrowseBioThresh_bio_TextChanged);
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Location = new System.Drawing.Point(6, 452);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(134, 13);
+            this.label67.TabIndex = 94;
+            this.label67.Text = "Browse Biomass Threshold";
+            // 
+            // label66
+            // 
+            this.label66.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label66.Location = new System.Drawing.Point(9, 269);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(170, 2);
+            this.label66.TabIndex = 93;
+            // 
+            // tbBDI
+            // 
+            this.tbBDI.Enabled = false;
+            this.tbBDI.Location = new System.Drawing.Point(140, 238);
+            this.tbBDI.Name = "tbBDI";
+            this.tbBDI.Size = new System.Drawing.Size(42, 20);
+            this.tbBDI.TabIndex = 92;
+            this.tbBDI.Text = "0.5";
+            this.tbBDI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // cbBDI
+            // 
+            this.cbBDI.Location = new System.Drawing.Point(8, 232);
+            this.cbBDI.Name = "cbBDI";
+            this.cbBDI.Size = new System.Drawing.Size(134, 33);
+            this.cbBDI.TabIndex = 91;
+            this.cbBDI.Text = "Browser Density Index (non-dynamic)";
+            this.cbBDI.UseVisualStyleBackColor = true;
+            this.cbBDI.CheckedChanged += new System.EventHandler(this.cbBDI_CheckedChanged);
+            // 
+            // label65
+            // 
+            this.label65.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label65.Location = new System.Drawing.Point(8, 443);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(170, 2);
+            this.label65.TabIndex = 90;
+            // 
+            // label62
+            // 
+            this.label62.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label62.Location = new System.Drawing.Point(9, 226);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(170, 2);
+            this.label62.TabIndex = 86;
+            // 
+            // label76
+            // 
+            this.label76.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label76.Location = new System.Drawing.Point(9, 48);
+            this.label76.Name = "label76";
+            this.label76.Size = new System.Drawing.Size(170, 2);
+            this.label76.TabIndex = 85;
+            // 
+            // tbInitPop
+            // 
+            this.tbInitPop.Location = new System.Drawing.Point(140, 290);
+            this.tbInitPop.Name = "tbInitPop";
+            this.tbInitPop.Size = new System.Drawing.Size(42, 20);
+            this.tbInitPop.TabIndex = 44;
+            this.tbInitPop.Text = "3";
+            this.tbInitPop.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(6, 293);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(84, 13);
+            this.label60.TabIndex = 43;
+            this.label60.Text = "Initial Population";
+            // 
+            // tbBrowseStart
+            // 
+            this.tbBrowseStart.Location = new System.Drawing.Point(140, 25);
+            this.tbBrowseStart.Name = "tbBrowseStart";
+            this.tbBrowseStart.Size = new System.Drawing.Size(42, 20);
+            this.tbBrowseStart.TabIndex = 42;
+            this.tbBrowseStart.Text = "0";
+            this.tbBrowseStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(6, 28);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(92, 13);
+            this.label59.TabIndex = 41;
+            this.label59.Text = "Browse Start Year";
+            // 
+            // tbAvgSiteForage
+            // 
+            this.tbAvgSiteForage.Location = new System.Drawing.Point(140, 201);
+            this.tbAvgSiteForage.Name = "tbAvgSiteForage";
+            this.tbAvgSiteForage.Size = new System.Drawing.Size(42, 20);
+            this.tbAvgSiteForage.TabIndex = 40;
+            this.tbAvgSiteForage.Text = "100";
+            this.tbAvgSiteForage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(16, 204);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(83, 13);
+            this.label58.TabIndex = 39;
+            this.label58.Text = "Avg Site Forage";
+            // 
+            // tbPopHarv
+            // 
+            this.tbPopHarv.Location = new System.Drawing.Point(140, 419);
+            this.tbPopHarv.Name = "tbPopHarv";
+            this.tbPopHarv.Size = new System.Drawing.Size(42, 20);
+            this.tbPopHarv.TabIndex = 38;
+            this.tbPopHarv.Text = "0.0";
+            this.tbPopHarv.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(6, 422);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(44, 13);
+            this.label57.TabIndex = 37;
+            this.label57.Text = "Harvest";
+            // 
+            // tbPopPred
+            // 
+            this.tbPopPred.Location = new System.Drawing.Point(140, 393);
+            this.tbPopPred.Name = "tbPopPred";
+            this.tbPopPred.Size = new System.Drawing.Size(42, 20);
+            this.tbPopPred.TabIndex = 36;
+            this.tbPopPred.Text = "0.0";
+            this.tbPopPred.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(6, 396);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(52, 13);
+            this.label56.TabIndex = 35;
+            this.label56.Text = "Predation";
+            // 
+            // tbPopMort
+            // 
+            this.tbPopMort.Location = new System.Drawing.Point(140, 367);
+            this.tbPopMort.Name = "tbPopMort";
+            this.tbPopMort.Size = new System.Drawing.Size(42, 20);
+            this.tbPopMort.TabIndex = 34;
+            this.tbPopMort.Text = "0.0";
+            this.tbPopMort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(6, 370);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(46, 13);
+            this.label55.TabIndex = 33;
+            this.label55.Text = "Mortality";
+            // 
+            // tbPopR
+            // 
+            this.tbPopR.Location = new System.Drawing.Point(140, 341);
+            this.tbPopR.Name = "tbPopR";
+            this.tbPopR.Size = new System.Drawing.Size(42, 20);
+            this.tbPopR.TabIndex = 32;
+            this.tbPopR.Text = "1.0";
+            this.tbPopR.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(6, 344);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(15, 13);
+            this.label54.TabIndex = 31;
+            this.label54.Text = "R";
+            // 
+            // tbAvgSitePref
+            // 
+            this.tbAvgSitePref.Location = new System.Drawing.Point(140, 175);
+            this.tbAvgSitePref.Name = "tbAvgSitePref";
+            this.tbAvgSitePref.Size = new System.Drawing.Size(42, 20);
+            this.tbAvgSitePref.TabIndex = 30;
+            this.tbAvgSitePref.Text = "0.5";
+            this.tbAvgSitePref.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(16, 178);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(102, 13);
+            this.label53.TabIndex = 29;
+            this.label53.Text = "Avg Site Preference";
+            // 
+            // rbSameAsTarget
+            // 
+            this.rbSameAsTarget.AutoSize = true;
+            this.rbSameAsTarget.Location = new System.Drawing.Point(16, 130);
+            this.rbSameAsTarget.Name = "rbSameAsTarget";
+            this.rbSameAsTarget.Size = new System.Drawing.Size(121, 17);
+            this.rbSameAsTarget.TabIndex = 26;
+            this.rbSameAsTarget.Text = "Same as Target Site";
+            this.rbSameAsTarget.UseVisualStyleBackColor = true;
+            this.rbSameAsTarget.CheckedChanged += new System.EventHandler(this.rbSameAsTarget_CheckedChanged);
+            // 
+            // rbNotSameAsTarget
+            // 
+            this.rbNotSameAsTarget.Checked = true;
+            this.rbNotSameAsTarget.Location = new System.Drawing.Point(16, 148);
+            this.rbNotSameAsTarget.Name = "rbNotSameAsTarget";
+            this.rbNotSameAsTarget.Size = new System.Drawing.Size(133, 19);
+            this.rbNotSameAsTarget.TabIndex = 25;
+            this.rbNotSameAsTarget.TabStop = true;
+            this.rbNotSameAsTarget.Text = "Specified Below";
+            this.rbNotSameAsTarget.UseVisualStyleBackColor = true;
+            this.rbNotSameAsTarget.CheckedChanged += new System.EventHandler(this.rbSameAsTarget_CheckedChanged);
+            // 
+            // tbCellSize
+            // 
+            this.tbCellSize.Location = new System.Drawing.Point(140, 79);
+            this.tbCellSize.Name = "tbCellSize";
+            this.tbCellSize.Size = new System.Drawing.Size(42, 20);
+            this.tbCellSize.TabIndex = 20;
+            this.tbCellSize.Text = "10000";
+            this.tbCellSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(6, 82);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(70, 13);
+            this.label51.TabIndex = 19;
+            this.label51.Text = "Cell Size (m2)";
+            // 
+            // tbLandscapeSize
+            // 
+            this.tbLandscapeSize.Location = new System.Drawing.Point(140, 53);
+            this.tbLandscapeSize.Name = "tbLandscapeSize";
+            this.tbLandscapeSize.Size = new System.Drawing.Size(42, 20);
+            this.tbLandscapeSize.TabIndex = 18;
+            this.tbLandscapeSize.Text = "10";
+            this.tbLandscapeSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(6, 56);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(113, 13);
+            this.label50.TabIndex = 17;
+            this.label50.Text = "Landscape Size (cells)";
+            // 
+            // tbConsume
+            // 
+            this.tbConsume.Location = new System.Drawing.Point(140, 316);
+            this.tbConsume.Name = "tbConsume";
+            this.tbConsume.Size = new System.Drawing.Size(42, 20);
+            this.tbConsume.TabIndex = 16;
+            this.tbConsume.Text = "2738";
+            this.tbConsume.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(6, 319);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(128, 13);
+            this.label49.TabIndex = 15;
+            this.label49.Text = "Consumption Rate (kg/yr)";
+            // 
+            // groupBox11
+            // 
+            this.groupBox11.Controls.Add(this.label81);
+            this.groupBox11.Controls.Add(this.tbPrefNbrRad);
+            this.groupBox11.Controls.Add(this.tbQuantityNbrRad);
+            this.groupBox11.Controls.Add(this.rbHSIBoth);
+            this.groupBox11.Controls.Add(this.rbHSIQuantity);
+            this.groupBox11.Controls.Add(this.rbHSIPref);
+            this.groupBox11.Location = new System.Drawing.Point(877, 842);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(188, 119);
+            this.groupBox11.TabIndex = 115;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "HSI Options";
+            // 
+            // label81
+            // 
+            this.label81.AutoSize = true;
+            this.label81.Location = new System.Drawing.Point(110, 16);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(74, 13);
+            this.label81.TabIndex = 111;
+            this.label81.Text = "Neighborhood";
+            // 
+            // tbPrefNbrRad
+            // 
+            this.tbPrefNbrRad.Enabled = false;
+            this.tbPrefNbrRad.Location = new System.Drawing.Point(140, 60);
+            this.tbPrefNbrRad.Name = "tbPrefNbrRad";
+            this.tbPrefNbrRad.Size = new System.Drawing.Size(42, 20);
+            this.tbPrefNbrRad.TabIndex = 110;
+            this.tbPrefNbrRad.Text = "0";
+            this.tbPrefNbrRad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbQuantityNbrRad
+            // 
+            this.tbQuantityNbrRad.Enabled = false;
+            this.tbQuantityNbrRad.Location = new System.Drawing.Point(140, 34);
+            this.tbQuantityNbrRad.Name = "tbQuantityNbrRad";
+            this.tbQuantityNbrRad.Size = new System.Drawing.Size(42, 20);
+            this.tbQuantityNbrRad.TabIndex = 109;
+            this.tbQuantityNbrRad.Text = "0";
+            this.tbQuantityNbrRad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // rbHSIBoth
+            // 
+            this.rbHSIBoth.Location = new System.Drawing.Point(6, 82);
+            this.rbHSIBoth.Name = "rbHSIBoth";
+            this.rbHSIBoth.Size = new System.Drawing.Size(176, 31);
+            this.rbHSIBoth.TabIndex = 29;
+            this.rbHSIBoth.Text = "Forage Quantity + Site Preference";
+            this.rbHSIBoth.UseVisualStyleBackColor = true;
+            // 
+            // rbHSIQuantity
+            // 
+            this.rbHSIQuantity.AutoSize = true;
+            this.rbHSIQuantity.Checked = true;
+            this.rbHSIQuantity.Location = new System.Drawing.Point(6, 34);
+            this.rbHSIQuantity.Name = "rbHSIQuantity";
+            this.rbHSIQuantity.Size = new System.Drawing.Size(100, 17);
+            this.rbHSIQuantity.TabIndex = 28;
+            this.rbHSIQuantity.TabStop = true;
+            this.rbHSIQuantity.Text = "Forage Quantity";
+            this.rbHSIQuantity.UseVisualStyleBackColor = true;
+            // 
+            // rbHSIPref
+            // 
+            this.rbHSIPref.Location = new System.Drawing.Point(6, 57);
+            this.rbHSIPref.Name = "rbHSIPref";
+            this.rbHSIPref.Size = new System.Drawing.Size(133, 19);
+            this.rbHSIPref.TabIndex = 27;
+            this.rbHSIPref.Text = "Site Preference";
+            this.rbHSIPref.UseVisualStyleBackColor = true;
+            // 
             // cbRandSeed
             // 
             this.cbRandSeed.AutoSize = true;
-            this.cbRandSeed.Location = new System.Drawing.Point(661, 499);
+            this.cbRandSeed.Location = new System.Drawing.Point(652, 499);
             this.cbRandSeed.Name = "cbRandSeed";
             this.cbRandSeed.Size = new System.Drawing.Size(15, 14);
-            this.cbRandSeed.TabIndex = 99;
+            this.cbRandSeed.TabIndex = 118;
             this.cbRandSeed.UseVisualStyleBackColor = true;
             this.cbRandSeed.CheckedChanged += new System.EventHandler(this.cbRandSeed_CheckedChanged);
+            // 
+            // tbRandSeed
+            // 
+            this.tbRandSeed.Enabled = false;
+            this.tbRandSeed.Location = new System.Drawing.Point(757, 497);
+            this.tbRandSeed.Name = "tbRandSeed";
+            this.tbRandSeed.Size = new System.Drawing.Size(94, 20);
+            this.tbRandSeed.TabIndex = 116;
+            this.tbRandSeed.Text = "617788279";
+            this.tbRandSeed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(898, 733);
+            this.ClientSize = new System.Drawing.Size(1079, 998);
             this.Controls.Add(this.cbRandSeed);
             this.Controls.Add(this.label99);
             this.Controls.Add(this.tbRandSeed);
+            this.Controls.Add(this.groupBox11);
+            this.Controls.Add(this.groupBox10);
+            this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox2);
@@ -3877,7 +5220,7 @@ namespace SiteVegCalc
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
-            this.Text = "LANDIS-II-Site v2.4";
+            this.Text = "LANDIS-II-Site Browse Beta 0.10";
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -3893,6 +5236,12 @@ namespace SiteVegCalc
             this.tabPage7.ResumeLayout(false);
             this.tabPage11.ResumeLayout(false);
             this.tabPage12.ResumeLayout(false);
+            this.tabPage8.ResumeLayout(false);
+            this.tabPage10.ResumeLayout(false);
+            this.tabPage13.ResumeLayout(false);
+            this.tabPage14.ResumeLayout(false);
+            this.tab15.ResumeLayout(false);
+            this.tabPage15.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
@@ -3907,6 +5256,12 @@ namespace SiteVegCalc
             this.groupBox1.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
+            this.groupBox11.ResumeLayout(false);
+            this.groupBox11.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3959,7 +5314,7 @@ namespace SiteVegCalc
         private System.Windows.Forms.ToolStripMenuItem menuGraphLegend;
         private System.Windows.Forms.TextBox tbBatch;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.RadioButton rbV2;
+        private System.Windows.Forms.RadioButton rbV30;
         private System.Windows.Forms.CheckBox checkBoxBatch;
         private System.Windows.Forms.TabPage tabPage7;
         private ZedGraph.ZedGraphControl graph6;
@@ -4087,6 +5442,7 @@ namespace SiteVegCalc
         private System.Windows.Forms.TextBox tbSEC4;
         private System.Windows.Forms.ToolStripMenuItem species4ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem species4ToolStripMenuItem1;
+        private System.Windows.Forms.RadioButton rbV35;
         private System.Windows.Forms.NumericUpDown tbNumberSpp;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.TextBox tbLandMaxBio;
@@ -4224,7 +5580,123 @@ namespace SiteVegCalc
         private System.Windows.Forms.RadioButton rbOldest;
         private System.Windows.Forms.RadioButton rbAllCohorts;
         private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.RadioButton rbV3;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.TextBox tbMast6;
+        private System.Windows.Forms.TextBox tbMast5;
+        private System.Windows.Forms.TextBox tbMast4;
+        private System.Windows.Forms.TextBox tbMast3;
+        private System.Windows.Forms.TextBox tbMast2;
+        private System.Windows.Forms.TextBox tbMast1;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.TextBox tbPref6;
+        private System.Windows.Forms.TextBox tbPref5;
+        private System.Windows.Forms.TextBox tbPref4;
+        private System.Windows.Forms.TextBox tbPref3;
+        private System.Windows.Forms.TextBox tbPref2;
+        private System.Windows.Forms.TextBox tbPref1;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.TabPage tabPage8;
+        private ZedGraph.ZedGraphControl graph11;
+        private System.Windows.Forms.TabPage tabPage10;
+        private ZedGraph.ZedGraphControl graph12;
+        private System.Windows.Forms.TabPage tabPage13;
+        private ZedGraph.ZedGraphControl graph13;
+        private System.Windows.Forms.TabPage tabPage14;
+        private ZedGraph.ZedGraphControl graph14;
+        private System.Windows.Forms.TabPage tab15;
+        private System.Windows.Forms.TextBox tbBrowseStart;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.TextBox tbAvgSiteForage;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.TextBox tbPopHarv;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.TextBox tbPopPred;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.TextBox tbPopMort;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.TextBox tbPopR;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.RadioButton rbSameAsTarget;
+        private System.Windows.Forms.RadioButton rbNotSameAsTarget;
+        private System.Windows.Forms.TextBox tbCellSize;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.TextBox tbLandscapeSize;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.TextBox tbConsume;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.TextBox tbInitPop;
+        private System.Windows.Forms.Label label60;
+        private ZedGraph.ZedGraphControl graph15;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.Label label76;
+        private System.Windows.Forms.Label label79;
+        private System.Windows.Forms.Label label75;
+        private System.Windows.Forms.TextBox tbMinPropBrowse;
+        private System.Windows.Forms.Label label78;
+        private System.Windows.Forms.TextBox tbFracANPPBrowse;
+        private System.Windows.Forms.Label label77;
+        private System.Windows.Forms.Label label74;
+        private System.Windows.Forms.Label label73;
+        private System.Windows.Forms.TextBox tbAgeBrowseEscape;
+        private System.Windows.Forms.Label label72;
+        private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.TextBox tbBrowseBioThresh_prop;
+        private System.Windows.Forms.TextBox tbBrowseBioThresh_bio;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.TextBox tbBDI;
+        private System.Windows.Forms.CheckBox cbBDI;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.CheckBox cbNonForageSitePref;
+        private System.Windows.Forms.Label label80;
+        private System.Windows.Forms.TabPage tabPage15;
+        private ZedGraph.ZedGraphControl graph16;
+        private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.Label label81;
+        private System.Windows.Forms.TextBox tbPrefNbrRad;
+        private System.Windows.Forms.TextBox tbQuantityNbrRad;
+        private System.Windows.Forms.RadioButton rbHSIBoth;
+        private System.Windows.Forms.RadioButton rbHSIQuantity;
+        private System.Windows.Forms.RadioButton rbHSIPref;
+        private System.Windows.Forms.TextBox tbAvgSitePref;
+        private System.Windows.Forms.CheckBox cbANPPOnly;
+        private System.Windows.Forms.TextBox tbMortMax6;
+        private System.Windows.Forms.TextBox tbMortMax5;
+        private System.Windows.Forms.TextBox tbMortMax4;
+        private System.Windows.Forms.TextBox tbMortMax3;
+        private System.Windows.Forms.TextBox tbMortMax2;
+        private System.Windows.Forms.TextBox tbMortMax1;
+        private System.Windows.Forms.Label label83;
+        private System.Windows.Forms.TextBox tbMortThresh6;
+        private System.Windows.Forms.TextBox tbMortThresh5;
+        private System.Windows.Forms.TextBox tbMortThresh4;
+        private System.Windows.Forms.TextBox tbMortThresh3;
+        private System.Windows.Forms.TextBox tbMortThresh2;
+        private System.Windows.Forms.TextBox tbMortThresh1;
+        private System.Windows.Forms.Label label84;
+        private System.Windows.Forms.TextBox tbGrowRedMax6;
+        private System.Windows.Forms.TextBox tbGrowRedMax5;
+        private System.Windows.Forms.TextBox tbGrowRedMax4;
+        private System.Windows.Forms.TextBox tbGrowRedMax3;
+        private System.Windows.Forms.TextBox tbGrowRedMax2;
+        private System.Windows.Forms.TextBox tbGrowRedMax1;
+        private System.Windows.Forms.Label label82;
+        private System.Windows.Forms.TextBox tbGrowRedThresh6;
+        private System.Windows.Forms.TextBox tbGrowRedThresh5;
+        private System.Windows.Forms.TextBox tbGrowRedThresh4;
+        private System.Windows.Forms.TextBox tbGrowRedThresh3;
+        private System.Windows.Forms.TextBox tbGrowRedThresh2;
+        private System.Windows.Forms.TextBox tbGrowRedThresh1;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.CheckBox cbMortality;
+        private System.Windows.Forms.CheckBox cbGrowthReduction;
+        private System.Windows.Forms.Label label85;
+        private System.Windows.Forms.Label label61;
         private System.Windows.Forms.CheckBox cbRandSeed;
         private System.Windows.Forms.Label label99;
         private System.Windows.Forms.TextBox tbRandSeed;

@@ -1,4 +1,4 @@
-﻿namespace SiteVegCalc
+﻿namespace SiteVegCalcV2_3
 {
     partial class Form5
     {
