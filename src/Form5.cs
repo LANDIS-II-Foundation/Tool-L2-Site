@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 
-namespace SiteVegCalc
+namespace L2_Site_Budworm
 {
     public partial class Form5 : Form
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace SiteVegCalc
+namespace L2_Site_Budworm
 {
     static class Program
     {

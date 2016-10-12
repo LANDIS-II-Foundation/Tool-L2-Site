@@ -1,4 +1,4 @@
-﻿namespace SiteVegCalc
+﻿namespace L2_Site_Budworm
 {
     partial class Form5
     {

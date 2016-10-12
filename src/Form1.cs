@@ -12,12 +12,13 @@ using System.Linq;
 using ZedGraph;
 using Landis.Biomass;
 using Landis.Species;
+using Troschuetz.Random;
 
-namespace SiteVegCalc
+namespace L2_Site_Budworm
 {
     public partial class Form1 : Form
     {
-        int repCount = 0;
+        int repCount = 1;
         int rangeCount = 0;
         static bool shrub1 = false;
         static bool shrub2 = false;
@@ -32,6 +33,9 @@ namespace SiteVegCalc
         static double effAge5 = 1;
         static double effAge6 = 1;
         static int numSpecies = 1;
+        string dirName = "";
+        string baseFileName = "";
+
 
         public Form1()
         {
@@ -52,10 +56,14 @@ namespace SiteVegCalc
                 // General parameters
                 string executableName = Application.ExecutablePath;
                 FileInfo executableFileInfo = new FileInfo(executableName);
-                string dirName = executableFileInfo.DirectoryName;
+               dirName = executableFileInfo.DirectoryName;
+            
                 if (cbOutputFolder.Checked)
+                {
                     dirName = tbOutputFolder.Text;
-
+                    System.IO.Directory.CreateDirectory(dirName);
+                }
+                baseFileName = tbBaseFileName.Text;
                 int timestep = int.Parse(tbTimestep.Text);
                 int simYears = int.Parse(tbSimYears.Text);
                 double paramY = 0.01;
@@ -104,8 +112,71 @@ namespace SiteVegCalc
                 double light54 = 0;
                 double light55 = 0;
 
+                //Budworm - Declare input parameters
+                int budwormStartYear = 0;
+                double budwormrm = 0;
+                double budwormrprimem = 0;
+                double budwormb = 0;
+                double budwormcprime = 0;
+                double budwormbprime = 0;
+                double budwormc = 0;
+                double budEnemyDensity0 = 0;
+                double budwormDensity0 = 0;
+                double budwormMaxDensity = 0;
+                double budwormbprime2 = 0;
+                double budwormaprime2 = 0;
+                double budwormaprime = 0;
+                double budwormdeltaaprime2 = 0;
+                double budwormdeltabprime2 = 0;
+                double budwormWinterMean = 1;
+                double budwormWinterStdev = 0;
+                double budwormPredationMean = 1;
+                double budwormPredationStdev = 0;
+                bool budwormWinterConstant = false;
+                bool budwormPredationConstant = false;
+                Troschuetz.Random.NormalDistribution normDistWinter = new Troschuetz.Random.NormalDistribution(randGen);
+                Troschuetz.Random.NormalDistribution normDistPredation = new Troschuetz.Random.NormalDistribution(randGen);
+                Troschuetz.Random.BetaDistribution betaDistDefol = new Troschuetz.Random.BetaDistribution(randGen);
+                bool budwormHost1 = false;
+                bool budwormHost2 = false;
+                bool budwormHost3 = false;
+                bool budwormHost4 = false;
+                bool budwormHost5 = false;
+                bool budwormHost6 = false;
+                bool budwormDecid1 = false;
+                bool budwormDecid2 = false;
+                bool budwormDecid3 = false;
+                bool budwormDecid4 = false;
+                bool budwormDecid5 = false;
+                bool budwormDecid6 = false;
+                bool budwormCondHost1 = false;
+                bool budwormCondHost2 = false;
+                bool budwormCondHost3 = false;
+                bool budwormCondHost4 = false;
+                bool budwormCondHost5 = false;
+                bool budwormCondHost6 = false;
+                double matingA = 0;
+                double matingB = 0;
+                double matingC = 0;
+                double decidProtectDmax1 = 0;
+                double decidProtectDmax2 = 0;
+                double phenolLimitMean = 1;
+                double phenolLimitStdev = 0;
+                bool phenolLimitConstant = false;
+                Troschuetz.Random.NormalDistribution normDistPhenolLimit = new Troschuetz.Random.NormalDistribution(randGen);
+                double defolLambda = 0.255;
+                double minLDD = 0;
+                double halfLDD = 0;
+                double maxLDD = 0;
+                double maxLDDProp = 0;
+                int minSuscAge = 0;
+                double predM = 1.0;
+                double predN = 1.0;
+                double preyM = 1.0;
+                double preyN = 1.0;
+            //Budworm - END - Declare input parameters
 
-                if (rbV2.Checked || rbV3.Checked)
+                if (rbV30.Checked || rbV35.Checked)
                 {
                     shade1 = double.Parse(tbRelBio1.Text);
                     shade2 = double.Parse(tbRelBio2.Text);
@@ -181,9 +252,68 @@ namespace SiteVegCalc
                     sufficientLight.Add(light4);
                     sufficientLight.Add(light5);
 
+                    //Budworm - Read parameter values from text boxes
+                    budwormStartYear = int.Parse(tbBudStartYear.Text);
+                    budwormrm = double.Parse(tbBudrm.Text);
+                    budwormrprimem = double.Parse(tbBudrprimem.Text);
+                    budwormb = double.Parse(tbBudb.Text);
+                    budwormbprime = double.Parse(tbBudbprime.Text);
+                    budwormcprime = double.Parse(tbBudcprime.Text);
+                    budwormc = double.Parse(tbBudc.Text);
+                    budEnemyDensity0 = double.Parse(tbBudx0.Text);
+                    budwormDensity0 = double.Parse(tbBudy0.Text);
+                    budwormMaxDensity = double.Parse(tbBudMaxDensity.Text);
+                    budwormaprime = double.Parse(tbBudaprime.Text);
+                    budwormWinterMean = double.Parse(tbBudWinterMean.Text);
+                    budwormWinterStdev = double.Parse(tbBudWinterStdev.Text);
+                    budwormPredationMean = double.Parse(tbBudPredationMean.Text);
+                    budwormPredationStdev = double.Parse(tbBudPredationStdev.Text);
+                    matingA = double.Parse(tbAlleeShape.Text);
+                    matingB = double.Parse(tbAlleeScale.Text);
+                    matingC = double.Parse(tbMatingC.Text);
+                    decidProtectDmax1 = double.Parse(tbDecidProtectD1.Text);
+                    decidProtectDmax2 = double.Parse(tbDecidProtectD2.Text);
+                    phenolLimitMean = double.Parse(tbBudPhenolMean.Text);
+                    phenolLimitStdev = double.Parse(tbBudPhenolStdev.Text);
+                    defolLambda = double.Parse(tbDefolLambda.Text);
+                    minLDD = double.Parse(tbMinLDD.Text);
+                    halfLDD = double.Parse(tbHalfLDD.Text);
+                    maxLDD = double.Parse(tbMaxLDD.Text);
+                    maxLDDProp = double.Parse(tbMaxLDDProp.Text);
+                    minSuscAge = int.Parse(tbMinSuscAge.Text);
+                    predM = double.Parse(tbPredM.Text);
+                    predN = double.Parse(tbPredN.Text);
+                    preyM = double.Parse(tbPreyM.Text);
+                    preyN = double.Parse(tbPreyN.Text);
+
+                    // the normal distribution will not accept a sigma value of 0
+                    // we want to use a constant equal to the mean (mu) when stdev = 0
+                    // use the *Constant boolean parameters to control this
+                    // 
+                    if (budwormWinterStdev == 0)
+                        budwormWinterConstant = true;
+                    else
+                    {
+                        normDistWinter.Mu = budwormWinterMean;
+                        normDistWinter.Sigma = budwormWinterStdev;
+                    }
+                    if (budwormPredationStdev == 0)
+                        budwormPredationConstant = true;
+                    else
+                    {
+                        normDistPredation.Mu = budwormPredationMean;
+                        normDistPredation.Sigma = budwormPredationStdev;
+                    }
+                    if (phenolLimitStdev == 0)
+                        phenolLimitConstant = true;
+                    else
+                    {
+                        normDistPhenolLimit.Mu = phenolLimitMean;
+                        normDistPhenolLimit.Sigma = phenolLimitStdev;
+                    }
                 }
 
-
+                //Budworm - END - Read parameter values from text boxes
 
                 int sppNum1 = int.Parse(tbSppNum1.Text);
                 int sppNum2 = int.Parse(tbSppNum2.Text);
@@ -385,7 +515,10 @@ namespace SiteVegCalc
                     batchNum = int.Parse(tbBatch.Text);
 
 
-                List<Species> speciesList = new List<Species>();
+                List<ISpecies> speciesList = new List<ISpecies>();
+                //Budworm
+                List<ISpecies> hostSpeciesList = new List<ISpecies>();
+                List<ISpecies> condHostSpeciesList = new List<ISpecies>();
                 //Species 1
                 if (sppNum1 == 1)
                 {
@@ -395,7 +528,7 @@ namespace SiteVegCalc
                     maturityAge1 = double.Parse(tbMatAge1.Text);
                     maxANPP1 = int.Parse(tbANPPmax.Text);
                     maxBiomass = int.Parse(tbBioMax.Text);
-                    if(rbV3.Checked)
+                    if(rbV35.Checked)
                         paramD1 = double.Parse(tbAgeMort1.Text);
                     else
                         paramD1 = double.Parse(tbMortShape1.Text);
@@ -407,7 +540,7 @@ namespace SiteVegCalc
                     removeProp1 = double.Parse(tbRemProp1.Text);
                     anppPower1 = double.Parse(tbPower1.Text);
                     decayRate1 = double.Parse(tbDecay1.Text);
-                    if (rbV3.Checked)
+                    if (rbV35.Checked)
                         mortMod1 = double.Parse(tbMortMod1.Text);
                     if (cbANPP1.Checked)
                         rangeANPP1 = true;
@@ -420,6 +553,9 @@ namespace SiteVegCalc
                     resproutProb1 = double.Parse(tbVegProb1.Text);
                     minVegAge1 = int.Parse(tbMinVegAge1.Text);
                     maxVegAge1 = int.Parse(tbMaxVegAge1.Text);
+                    budwormHost1 = rbHost1.Checked;
+                    budwormDecid1 = rbDecid1.Checked;
+                    budwormCondHost1 = rbCondHost1.Checked;
                 }
                 else if (sppNum2 == 1)
                 {
@@ -429,7 +565,7 @@ namespace SiteVegCalc
                     maturityAge1 = double.Parse(tbMatAge2.Text);
                     maxANPP1 = int.Parse(tbANPPmax2.Text);
                     maxBiomass = int.Parse(tbBioMax2.Text);
-                    if (rbV3.Checked)
+                    if (rbV35.Checked)
                         paramD1 = double.Parse(tbAgeMort2.Text);
                     else
                         paramD1 = double.Parse(tbMortShape2.Text);
@@ -441,7 +577,7 @@ namespace SiteVegCalc
                     removeProp1 = double.Parse(tbRemProp2.Text);
                     anppPower1 = double.Parse(tbPower2.Text);
                     decayRate1 = double.Parse(tbDecay2.Text);
-                    if (rbV3.Checked)
+                    if (rbV35.Checked)
                         mortMod1 = double.Parse(tbMortMod2.Text);
                     if (cbANPP2.Checked)
                         rangeANPP1 = true;
@@ -454,6 +590,9 @@ namespace SiteVegCalc
                     resproutProb1 = double.Parse(tbVegProb2.Text);
                     minVegAge1 = int.Parse(tbMinVegAge2.Text);
                     maxVegAge1 = int.Parse(tbMaxVegAge2.Text);
+                    budwormHost1 = rbHost2.Checked;
+                    budwormDecid1 = rbDecid2.Checked;
+                    budwormCondHost1 = rbCondHost2.Checked;
                 }
                 else if (sppNum3 == 1)
                 {
@@ -463,7 +602,7 @@ namespace SiteVegCalc
                     maturityAge1 = double.Parse(tbMatAge3.Text);
                     maxANPP1 = int.Parse(tbANPPmax3.Text);
                     maxBiomass = int.Parse(tbBioMax3.Text);
-                    if (rbV3.Checked)
+                    if (rbV35.Checked)
                         paramD1 = double.Parse(tbAgeMort3.Text);
                     else
                         paramD1 = double.Parse(tbMortShape3.Text);
@@ -475,7 +614,7 @@ namespace SiteVegCalc
                     removeProp1 = double.Parse(tbRemProp3.Text);
                     anppPower1 = double.Parse(tbPower3.Text);
                     decayRate1 = double.Parse(tbDecay3.Text);
-                    if (rbV3.Checked)
+                    if (rbV35.Checked)
                         mortMod1 = double.Parse(tbMortMod3.Text);
                     if (cbANPP3.Checked)
                         rangeANPP1 = true;
@@ -488,6 +627,9 @@ namespace SiteVegCalc
                     resproutProb1 = double.Parse(tbVegProb3.Text);
                     minVegAge1 = int.Parse(tbMinVegAge3.Text);
                     maxVegAge1 = int.Parse(tbMaxVegAge3.Text);
+                    budwormHost1 = rbHost3.Checked;
+                    budwormDecid1 = rbDecid3.Checked;
+                    budwormCondHost1 = rbCondHost3.Checked;
                 }
                 else if (sppNum4 == 1)
                 {
@@ -497,7 +639,7 @@ namespace SiteVegCalc
                     maturityAge1 = double.Parse(tbMatAge4.Text);
                     maxANPP1 = int.Parse(tbANPPmax4.Text);
                     maxBiomass = int.Parse(tbBioMax4.Text);
-                    if (rbV3.Checked)
+                    if (rbV35.Checked)
                         paramD1 = double.Parse(tbAgeMort4.Text);
                     else
                         paramD1 = double.Parse(tbMortShape4.Text);
@@ -509,7 +651,7 @@ namespace SiteVegCalc
                     removeProp1 = double.Parse(tbRemProp4.Text);
                     anppPower1 = double.Parse(tbPower4.Text);
                     decayRate1 = double.Parse(tbDecay4.Text);
-                    if (rbV3.Checked)
+                    if (rbV35.Checked)
                         mortMod1 = double.Parse(tbMortMod4.Text);
                     if (cbANPP4.Checked)
                         rangeANPP1 = true;
@@ -522,6 +664,9 @@ namespace SiteVegCalc
                     resproutProb1 = double.Parse(tbVegProb4.Text);
                     minVegAge1 = int.Parse(tbMinVegAge4.Text);
                     maxVegAge1 = int.Parse(tbMaxVegAge4.Text);
+                    budwormHost1 = rbHost4.Checked;
+                    budwormDecid1 = rbDecid4.Checked;
+                    budwormCondHost1 = rbCondHost4.Checked;
                 }
                 else if (sppNum5 == 1)
                 {
@@ -531,7 +676,7 @@ namespace SiteVegCalc
                     maturityAge1 = double.Parse(tbMatAge5.Text);
                     maxANPP1 = int.Parse(tbANPPmax5.Text);
                     maxBiomass = int.Parse(tbBioMax5.Text);
-                    if (rbV3.Checked)
+                    if (rbV35.Checked)
                         paramD1 = double.Parse(tbAgeMort5.Text);
                     else
                         paramD1 = double.Parse(tbMortShape5.Text);
@@ -543,7 +688,7 @@ namespace SiteVegCalc
                     removeProp1 = double.Parse(tbRemProp5.Text);
                     anppPower1 = double.Parse(tbPower5.Text);
                     decayRate1 = double.Parse(tbDecay5.Text);
-                    if (rbV3.Checked)
+                    if (rbV35.Checked)
                         mortMod1 = double.Parse(tbMortMod5.Text);
                     if (cbANPP5.Checked)
                         rangeANPP1 = true;
@@ -556,6 +701,9 @@ namespace SiteVegCalc
                     resproutProb1 = double.Parse(tbVegProb5.Text);
                     minVegAge1 = int.Parse(tbMinVegAge5.Text);
                     maxVegAge1 = int.Parse(tbMaxVegAge5.Text);
+                    budwormHost1 = rbHost5.Checked;
+                    budwormDecid1 = rbDecid5.Checked;
+                    budwormCondHost1 = rbCondHost5.Checked;
                 }
                 else if (sppNum6 == 1)
                 {
@@ -565,7 +713,7 @@ namespace SiteVegCalc
                     maturityAge1 = double.Parse(tbMatAge6.Text);
                     maxANPP1 = int.Parse(tbANPPmax6.Text);
                     maxBiomass = int.Parse(tbBioMax6.Text);
-                    if (rbV3.Checked)
+                    if (rbV35.Checked)
                         paramD1 = double.Parse(tbAgeMort6.Text);
                     else
                         paramD1 = double.Parse(tbMortShape6.Text);
@@ -577,7 +725,7 @@ namespace SiteVegCalc
                     removeProp1 = double.Parse(tbRemProp6.Text);
                     anppPower1 = double.Parse(tbPower6.Text);
                     decayRate1 = double.Parse(tbDecay6.Text);
-                    if (rbV3.Checked)
+                    if (rbV35.Checked)
                         mortMod1 = double.Parse(tbMortMod6.Text);
                     if (cbANPP6.Checked)
                         rangeANPP1 = true;
@@ -590,6 +738,9 @@ namespace SiteVegCalc
                     resproutProb1 = double.Parse(tbVegProb6.Text);
                     minVegAge1 = int.Parse(tbMinVegAge6.Text);
                     maxVegAge1 = int.Parse(tbMaxVegAge6.Text);
+                    budwormHost1 = rbHost6.Checked;
+                    budwormDecid1 = rbDecid6.Checked;
+                    budwormCondHost1 = rbCondHost6.Checked;
                 }
                 maxShadeBiomass = maxBiomass;
 
@@ -597,9 +748,12 @@ namespace SiteVegCalc
                 mortR_1 = Calculations.Compute_mortR(X0_1, longevity1, paramD1);
 
                 Landis.Species.Parameters parameters1 = new Landis.Species.Parameters(sppName, longevity1, (int)maturityAge1, (byte)shadeTol1, 0, 0, 0, 0, 0, 0, PostFireRegeneration.None);
-                Landis.Species.Species species1 = new Landis.Species.Species(0, parameters1);
+                Landis.Species.ISpecies species1 = new Landis.Species.Species(0, parameters1);
                 speciesList.Add(species1);
                 siteMaxBio = maxBiomass;
+                //Budworm
+                if (budwormHost1) hostSpeciesList.Add(species1);
+                else if (budwormCondHost1) condHostSpeciesList.Add(species1);
 
                 if (numSpecies > 1)
                 {
@@ -612,7 +766,7 @@ namespace SiteVegCalc
                         maturityAge2 = double.Parse(tbMatAge1.Text);
                         maxANPP2 = int.Parse(tbANPPmax.Text);
                         maxBiomass2 = int.Parse(tbBioMax.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD2 = double.Parse(tbAgeMort1.Text);
                         else
                             paramD2 = double.Parse(tbMortShape1.Text);
@@ -624,7 +778,7 @@ namespace SiteVegCalc
                         removeProp2 = double.Parse(tbRemProp1.Text);
                         anppPower2 = double.Parse(tbPower1.Text);
                         decayRate2 = double.Parse(tbDecay1.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                         mortMod2 = double.Parse(tbMortMod1.Text);
                         if (cbANPP1.Checked)
                             rangeANPP2 = true;
@@ -637,6 +791,9 @@ namespace SiteVegCalc
                         resproutProb2 = double.Parse(tbVegProb1.Text);
                         minVegAge2 = int.Parse(tbMinVegAge1.Text);
                         maxVegAge2 = int.Parse(tbMaxVegAge1.Text);
+                        budwormHost2 = rbHost1.Checked;
+                        budwormDecid2 = rbDecid1.Checked;
+                        budwormCondHost2 = rbCondHost1.Checked;
                     }
                     else if (sppNum2 == 2)
                     {
@@ -646,7 +803,7 @@ namespace SiteVegCalc
                         maturityAge2 = double.Parse(tbMatAge2.Text);
                         maxANPP2 = int.Parse(tbANPPmax2.Text);
                         maxBiomass2 = int.Parse(tbBioMax2.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD2 = double.Parse(tbAgeMort2.Text);
                         else
                             paramD2 = double.Parse(tbMortShape2.Text);
@@ -658,7 +815,7 @@ namespace SiteVegCalc
                         removeProp2 = double.Parse(tbRemProp2.Text);
                         anppPower2 = double.Parse(tbPower2.Text);
                         decayRate2 = double.Parse(tbDecay2.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                         mortMod2 = double.Parse(tbMortMod2.Text);
                         if (cbANPP2.Checked)
                             rangeANPP2 = true;
@@ -671,6 +828,9 @@ namespace SiteVegCalc
                         resproutProb2 = double.Parse(tbVegProb2.Text);
                         minVegAge2 = int.Parse(tbMinVegAge2.Text);
                         maxVegAge2 = int.Parse(tbMaxVegAge2.Text);
+                        budwormHost2 = rbHost2.Checked;
+                        budwormDecid2 = rbDecid2.Checked;
+                        budwormCondHost2 = rbCondHost2.Checked;
                     }
                     else if (sppNum3 == 2)
                     {
@@ -680,7 +840,7 @@ namespace SiteVegCalc
                         maturityAge2 = double.Parse(tbMatAge3.Text);
                         maxANPP2 = int.Parse(tbANPPmax3.Text);
                         maxBiomass2 = int.Parse(tbBioMax3.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD2 = double.Parse(tbAgeMort3.Text);
                         else
                             paramD2 = double.Parse(tbMortShape3.Text);
@@ -692,7 +852,7 @@ namespace SiteVegCalc
                         removeProp2 = double.Parse(tbRemProp3.Text);
                         anppPower2 = double.Parse(tbPower3.Text);
                         decayRate2 = double.Parse(tbDecay3.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                         mortMod2 = double.Parse(tbMortMod3.Text);
                         if (cbANPP3.Checked)
                             rangeANPP2 = true;
@@ -705,6 +865,9 @@ namespace SiteVegCalc
                         resproutProb2 = double.Parse(tbVegProb3.Text);
                         minVegAge2 = int.Parse(tbMinVegAge3.Text);
                         maxVegAge2 = int.Parse(tbMaxVegAge3.Text);
+                        budwormHost2 = rbHost3.Checked;
+                        budwormDecid2 = rbDecid3.Checked;
+                        budwormCondHost2 = rbCondHost3.Checked;
                     }
                     else if (sppNum4 == 2)
                     {
@@ -714,7 +877,7 @@ namespace SiteVegCalc
                         maturityAge2 = double.Parse(tbMatAge4.Text);
                         maxANPP2 = int.Parse(tbANPPmax4.Text);
                         maxBiomass2 = int.Parse(tbBioMax4.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD2 = double.Parse(tbAgeMort4.Text);
                         else
                             paramD2 = double.Parse(tbMortShape4.Text);
@@ -727,7 +890,7 @@ namespace SiteVegCalc
                         anppPower2 = double.Parse(tbPower4.Text);
                         decayRate2 = double.Parse(tbDecay4.Text);
                         mortMod2 = double.Parse(tbMortMod4.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                         if (cbANPP4.Checked)
                             rangeANPP2 = true;
                         if (cbRangeAP4.Checked)
@@ -739,6 +902,9 @@ namespace SiteVegCalc
                         resproutProb2 = double.Parse(tbVegProb4.Text);
                         minVegAge2 = int.Parse(tbMinVegAge4.Text);
                         maxVegAge2 = int.Parse(tbMaxVegAge4.Text);
+                        budwormHost2 = rbHost4.Checked;
+                        budwormDecid2 = rbDecid4.Checked;
+                        budwormCondHost2 = rbCondHost4.Checked;
                     }
                     else if (sppNum5 == 2)
                     {
@@ -748,7 +914,7 @@ namespace SiteVegCalc
                         maturityAge2 = double.Parse(tbMatAge5.Text);
                         maxANPP2 = int.Parse(tbANPPmax5.Text);
                         maxBiomass2 = int.Parse(tbBioMax5.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD2 = double.Parse(tbAgeMort5.Text);
                         else
                             paramD2 = double.Parse(tbMortShape5.Text);
@@ -761,7 +927,7 @@ namespace SiteVegCalc
                         anppPower2 = double.Parse(tbPower5.Text);
                         decayRate2 = double.Parse(tbDecay5.Text);
                         mortMod2 = double.Parse(tbMortMod5.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             if (cbANPP5.Checked)
                                 rangeANPP2 = true;
                         if (cbRangeAP5.Checked)
@@ -773,6 +939,9 @@ namespace SiteVegCalc
                         resproutProb2 = double.Parse(tbVegProb5.Text);
                         minVegAge2 = int.Parse(tbMinVegAge5.Text);
                         maxVegAge2 = int.Parse(tbMaxVegAge5.Text);
+                        budwormHost2 = rbHost5.Checked;
+                        budwormDecid2 = rbDecid5.Checked;
+                        budwormCondHost2 = rbCondHost5.Checked;
                     }
                     else if (sppNum6 == 2)
                     {
@@ -782,7 +951,7 @@ namespace SiteVegCalc
                         maturityAge2 = double.Parse(tbMatAge6.Text);
                         maxANPP2 = int.Parse(tbANPPmax6.Text);
                         maxBiomass2 = int.Parse(tbBioMax6.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD2 = double.Parse(tbAgeMort6.Text);
                         else
                             paramD2 = double.Parse(tbMortShape6.Text);
@@ -795,7 +964,7 @@ namespace SiteVegCalc
                         anppPower2 = double.Parse(tbPower6.Text);
                         decayRate2 = double.Parse(tbDecay6.Text);
                         mortMod2 = double.Parse(tbMortMod6.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             if (cbANPP6.Checked)
                                 rangeANPP2 = true;
                         if (cbRangeAP6.Checked)
@@ -807,6 +976,9 @@ namespace SiteVegCalc
                         resproutProb2 = double.Parse(tbVegProb6.Text);
                         minVegAge2 = int.Parse(tbMinVegAge6.Text);
                         maxVegAge2 = int.Parse(tbMaxVegAge6.Text);
+                        budwormHost2 = rbHost6.Checked;
+                        budwormDecid2 = rbDecid6.Checked;
+                        budwormCondHost2 = rbCondHost6.Checked;
                     }
                     maxShadeBiomass = Math.Max(maxShadeBiomass, maxBiomass2);
 
@@ -821,6 +993,10 @@ namespace SiteVegCalc
                 {
                     speciesList.Add(species2);
                     siteMaxBio = Math.Max(maxBiomass, maxBiomass2);
+                    //Budworm
+                    if(budwormHost2) hostSpeciesList.Add(species2);
+                    else if (budwormCondHost2) condHostSpeciesList.Add(species2);
+
                 }
 
                 if (numSpecies > 2)
@@ -834,7 +1010,7 @@ namespace SiteVegCalc
                         maturityAge3 = double.Parse(tbMatAge1.Text);
                         maxANPP3 = int.Parse(tbANPPmax.Text);
                         maxBiomass3 = int.Parse(tbBioMax.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD3 = double.Parse(tbAgeMort1.Text);
                         else
                             paramD3 = double.Parse(tbMortShape1.Text);
@@ -846,7 +1022,7 @@ namespace SiteVegCalc
                         removeProp3 = double.Parse(tbRemProp1.Text);
                         anppPower3 = double.Parse(tbPower1.Text);
                         decayRate3 = double.Parse(tbDecay1.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                         mortMod3 = double.Parse(tbMortMod1.Text);
                         if (cbANPP1.Checked)
                             rangeANPP3 = true;
@@ -859,6 +1035,9 @@ namespace SiteVegCalc
                         resproutProb3 = double.Parse(tbVegProb1.Text);
                         minVegAge3 = int.Parse(tbMinVegAge1.Text);
                         maxVegAge3 = int.Parse(tbMaxVegAge1.Text);
+                        budwormHost3 = rbHost1.Checked;
+                        budwormDecid3 = rbDecid1.Checked;
+                        budwormCondHost3 = rbCondHost1.Checked;
                     }
                     else if (sppNum2 == 3)
                     {
@@ -868,7 +1047,7 @@ namespace SiteVegCalc
                         maturityAge3 = double.Parse(tbMatAge2.Text);
                         maxANPP3 = int.Parse(tbANPPmax2.Text);
                         maxBiomass3 = int.Parse(tbBioMax2.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD3 = double.Parse(tbAgeMort2.Text);
                         else
                             paramD3 = double.Parse(tbMortShape2.Text);
@@ -880,7 +1059,7 @@ namespace SiteVegCalc
                         removeProp3 = double.Parse(tbRemProp2.Text);
                         anppPower3 = double.Parse(tbPower2.Text);
                         decayRate3 = double.Parse(tbDecay2.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                         mortMod3 = double.Parse(tbMortMod2.Text);
                         if (cbANPP2.Checked)
                             rangeANPP3 = true;
@@ -893,6 +1072,9 @@ namespace SiteVegCalc
                         resproutProb3 = double.Parse(tbVegProb2.Text);
                         minVegAge3 = int.Parse(tbMinVegAge2.Text);
                         maxVegAge3 = int.Parse(tbMaxVegAge2.Text);
+                        budwormHost3 = rbHost2.Checked;
+                        budwormDecid3 = rbDecid2.Checked;
+                        budwormCondHost3 = rbCondHost2.Checked;
                     }
                     else if (sppNum3 == 3)
                     {
@@ -902,7 +1084,7 @@ namespace SiteVegCalc
                         maturityAge3 = double.Parse(tbMatAge3.Text);
                         maxANPP3 = int.Parse(tbANPPmax3.Text);
                         maxBiomass3 = int.Parse(tbBioMax3.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD3 = double.Parse(tbAgeMort3.Text);
                         else
                             paramD3 = double.Parse(tbMortShape3.Text);
@@ -914,7 +1096,7 @@ namespace SiteVegCalc
                         removeProp3 = double.Parse(tbRemProp3.Text);
                         anppPower3 = double.Parse(tbPower3.Text);
                         decayRate3 = double.Parse(tbDecay3.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                         mortMod3 = double.Parse(tbMortMod3.Text);
                         if (cbANPP3.Checked)
                             rangeANPP3 = true;
@@ -927,6 +1109,9 @@ namespace SiteVegCalc
                         resproutProb3 = double.Parse(tbVegProb3.Text);
                         minVegAge3 = int.Parse(tbMinVegAge3.Text);
                         maxVegAge3 = int.Parse(tbMaxVegAge3.Text);
+                        budwormHost3 = rbHost3.Checked;
+                        budwormDecid3 = rbDecid3.Checked;
+                        budwormCondHost3 = rbCondHost3.Checked;
                     }
                     else if (sppNum4 == 3)
                     {
@@ -936,7 +1121,7 @@ namespace SiteVegCalc
                         maturityAge3 = double.Parse(tbMatAge4.Text);
                         maxANPP3 = int.Parse(tbANPPmax4.Text);
                         maxBiomass3 = int.Parse(tbBioMax4.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD3 = double.Parse(tbAgeMort4.Text);
                         else
                             paramD3 = double.Parse(tbMortShape4.Text);
@@ -948,7 +1133,7 @@ namespace SiteVegCalc
                         removeProp3 = double.Parse(tbRemProp4.Text);
                         anppPower3 = double.Parse(tbPower4.Text);
                         decayRate3 = double.Parse(tbDecay4.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                         mortMod3 = double.Parse(tbMortMod4.Text);
                         if (cbANPP4.Checked)
                             rangeANPP3 = true;
@@ -961,6 +1146,9 @@ namespace SiteVegCalc
                         resproutProb3 = double.Parse(tbVegProb4.Text);
                         minVegAge3 = int.Parse(tbMinVegAge4.Text);
                         maxVegAge3 = int.Parse(tbMaxVegAge4.Text);
+                        budwormHost3 = rbHost4.Checked;
+                        budwormDecid3 = rbDecid4.Checked;
+                        budwormCondHost3 = rbCondHost4.Checked;
                     }
                     else if (sppNum5 == 3)
                     {
@@ -970,7 +1158,7 @@ namespace SiteVegCalc
                         maturityAge3 = double.Parse(tbMatAge5.Text);
                         maxANPP3 = int.Parse(tbANPPmax5.Text);
                         maxBiomass3 = int.Parse(tbBioMax5.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD3 = double.Parse(tbAgeMort5.Text);
                         else
                             paramD3 = double.Parse(tbMortShape5.Text);
@@ -982,7 +1170,7 @@ namespace SiteVegCalc
                         removeProp3 = double.Parse(tbRemProp5.Text);
                         anppPower3 = double.Parse(tbPower5.Text);
                         decayRate3 = double.Parse(tbDecay5.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             mortMod3 = double.Parse(tbMortMod5.Text);
                         if (cbANPP5.Checked)
                             rangeANPP3 = true;
@@ -995,6 +1183,9 @@ namespace SiteVegCalc
                         resproutProb3 = double.Parse(tbVegProb5.Text);
                         minVegAge3 = int.Parse(tbMinVegAge5.Text);
                         maxVegAge3 = int.Parse(tbMaxVegAge5.Text);
+                        budwormHost3 = rbHost5.Checked;
+                        budwormDecid3 = rbDecid5.Checked;
+                        budwormCondHost3 = rbCondHost5.Checked;
                     }
                     else if (sppNum6 == 3)
                     {
@@ -1004,7 +1195,7 @@ namespace SiteVegCalc
                         maturityAge3 = double.Parse(tbMatAge6.Text);
                         maxANPP3 = int.Parse(tbANPPmax6.Text);
                         maxBiomass3 = int.Parse(tbBioMax6.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD3 = double.Parse(tbAgeMort6.Text);
                         else
                             paramD3 = double.Parse(tbMortShape6.Text);
@@ -1016,7 +1207,7 @@ namespace SiteVegCalc
                         removeProp3 = double.Parse(tbRemProp6.Text);
                         anppPower3 = double.Parse(tbPower6.Text);
                         decayRate3 = double.Parse(tbDecay6.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             mortMod3 = double.Parse(tbMortMod6.Text);
                         if (cbANPP6.Checked)
                             rangeANPP3 = true;
@@ -1029,6 +1220,9 @@ namespace SiteVegCalc
                         resproutProb3 = double.Parse(tbVegProb6.Text);
                         minVegAge3 = int.Parse(tbMinVegAge6.Text);
                         maxVegAge3 = int.Parse(tbMaxVegAge6.Text);
+                        budwormHost3 = rbHost6.Checked;
+                        budwormDecid3 = rbDecid6.Checked;
+                        budwormCondHost3 = rbCondHost6.Checked;
                     }
                     maxShadeBiomass = Math.Max(maxShadeBiomass, maxBiomass3);
 
@@ -1043,6 +1237,10 @@ namespace SiteVegCalc
                 {
                     speciesList.Add(species3);
                     siteMaxBio = Math.Max(siteMaxBio, maxBiomass3);
+                    //Budworm
+                    if(budwormHost3) hostSpeciesList.Add(species3);
+                    else if (budwormCondHost3) condHostSpeciesList.Add(species3);
+
                 }
 
                 if (numSpecies > 3)
@@ -1056,7 +1254,7 @@ namespace SiteVegCalc
                         maturityAge4 = double.Parse(tbMatAge1.Text);
                         maxANPP4 = int.Parse(tbANPPmax.Text);
                         maxBiomass4 = int.Parse(tbBioMax.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD4 = double.Parse(tbAgeMort1.Text);
                         else
                             paramD4 = double.Parse(tbMortShape1.Text);
@@ -1068,7 +1266,7 @@ namespace SiteVegCalc
                         removeProp4 = double.Parse(tbRemProp1.Text);
                         anppPower4 = double.Parse(tbPower1.Text);
                         decayRate4 = double.Parse(tbDecay1.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                         mortMod4 = double.Parse(tbMortMod1.Text);
                         if (cbANPP1.Checked)
                             rangeANPP4 = true;
@@ -1081,6 +1279,9 @@ namespace SiteVegCalc
                         resproutProb4 = double.Parse(tbVegProb1.Text);
                         minVegAge4 = int.Parse(tbMinVegAge1.Text);
                         maxVegAge4 = int.Parse(tbMaxVegAge1.Text);
+                        budwormHost4 = rbHost1.Checked;
+                        budwormDecid4 = rbDecid1.Checked;
+                        budwormCondHost4 = rbCondHost1.Checked;
                     }
                     else if (sppNum2 == 4)
                     {
@@ -1090,7 +1291,7 @@ namespace SiteVegCalc
                         maturityAge4 = double.Parse(tbMatAge2.Text);
                         maxANPP4 = int.Parse(tbANPPmax2.Text);
                         maxBiomass4 = int.Parse(tbBioMax2.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD4 = double.Parse(tbAgeMort2.Text);
                         else
                             paramD4 = double.Parse(tbMortShape2.Text);
@@ -1102,7 +1303,7 @@ namespace SiteVegCalc
                         removeProp4 = double.Parse(tbRemProp2.Text);
                         anppPower4 = double.Parse(tbPower2.Text);
                         decayRate4 = double.Parse(tbDecay2.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                         mortMod4 = double.Parse(tbMortMod2.Text);
                         if (cbANPP2.Checked)
                             rangeANPP4 = true;
@@ -1115,6 +1316,9 @@ namespace SiteVegCalc
                         resproutProb4 = double.Parse(tbVegProb2.Text);
                         minVegAge4 = int.Parse(tbMinVegAge2.Text);
                         maxVegAge4 = int.Parse(tbMaxVegAge2.Text);
+                        budwormHost4 = rbHost2.Checked;
+                        budwormDecid4 = rbDecid2.Checked;
+                        budwormCondHost4 = rbCondHost2.Checked;
                     }
                     else if (sppNum3 == 4)
                     {
@@ -1124,7 +1328,7 @@ namespace SiteVegCalc
                         maturityAge4 = double.Parse(tbMatAge3.Text);
                         maxANPP4 = int.Parse(tbANPPmax3.Text);
                         maxBiomass4 = int.Parse(tbBioMax3.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD4 = double.Parse(tbAgeMort3.Text);
                         else
                             paramD4 = double.Parse(tbMortShape3.Text);
@@ -1136,7 +1340,7 @@ namespace SiteVegCalc
                         removeProp4 = double.Parse(tbRemProp3.Text);
                         anppPower4 = double.Parse(tbPower3.Text);
                         decayRate4 = double.Parse(tbDecay3.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                         mortMod4 = double.Parse(tbMortMod3.Text);
                         if (cbANPP3.Checked)
                             rangeANPP4 = true;
@@ -1149,6 +1353,9 @@ namespace SiteVegCalc
                         resproutProb4 = double.Parse(tbVegProb3.Text);
                         minVegAge4 = int.Parse(tbMinVegAge3.Text);
                         maxVegAge4 = int.Parse(tbMaxVegAge3.Text);
+                        budwormHost4 = rbHost3.Checked;
+                        budwormDecid4 = rbDecid3.Checked;
+                        budwormCondHost4 = rbCondHost3.Checked;
                     }
                     else if (sppNum4 == 4)
                     {
@@ -1158,7 +1365,7 @@ namespace SiteVegCalc
                         maturityAge4 = double.Parse(tbMatAge4.Text);
                         maxANPP4 = int.Parse(tbANPPmax4.Text);
                         maxBiomass4 = int.Parse(tbBioMax4.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD4 = double.Parse(tbAgeMort4.Text);
                         else
                             paramD4 = double.Parse(tbMortShape4.Text);
@@ -1170,7 +1377,7 @@ namespace SiteVegCalc
                         removeProp4 = double.Parse(tbRemProp4.Text);
                         anppPower4 = double.Parse(tbPower4.Text);
                         decayRate4 = double.Parse(tbDecay4.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                         mortMod4 = double.Parse(tbMortMod4.Text);
                         if (cbANPP4.Checked)
                             rangeANPP4 = true;
@@ -1183,6 +1390,9 @@ namespace SiteVegCalc
                         resproutProb4 = double.Parse(tbVegProb4.Text);
                         minVegAge4 = int.Parse(tbMinVegAge4.Text);
                         maxVegAge4 = int.Parse(tbMaxVegAge4.Text);
+                        budwormHost4 = rbHost4.Checked;
+                        budwormDecid4 = rbDecid4.Checked;
+                        budwormCondHost4 = rbCondHost4.Checked;
                     }
                     else if (sppNum5 == 4)
                     {
@@ -1192,7 +1402,7 @@ namespace SiteVegCalc
                         maturityAge4 = double.Parse(tbMatAge5.Text);
                         maxANPP4 = int.Parse(tbANPPmax5.Text);
                         maxBiomass4 = int.Parse(tbBioMax5.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD4 = double.Parse(tbAgeMort5.Text);
                         else
                             paramD4 = double.Parse(tbMortShape5.Text);
@@ -1204,7 +1414,7 @@ namespace SiteVegCalc
                         removeProp4 = double.Parse(tbRemProp5.Text);
                         anppPower4 = double.Parse(tbPower5.Text);
                         decayRate4 = double.Parse(tbDecay5.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             mortMod4 = double.Parse(tbMortMod5.Text);
                         if (cbANPP5.Checked)
                             rangeANPP4 = true;
@@ -1217,6 +1427,9 @@ namespace SiteVegCalc
                         resproutProb4 = double.Parse(tbVegProb5.Text);
                         minVegAge4 = int.Parse(tbMinVegAge5.Text);
                         maxVegAge4 = int.Parse(tbMaxVegAge5.Text);
+                        budwormHost4 = rbHost5.Checked;
+                        budwormDecid4 = rbDecid5.Checked;
+                        budwormCondHost4 = rbCondHost5.Checked;
                     }
                     else if (sppNum6 == 4)
                     {
@@ -1226,7 +1439,7 @@ namespace SiteVegCalc
                         maturityAge4 = double.Parse(tbMatAge6.Text);
                         maxANPP4 = int.Parse(tbANPPmax6.Text);
                         maxBiomass4 = int.Parse(tbBioMax6.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD4 = double.Parse(tbAgeMort6.Text);
                         else
                             paramD4 = double.Parse(tbMortShape6.Text);
@@ -1238,7 +1451,7 @@ namespace SiteVegCalc
                         removeProp4 = double.Parse(tbRemProp6.Text);
                         anppPower4 = double.Parse(tbPower6.Text);
                         decayRate4 = double.Parse(tbDecay6.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             mortMod4 = double.Parse(tbMortMod6.Text);
                         if (cbANPP6.Checked)
                             rangeANPP4 = true;
@@ -1251,6 +1464,9 @@ namespace SiteVegCalc
                         resproutProb4 = double.Parse(tbVegProb6.Text);
                         minVegAge4 = int.Parse(tbMinVegAge6.Text);
                         maxVegAge4 = int.Parse(tbMaxVegAge6.Text);
+                        budwormHost4 = rbHost6.Checked;
+                        budwormDecid4 = rbDecid6.Checked;
+                        budwormCondHost4 = rbCondHost6.Checked;
                     }
                     maxShadeBiomass = Math.Max(maxShadeBiomass, maxBiomass4);
                     
@@ -1268,6 +1484,10 @@ namespace SiteVegCalc
                 {
                     speciesList.Add(species4);
                     siteMaxBio = Math.Max(siteMaxBio, maxBiomass4);
+                    //Budworm
+                    if(budwormHost4) hostSpeciesList.Add(species4);
+                    else if (budwormCondHost4) condHostSpeciesList.Add(species4);
+
                 }
 
                 if (numSpecies > 4)
@@ -1281,7 +1501,7 @@ namespace SiteVegCalc
                         maturityAge5 = double.Parse(tbMatAge1.Text);
                         maxANPP5 = int.Parse(tbANPPmax.Text);
                         maxBiomass5 = int.Parse(tbBioMax.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD5 = double.Parse(tbAgeMort1.Text);
                         else
                             paramD5 = double.Parse(tbMortShape1.Text);
@@ -1293,7 +1513,7 @@ namespace SiteVegCalc
                         removeProp5 = double.Parse(tbRemProp1.Text);
                         anppPower5 = double.Parse(tbPower1.Text);
                         decayRate5 = double.Parse(tbDecay1.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             mortMod5 = double.Parse(tbMortMod1.Text);
                         if (cbANPP1.Checked)
                             rangeANPP5 = true;
@@ -1306,6 +1526,9 @@ namespace SiteVegCalc
                         resproutProb5 = double.Parse(tbVegProb1.Text);
                         minVegAge5 = int.Parse(tbMinVegAge1.Text);
                         maxVegAge5 = int.Parse(tbMaxVegAge1.Text);
+                        budwormHost5 = rbHost1.Checked;
+                        budwormDecid5 = rbDecid1.Checked;
+                        budwormCondHost5 = rbCondHost1.Checked;
                     }
                     else if (sppNum2 == 5)
                     {
@@ -1315,7 +1538,7 @@ namespace SiteVegCalc
                         maturityAge5 = double.Parse(tbMatAge2.Text);
                         maxANPP5 = int.Parse(tbANPPmax2.Text);
                         maxBiomass5 = int.Parse(tbBioMax2.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD5 = double.Parse(tbAgeMort2.Text);
                         else
                             paramD5 = double.Parse(tbMortShape2.Text);
@@ -1327,7 +1550,7 @@ namespace SiteVegCalc
                         removeProp5 = double.Parse(tbRemProp2.Text);
                         anppPower5 = double.Parse(tbPower2.Text);
                         decayRate5 = double.Parse(tbDecay2.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             mortMod5 = double.Parse(tbMortMod2.Text);
                         if (cbANPP2.Checked)
                             rangeANPP5 = true;
@@ -1340,6 +1563,9 @@ namespace SiteVegCalc
                         resproutProb5 = double.Parse(tbVegProb2.Text);
                         minVegAge5 = int.Parse(tbMinVegAge2.Text);
                         maxVegAge5 = int.Parse(tbMaxVegAge2.Text);
+                        budwormHost5 = rbHost2.Checked;
+                        budwormDecid5 = rbDecid2.Checked;
+                        budwormCondHost5 = rbCondHost2.Checked;
                     }
                     else if (sppNum3 == 5)
                     {
@@ -1349,7 +1575,7 @@ namespace SiteVegCalc
                         maturityAge5 = double.Parse(tbMatAge3.Text);
                         maxANPP5 = int.Parse(tbANPPmax3.Text);
                         maxBiomass5 = int.Parse(tbBioMax3.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD5 = double.Parse(tbAgeMort3.Text);
                         else
                             paramD5 = double.Parse(tbMortShape3.Text);
@@ -1361,7 +1587,7 @@ namespace SiteVegCalc
                         removeProp5 = double.Parse(tbRemProp3.Text);
                         anppPower5 = double.Parse(tbPower3.Text);
                         decayRate5 = double.Parse(tbDecay3.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             mortMod5 = double.Parse(tbMortMod3.Text);
                         if (cbANPP3.Checked)
                             rangeANPP5 = true;
@@ -1374,6 +1600,9 @@ namespace SiteVegCalc
                         resproutProb5 = double.Parse(tbVegProb3.Text);
                         minVegAge5 = int.Parse(tbMinVegAge3.Text);
                         maxVegAge5 = int.Parse(tbMaxVegAge3.Text);
+                        budwormHost5 = rbHost3.Checked;
+                        budwormDecid5 = rbDecid3.Checked;
+                        budwormCondHost5 = rbCondHost3.Checked;
                     }
                     else if (sppNum4 == 5)
                     {
@@ -1383,7 +1612,7 @@ namespace SiteVegCalc
                         maturityAge5 = double.Parse(tbMatAge4.Text);
                         maxANPP5 = int.Parse(tbANPPmax4.Text);
                         maxBiomass5 = int.Parse(tbBioMax4.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD5 = double.Parse(tbAgeMort4.Text);
                         else
                             paramD5 = double.Parse(tbMortShape4.Text);
@@ -1395,7 +1624,7 @@ namespace SiteVegCalc
                         removeProp5 = double.Parse(tbRemProp4.Text);
                         anppPower5 = double.Parse(tbPower4.Text);
                         decayRate5 = double.Parse(tbDecay4.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             mortMod5 = double.Parse(tbMortMod4.Text);
                         if (cbANPP5.Checked)
                             rangeANPP4 = true;
@@ -1408,6 +1637,9 @@ namespace SiteVegCalc
                         resproutProb5 = double.Parse(tbVegProb4.Text);
                         minVegAge5 = int.Parse(tbMinVegAge4.Text);
                         maxVegAge5 = int.Parse(tbMaxVegAge4.Text);
+                        budwormHost5 = rbHost4.Checked;
+                        budwormDecid5 = rbDecid4.Checked;
+                        budwormCondHost5 = rbCondHost4.Checked;
                     }
                     else if (sppNum5 == 5)
                     {
@@ -1417,7 +1649,7 @@ namespace SiteVegCalc
                         maturityAge5 = double.Parse(tbMatAge5.Text);
                         maxANPP5 = int.Parse(tbANPPmax5.Text);
                         maxBiomass5 = int.Parse(tbBioMax5.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD5 = double.Parse(tbAgeMort5.Text);
                         else
                             paramD5 = double.Parse(tbMortShape5.Text);
@@ -1429,7 +1661,7 @@ namespace SiteVegCalc
                         removeProp5 = double.Parse(tbRemProp5.Text);
                         anppPower5 = double.Parse(tbPower5.Text);
                         decayRate5 = double.Parse(tbDecay5.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             mortMod5 = double.Parse(tbMortMod5.Text);
                         if (cbANPP5.Checked)
                             rangeANPP5 = true;
@@ -1442,6 +1674,9 @@ namespace SiteVegCalc
                         resproutProb5 = double.Parse(tbVegProb5.Text);
                         minVegAge5 = int.Parse(tbMinVegAge5.Text);
                         maxVegAge5 = int.Parse(tbMaxVegAge5.Text);
+                        budwormHost5 = rbHost5.Checked;
+                        budwormDecid5 = rbDecid5.Checked;
+                        budwormCondHost5 = rbCondHost5.Checked;
                     }
                     else if (sppNum6 == 5)
                     {
@@ -1451,7 +1686,7 @@ namespace SiteVegCalc
                         maturityAge5 = double.Parse(tbMatAge6.Text);
                         maxANPP5 = int.Parse(tbANPPmax6.Text);
                         maxBiomass5 = int.Parse(tbBioMax6.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD5 = double.Parse(tbAgeMort6.Text);
                         else
                             paramD5 = double.Parse(tbMortShape6.Text);
@@ -1463,7 +1698,7 @@ namespace SiteVegCalc
                         removeProp5 = double.Parse(tbRemProp6.Text);
                         anppPower5 = double.Parse(tbPower6.Text);
                         decayRate5 = double.Parse(tbDecay6.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             mortMod5 = double.Parse(tbMortMod6.Text);
                         if (cbANPP6.Checked)
                             rangeANPP5 = true;
@@ -1476,6 +1711,9 @@ namespace SiteVegCalc
                         resproutProb5 = double.Parse(tbVegProb6.Text);
                         minVegAge5 = int.Parse(tbMinVegAge6.Text);
                         maxVegAge5 = int.Parse(tbMaxVegAge6.Text);
+                        budwormHost5 = rbHost6.Checked;
+                        budwormDecid5 = rbDecid6.Checked;
+                        budwormCondHost5 = rbCondHost6.Checked;
                     }
                     maxShadeBiomass = Math.Max(maxShadeBiomass, maxBiomass5);
 
@@ -1493,6 +1731,10 @@ namespace SiteVegCalc
                 {
                     speciesList.Add(species5);
                     siteMaxBio = Math.Max(siteMaxBio, maxBiomass5);
+                    //Budworm
+                    if(budwormHost5) hostSpeciesList.Add(species5);
+                    else if (budwormCondHost5) condHostSpeciesList.Add(species5);
+
                 }
                 if (numSpecies > 5)
                 {
@@ -1505,7 +1747,7 @@ namespace SiteVegCalc
                         maturityAge6 = double.Parse(tbMatAge1.Text);
                         maxANPP6 = int.Parse(tbANPPmax.Text);
                         maxBiomass6 = int.Parse(tbBioMax.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD6 = double.Parse(tbAgeMort1.Text);
                         else
                             paramD6 = double.Parse(tbMortShape1.Text);
@@ -1517,7 +1759,7 @@ namespace SiteVegCalc
                         removeProp6 = double.Parse(tbRemProp1.Text);
                         anppPower6 = double.Parse(tbPower1.Text);
                         decayRate6 = double.Parse(tbDecay1.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             mortMod6 = double.Parse(tbMortMod1.Text);
                         if (cbANPP1.Checked)
                             rangeANPP6 = true;
@@ -1530,6 +1772,9 @@ namespace SiteVegCalc
                         resproutProb6 = double.Parse(tbVegProb1.Text);
                         minVegAge6 = int.Parse(tbMinVegAge1.Text);
                         maxVegAge6 = int.Parse(tbMaxVegAge1.Text);
+                        budwormHost6 = rbHost1.Checked;
+                        budwormDecid6 = rbDecid1.Checked;
+                        budwormCondHost6 = rbCondHost1.Checked;
                     }
                     else if (sppNum2 == 6)
                     {
@@ -1539,7 +1784,7 @@ namespace SiteVegCalc
                         maturityAge6 = double.Parse(tbMatAge2.Text);
                         maxANPP6 = int.Parse(tbANPPmax2.Text);
                         maxBiomass6 = int.Parse(tbBioMax2.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD6 = double.Parse(tbAgeMort2.Text);
                         else
                             paramD6 = double.Parse(tbMortShape2.Text);
@@ -1551,7 +1796,7 @@ namespace SiteVegCalc
                         removeProp6 = double.Parse(tbRemProp2.Text);
                         anppPower6 = double.Parse(tbPower2.Text);
                         decayRate6 = double.Parse(tbDecay2.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             mortMod6 = double.Parse(tbMortMod2.Text);
                         if (cbANPP2.Checked)
                             rangeANPP6 = true;
@@ -1564,6 +1809,9 @@ namespace SiteVegCalc
                         resproutProb6 = double.Parse(tbVegProb2.Text);
                         minVegAge6 = int.Parse(tbMinVegAge2.Text);
                         maxVegAge6 = int.Parse(tbMaxVegAge2.Text);
+                        budwormHost6 = rbHost2.Checked;
+                        budwormDecid6 = rbDecid2.Checked;
+                        budwormCondHost6 = rbCondHost2.Checked;
                     }
                     else if (sppNum3 == 6)
                     {
@@ -1573,7 +1821,7 @@ namespace SiteVegCalc
                         maturityAge6 = double.Parse(tbMatAge3.Text);
                         maxANPP6 = int.Parse(tbANPPmax3.Text);
                         maxBiomass6 = int.Parse(tbBioMax3.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD6 = double.Parse(tbAgeMort3.Text);
                         else
                             paramD6 = double.Parse(tbMortShape3.Text);
@@ -1585,7 +1833,7 @@ namespace SiteVegCalc
                         removeProp6 = double.Parse(tbRemProp3.Text);
                         anppPower6 = double.Parse(tbPower3.Text);
                         decayRate6 = double.Parse(tbDecay3.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             mortMod6 = double.Parse(tbMortMod3.Text);
                         if (cbANPP3.Checked)
                             rangeANPP6 = true;
@@ -1598,6 +1846,9 @@ namespace SiteVegCalc
                         resproutProb6 = double.Parse(tbVegProb3.Text);
                         minVegAge6 = int.Parse(tbMinVegAge3.Text);
                         maxVegAge6 = int.Parse(tbMaxVegAge3.Text);
+                        budwormHost6 = rbHost3.Checked;
+                        budwormDecid6 = rbDecid3.Checked;
+                        budwormCondHost6 = rbCondHost3.Checked;
                     }
                     else if (sppNum4 == 6)
                     {
@@ -1607,7 +1858,7 @@ namespace SiteVegCalc
                         maturityAge6 = double.Parse(tbMatAge4.Text);
                         maxANPP6 = int.Parse(tbANPPmax4.Text);
                         maxBiomass6 = int.Parse(tbBioMax4.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD6 = double.Parse(tbAgeMort4.Text);
                         else
                             paramD6 = double.Parse(tbMortShape4.Text);
@@ -1619,7 +1870,7 @@ namespace SiteVegCalc
                         removeProp6 = double.Parse(tbRemProp4.Text);
                         anppPower6 = double.Parse(tbPower4.Text);
                         decayRate6 = double.Parse(tbDecay4.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             mortMod6 = double.Parse(tbMortMod4.Text);
                         if (cbANPP6.Checked)
                             rangeANPP4 = true;
@@ -1632,6 +1883,9 @@ namespace SiteVegCalc
                         resproutProb6 = double.Parse(tbVegProb4.Text);
                         minVegAge6 = int.Parse(tbMinVegAge4.Text);
                         maxVegAge6 = int.Parse(tbMaxVegAge4.Text);
+                        budwormHost6 = rbHost4.Checked;
+                        budwormDecid6 = rbDecid4.Checked;
+                        budwormCondHost6 = rbCondHost4.Checked;
                     }
                     else if (sppNum5 == 6)
                     {
@@ -1641,7 +1895,7 @@ namespace SiteVegCalc
                         maturityAge6 = double.Parse(tbMatAge5.Text);
                         maxANPP6 = int.Parse(tbANPPmax5.Text);
                         maxBiomass6 = int.Parse(tbBioMax5.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD6 = double.Parse(tbAgeMort5.Text);
                         else
                             paramD6 = double.Parse(tbMortShape5.Text);
@@ -1653,7 +1907,7 @@ namespace SiteVegCalc
                         removeProp6 = double.Parse(tbRemProp5.Text);
                         anppPower6 = double.Parse(tbPower5.Text);
                         decayRate6 = double.Parse(tbDecay5.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             mortMod6 = double.Parse(tbMortMod5.Text);
                         if (cbANPP5.Checked)
                             rangeANPP6 = true;
@@ -1666,6 +1920,9 @@ namespace SiteVegCalc
                         resproutProb6 = double.Parse(tbVegProb5.Text);
                         minVegAge6 = int.Parse(tbMinVegAge5.Text);
                         maxVegAge6 = int.Parse(tbMaxVegAge5.Text);
+                        budwormHost6 = rbHost5.Checked;
+                        budwormDecid6 = rbDecid5.Checked;
+                        budwormCondHost6 = rbCondHost5.Checked;
                     }
                     else if (sppNum6 == 6)
                     {
@@ -1675,7 +1932,7 @@ namespace SiteVegCalc
                         maturityAge6 = double.Parse(tbMatAge6.Text);
                         maxANPP6 = int.Parse(tbANPPmax6.Text);
                         maxBiomass6 = int.Parse(tbBioMax6.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             paramD6 = double.Parse(tbAgeMort6.Text);
                         else
                             paramD6 = double.Parse(tbMortShape6.Text);
@@ -1687,7 +1944,7 @@ namespace SiteVegCalc
                         removeProp6 = double.Parse(tbRemProp6.Text);
                         anppPower6 = double.Parse(tbPower6.Text);
                         decayRate6 = double.Parse(tbDecay6.Text);
-                        if (rbV3.Checked)
+                        if (rbV35.Checked)
                             mortMod6 = double.Parse(tbMortMod6.Text);
                         if (cbANPP6.Checked)
                             rangeANPP6 = true;
@@ -1700,6 +1957,9 @@ namespace SiteVegCalc
                         resproutProb6 = double.Parse(tbVegProb6.Text);
                         minVegAge6 = int.Parse(tbMinVegAge6.Text);
                         maxVegAge6 = int.Parse(tbMaxVegAge6.Text);
+                        budwormHost6 = rbHost6.Checked;
+                        budwormDecid6 = rbDecid6.Checked;
+                        budwormCondHost6 = rbCondHost6.Checked;
                     }
                     maxShadeBiomass = Math.Max(maxShadeBiomass, maxBiomass6);
 
@@ -1717,9 +1977,13 @@ namespace SiteVegCalc
                 {
                     speciesList.Add(species6);
                     siteMaxBio = Math.Max(siteMaxBio, maxBiomass6);
+                    //Budworm
+                    if(budwormHost6) hostSpeciesList.Add(species6);
+                    else if (budwormCondHost6) condHostSpeciesList.Add(species6);
+
                 }
                 //Error check inputs first
-                if ((rbV2.Checked)||(rbV3.Checked))
+                if ((rbV30.Checked)||(rbV35.Checked))
                 {
                     if ((shade1 > shade2) | (shade2 > shade3) | (shade3 > shade4) | (shade4 > shade5))
                     {
@@ -2946,8 +3210,10 @@ namespace SiteVegCalc
                                     {
                                         c = Color.FromArgb(2, c.R, c.G, c.B);
                                     }
-                                string filename = "Out" + repCount.ToString() + ".csv";
+                                string filename = baseFileName+"_Out" + repCount.ToString() + ".csv";
+                                string paramFileName = baseFileName+ "_Param" + repCount.ToString() + ".csv";
                                 string outTextFile = Path.Combine(dirName, filename);
+                                string paramTextFile = Path.Combine(dirName, paramFileName);
 
                                 repCount += 1;
 
@@ -3009,9 +3275,36 @@ namespace SiteVegCalc
                                 double[] CoBioArray6 = new double[simYears + 11];
                                 double[] deadWoodArray = new double[simYears + 11];
                                 double[] layersArray = new double[simYears + 11];
+                                double[] paraArray = new double[simYears + 11];
+                                //Budworm - set up arrays to record values
+                                double[] budwormDensArray = new double[simYears + 11];
+                                double[] budwormCountArray = new double[simYears + 11];
+                                double[] budEnemyDensArray = new double[simYears + 11];
+                                double[] budEnemyCountArray = new double[simYears + 11];
+                                double[] pctDefoliationArray = new double[simYears + 11];
+                                double[] siteDefoliationArray = new double[simYears + 11];
+                                double[] hostFoliageArray = new double[simYears + 11];
+                                double[] currentHostFoliageArray = new double[simYears + 11];
+                                double[] hostFoliageFallArray = new double[simYears + 11];
+                                double[] currentHostFoliageFallArray = new double[simYears + 11];
+                                double[] budwormMortalityArray = new double[simYears + 11];
+                                double[] emigrationArray = new double[simYears + 11];
+                                //Budworm - END - set up arrays to record values
 
                                 //Create cohort list
                                 List<Cohort> cohortList = new List<Cohort>();
+
+                                //Budworm
+                                //Create defol history list to coincide with cohort list
+                                List<double[]> defolHistList = new List<double[]>();
+                                //Create foliage list to coincide with cohort list
+                                List<int> totalFoliageList = new List<int>();
+                                //Create current foliage list to coincide with cohort list
+                                List<int> currentFoliageList = new List<int>();
+                                //Create wood biomass list to coincide with cohort list
+                                List<double> woodList = new List<double>();
+
+                                
 
                                 //Cohort Biomass Array
                                 List<double[]> coBioList1 = new List<double[]>();
@@ -3157,7 +3450,7 @@ namespace SiteVegCalc
                                 double deadWoodyBio = 0;
                                 double totalDecayRate = 0;
                                 //Year 0 biomass initialized
-                                foreach (Species spp in speciesList)
+                                foreach (ISpecies spp in speciesList)
                                 {
                                     int maxANPP = 0;
                                     if (spp == species1)
@@ -3188,9 +3481,29 @@ namespace SiteVegCalc
 
                                 double prevMort = 0;
                                 double bioSumTotal = 0;
+                                //Budworm
+                                // set densities to input year 0 values
+                                // declare Count parameters
+                                // reset cumulative defoliation to 0;
+                                double budEnemyDensity = budEnemyDensity0;
+                                double budwormDensity = budwormDensity0;
+                                double budwormCount = 0;
+                                double budEnemyCount = 0;
+                                //double sumDefoliation = 0;
+                                double currentHostFoliage = 0;  // Current host foliage by site
+                                double hostFoliage = 0;   // Host foliage by site
+                                double totalFoliage = 0;  //Total foliage by cohort
+                                double currentFoliage = 0;  //Current foliage by cohort
+                                double totalFoliageAfterDefol = 0; //Total foliage by cohort after defoliation
+                                double totalFoliageAfterMort = 0; //Total foliage by cohort after mortality
+                                int maxHostAge = 0;
+                                //Budworm - END - set densities to input year 0 values & declare Count parameters
 
                                 for (int year = 0; year <= simYears + timestep; year++)
                                 {
+                                    string msg = "";
+                                    if ((year - timestep) == 77)
+                                        msg = "year 77)";
                                     byte shadeClass = 0;
                                     double pctShade = 0;
                                     double newBioSum1 = bioSum1;
@@ -3226,7 +3539,38 @@ namespace SiteVegCalc
                                     double secondCohortBio = 0;
                                     List<Cohort> newCohortList = new List<Cohort>();
                                     List<Cohort> renewCohortList = new List<Cohort>();
-                                    double siteBio = bioSum1 + bioSum2 + bioSum3 + bioSum4 + bioSum5 + bioSum6;
+                                    //Budworm - create cohort attributes
+                                    //Create defol history list to coincide with cohort list
+                                    List<double[]> newDefolHistList = new List<double[]>();
+                                    //Create foliage list to coincide with cohort list
+                                    List<int> newTotalFoliageList = new List<int>();
+                                    //Create current foliage list to coincide with cohort list
+                                    List<int> newCurrentFoliageList = new List<int>();
+                                    //Create wood biomass list to coincide with cohort list
+                                    List<double> newWoodList = new List<double>();
+                                    //maxHostAge = 0;
+                                    int totalSBWMortality = 0;
+                                    //Budworm - END - create cohort attributes
+
+                                    
+                                    //Budworm - calculate deciduous biomass
+                                    double decidBiomass = 0;
+                                    if (budwormDecid1)
+                                        decidBiomass += bioSum1;
+                                    if (budwormDecid2)
+                                        decidBiomass += bioSum2;
+                                    if (budwormDecid3)
+                                        decidBiomass += bioSum3;
+                                    if (budwormDecid4)
+                                        decidBiomass += bioSum4;
+                                    if (budwormDecid5)
+                                        decidBiomass += bioSum5;
+                                    if (budwormDecid6)
+                                        decidBiomass += bioSum6;
+
+
+                                    //Budworm - END - calculate deciduous biomass
+                                    double siteBiomass = bioSum1 + bioSum2 + bioSum3 + bioSum4 + bioSum5 + bioSum6;
                                     bool spp1Renew = false;
                                     bool spp2Renew = false;
                                     bool spp3Renew = false;
@@ -3254,23 +3598,312 @@ namespace SiteVegCalc
                                     int groupIndex = 0;
                                     int lastGroupIndex = 0;
                                     int lastGroupShadeTol = 0;
+                                    
+
+                                    //Budworm - Start annual calculations
+                                    // draw annual stochastic variables from normal distributions
+                                    // override to equal mean if stdev was 0
+                                    // these will be spatially auto-correlated functions in the real LANDIS-II extension
+                                    double winterSurvival = normDistWinter.NextDouble();
+                                    if (budwormWinterConstant)
+                                        winterSurvival = budwormWinterMean;
+                                    double randPredation = normDistPredation.NextDouble();
+                                    if (budwormPredationConstant)
+                                        randPredation = budwormPredationMean;
+                                    double phenolLimit = normDistPhenolLimit.NextDouble();
+                                    if (phenolLimitConstant)
+                                        phenolLimit = phenolLimitMean;
+
+                                    if ((year - timestep) == budwormStartYear) // at simulation year 0 use density values from the parameter inputs
+                                    {
+                                        budwormCount = budwormDensity0 * currentHostFoliage;
+                                        budEnemyCount = budEnemyDensity0 * budwormCount;
+                                    }
+                                    else if ((year - timestep) < budwormStartYear)
+                                    {
+                                        budwormCount = 0;
+                                        budEnemyCount = 0;
+                                    }
+                                   
+
+                                    // apply stochastic winter survival (3)
+                                    double budwormCountSpring = budwormCount * winterSurvival;
+                                    // calculate budworm density (4)
+                                    double budwormDensitySpring = 0;
+                                    if(currentHostFoliage > 0)
+                                        budwormDensitySpring = budwormCountSpring / currentHostFoliage;
+                                    else
+                                    {
+                                        if (budwormCountSpring > 0)
+                                            budwormDensitySpring = budwormMaxDensity;
+                                    }
+                                    // spatial average filter budworm density (5) - not applied in L2-Site
+                                    double budwormDensityL2 = budwormDensitySpring;
+
+                                    //Apply scaling parameters (6)
+                                    double budwormDensityL2Scaled = Math.Pow((budwormDensityL2 / preyM), (1.0 / preyN));
+
+                                    // calculate budworm L2 count (7)
+                                    double budwormCountL2 = budwormDensityL2Scaled * currentHostFoliage;
+
+                                    if ((year - timestep) == budwormStartYear) // at simulation year 0 use density values from the parameter inputs
+                                    {
+                                        budEnemyCount = budEnemyDensity0 * budwormCountSpring;
+                                    }
+                                    else if ((year - timestep) < budwormStartYear)
+                                    {
+                                        budEnemyCount = 0;
+                                    }
+
+                                    // calculate enemy density (8)
+                                    double enemyDensitySpring = 0;
+                                    if (budwormCountSpring > 0)
+                                        enemyDensitySpring = budEnemyCount / budwormCountSpring;
+                                    //Apply scaling parameters (9)
+                                    double enemyDensitySpringScaled = Math.Pow((enemyDensitySpring / predM), (1.0 / predN));
+     
+                                    // calculate mating effect (10a)
+                                    //double alleeEffect = Calculations.HillFunction(alleeShape, alleeHalfSat, budwormDensityL2);
+                                    double matingEffect = Calculations.ProportionMatedFunction(matingA, matingB, matingC, budwormDensityL2);
+
+                                    // calculate deciduous protection effect (10b)
+                                    double decidProtect1 = 0;
+                                    double decidProtect2 = 0;
+                                    if (siteBiomass > 0)
+                                    {
+                                        decidProtect1 = decidBiomass / siteBiomass * decidProtectDmax1;  // dispersal loss effect
+                                        decidProtect2 = decidBiomass / siteBiomass * decidProtectDmax2;  // parasite community composition effect
+                                    }
+
+                                    // recruitment functions (11)
+                                    double ryx = 1 - Math.Exp((-1 * budwormb * budwormDensityL2Scaled) - decidProtect2);
+                                    double rxy = Math.Exp(-1 * budwormc * enemyDensitySpringScaled);
+                                    double rt = budwormrm * ryx * rxy;
+                                    double fecundity = 216.8;
+
+                                    // calculate r't (rprimet) without foliage dependence
+                                    double rprimeyx = Math.Exp((-1 * (budwormbprime + decidProtect1) * Math.Pow(budwormDensityL2Scaled, budwormaprime)));
+                                    double rprimexy = Math.Exp(-1 * (budwormcprime * enemyDensitySpringScaled));
+                                    double rprimet = fecundity * budwormrprimem * rprimeyx * rprimexy * matingEffect;
+
+                                    // Host Tree Damage
+                                    // Calculate defoliation (12)
+                                    // Use Regniere and You 1991; Eq. 13
+                                    //double defolPopulationComp = 0.385; // Product of indivudual instar [lambda + (1-lambda)*S]
+                                    double allLarvalSurvival = rprimeyx * rprimexy;
+                                    double defolPopulationComp = (defolLambda + (1.0-defolLambda)* allLarvalSurvival); // Product of indivudual instar [lambda + (1-lambda)*S]
+                                    double etaDefol = 870; // mg foliage removed per budworm
+                                    double pctDefol = 100 * etaDefol * 0.001 * budwormDensityL2 * defolPopulationComp; //convert mg to g (0.001)
+                                    // cap defoliation at 100%
+                                    pctDefol = Math.Min(pctDefol, 100);
+                                    // do not allow damage if no budworm
+                                    if (!(budwormCountL2 > 0))
+                                        pctDefol = 0;
+
+                                    // calculate r''t (rprime2t) with defoliation effect on fecundity
+                                    // calculate defoliation effect on fecundity
+                                    double rprimeZ = (-0.0054 * pctDefol + 1); //Nealis & Regniere 2004, Fig 2
+
+                                    double rprime2t = fecundity * budwormrprimem * rprimeZ * rprimeyx * rprimexy * matingEffect;
+
+                                    // calculate enemy density following recruitment (11)
+                                    double enemyDensitySummer = enemyDensitySpring * rt;
+
+                                    // calculate budworm density following recruitment 11)
+                                    double budwormDensitySummer = 0;
+                                    if (cbDefolFecund.Checked)  // Defoliation-adjusted fecundity
+                                    {
+                                        if (year < timestep)
+                                            budwormDensitySummer = Math.Max(budwormDensitySpring * rprime2t, budwormDensity0); // Don't allow to go to 0 during spin-up
+                                        else
+                                            budwormDensitySummer = Math.Max(budwormDensitySpring * rprime2t, 0);
+                                    }
+                                    else  // No Defoliation-adjusted fecundity
+                                    {
+                                        if (year < timestep)
+                                            budwormDensitySummer = Math.Max(budwormDensitySpring * rprimet, budwormDensity0); // Don't allow to go to 0 during spin-up
+                                        else
+                                            budwormDensitySummer = Math.Max(budwormDensitySpring * rprimet, 0);
+                                    }
+
+                                   
+                                    // calculate number of budworm and enemies (13)
+                                    double budwormCountSummer = budwormDensitySummer * currentHostFoliage;
+                                    double enemyCountWinter = enemyDensitySummer * budwormCountSummer;
+                                    budEnemyCount = enemyCountWinter;
+
+                                    // apply stochastic predation (14a)
+                                    double budwormCountFall = budwormCountSummer * randPredation;
+
+                                    // apply stochastic phenological limitation (14b)
+                                    double eggCountFall = budwormCountFall * phenolLimit;
+
+                                 
+                                    // Reset site variables
+                                    double currentHostFoliageFall = 0;
+                                    double hostFoliageFall = 0;
+                                    int siteTotalDefol = 0;
+
+                                    double[] growthReductionList = new double[cohortList.Count];
+                                    double[] pctMortalityList = new double[cohortList.Count];
+
+                                    int cohortI = 0;
+                                    foreach (Cohort cohort in cohortList)
+                                    {
+                                        totalFoliage = totalFoliageList[cohortI];  //TotalFoliage is an added cohort attribute
+                                        currentFoliage = currentFoliageList[cohortI];  //CurrentFoliage is an added cohort attribute
+                                        if (cohort.Biomass > 0)
+                                            leafFraction = totalFoliage / cohort.Biomass;
+                                        else
+                                            leafFraction = 0;
+
+                                        double percentMortality = 0;
+                                        double growthReduction = 0;
+                                        totalFoliageAfterDefol = totalFoliage;
+                                        if (hostSpeciesList.Contains(cohort.Species) && (cohort.Age >= minSuscAge))
+                                        {
+                                            
+                                            // assign defoliation to cohorts skewed by species and age (12a)
+                                            double sppConvert = 0.0;
+                                            if (cohort.Species.Name == "abiebals")
+                                                sppConvert = 1.0;
+                                            else if (cohort.Species.Name == "piceglau")
+                                                sppConvert = 0.75;
+                                            else if (cohort.Species.Name == "picemari")
+                                                sppConvert = 0.375;
+                                            double cohortDefol = pctDefol * sppConvert * cohort.Age / maxHostAge;
+                                            if (cohortDefol > 100)
+                                                cohortDefol = 100;
+                                            defolHistList[cohortI][0] = (cohortDefol/100);  //DefolHist is an added cohort attribute
+                                            int currentDefol = (int)Math.Round((currentFoliage * (cohortDefol/100)));  // Assumes all defoliation comes out of current year foliage, convert percentage to proportion
+                                            siteTotalDefol += currentDefol;
+                                            
+                                                                                        
+                                            
+
+                                            // Calculate cumulative defoliation (15)
+                                            // Cumulative Annual Weighted Defoliation (Hennigar)
+                                            double annWtDefol0 = defolHistList[cohortI][0] * 0.28;
+                                            double annWtDefol1 = defolHistList[cohortI][1] * 0.26;
+                                            double annWtDefol2 = defolHistList[cohortI][2] * 0.22;
+                                            double annWtDefol3 = defolHistList[cohortI][3] * 0.13;
+                                            double annWtDefol4 = defolHistList[cohortI][4] * 0.08;
+                                            double annWtDefol5 = defolHistList[cohortI][5] * 0.03;
+                                            double cumAnnWtDefol = annWtDefol0 + annWtDefol1 + annWtDefol2 + annWtDefol3 + annWtDefol4 + annWtDefol5;
+
+                                            // Calculate host tree impacts (16)
+                                            // Growth reduction
+                                            if (cbBudGR.Checked)
+                                            {
+                                                // Hennigar method
+                                                growthReduction = 1 - (-0.0099 * (cumAnnWtDefol * 100) + 1.0182);
+                                                
+                                                // Dobesberger method
+                                                //growthReduction = 0.339 * cumAnnWtDefol;
+
+                                                if (growthReduction > 1.0)  // Cannot exceed 100%
+                                                    growthReduction = 1.0;
+                                                if (growthReduction < 0.0)  // Cannot be less than 0%
+                                                    growthReduction = 0.0;
+                                            }
+
+                                            // Allocate impacts to cohorts (12a)
+                                            // Biomass removal & mortality
+                                            // Hennigar method
+                                            const double CD_ScaleFactor = 0.952;
+                                            double periodicDefoliation = cumAnnWtDefol * CD_ScaleFactor;
+                                            // Apply budworm mortality
+                                            // all cohorts treated equally
+                                            if (cbBudmort.Checked)
+                                            {
+                                                percentMortality = Calculations.GetMortalityRate_AGE(cohort.Species, periodicDefoliation, cohort.Age);
+                                            }
+                                            int cohortMortality = (int)(percentMortality * (cohort.Biomass - currentDefol));
+                                            totalSBWMortality += cohortMortality;
+                                            int totalBiomassReduction = currentDefol + cohortMortality;
+                                            cohort.ChangeBiomass(-1 * (int)totalBiomassReduction);
+                                            if (cohort.Species == species1)
+                                            {
+                                                bioSum1 -= (int)totalBiomassReduction;
+                                                newBioSum1 -= (int)totalBiomassReduction;
+                                            }
+                                            else if (cohort.Species == species2)
+                                            {
+                                                bioSum2 -= (int)totalBiomassReduction;
+                                                newBioSum2 -= (int)totalBiomassReduction;
+                                            }
+                                            else if (cohort.Species == species3)
+                                            {
+                                                bioSum3 -= (int)totalBiomassReduction;
+                                                newBioSum3 -= (int)totalBiomassReduction;
+                                            }
+                                            else if (cohort.Species == species4)
+                                            {
+                                                bioSum4 -= (int)totalBiomassReduction;
+                                                newBioSum4 -= (int)totalBiomassReduction;
+                                            }
+                                            else if (cohort.Species == species5)
+                                            {
+                                                bioSum5 -= (int)totalBiomassReduction;
+                                                newBioSum5 -= (int)totalBiomassReduction;
+                                            }
+                                            else if (cohort.Species == species6)
+                                            {
+                                                bioSum6 -= (int)totalBiomassReduction;
+                                                newBioSum6 -= (int)totalBiomassReduction;
+                                            }
+                                            bioSumTotal -= (int)totalBiomassReduction;
+
+                                            // Calculate remaining foliage (17)
+                                            double currentFoliageAfterDefol = (currentFoliage - currentDefol)* (1-percentMortality);
+                                            totalFoliageAfterDefol = (totalFoliage - currentDefol) * (1-percentMortality);
+                                            // Tabulate site variable of remaining current host foliage
+                                            currentHostFoliageFall += currentFoliageAfterDefol;
+                                        }
+                                        growthReductionList[cohortI] = growthReduction;
+                                        pctMortalityList[cohortI] = percentMortality;
+                                        cohortI++;
+                                    }
+
+
+                                    // Calculate SiteDefol (12a)
+                                    double siteDefol = siteTotalDefol / currentHostFoliage;
+                                    
+
+                                    // reset site variables
+                                    currentHostFoliage = 0;
+                                    hostFoliage = 0;
+
+                                    //Budworm - END - annual calculations
+
+
                                     // Start
-                                    if ((rbAgeList.Checked) || (rbV2.Checked) || (rbV3.Checked))
+                                    if ((rbAgeList.Checked) || (rbV30.Checked) || (rbV35.Checked))
                                     {
 
                                         List<int> groupList = new List<int>();
                                         int cohortIndex = -1;
                                         double groupBiomass = 0;
                                         double weightSum = 0;
-                                      
+                                        maxHostAge = 0;
+
+                                        List<Cohort> updatedCohortList = new List<Cohort>(cohortList);
                                         foreach (Cohort cohort in cohortList)
                                         {
                                             double age = (double)cohort.Age;
                                             double shadeAge = age;
                                             double bio = (double)cohort.Biomass;
+                                            //Budworm - read cohort attributes
+                                            double growthReduction = growthReductionList[cohortIndex + 1];
+                                            double percentMortality = pctMortalityList[cohortIndex + 1];
+                                            if (bio > 0)
+                                                leafFraction = totalFoliageList[cohortIndex + 1] / bio;
+                                            else
+                                                leafFraction = 0;
+
                                             // Assign cohorts to age class "groups" (meaning layers)
 
-                                            if (rbV3.Checked)
+                                            if (rbV35.Checked)
                                             {
                                                 weightSum = 0;
                                                 foreach (Cohort xcohort in cohortList)
@@ -3300,7 +3933,7 @@ namespace SiteVegCalc
                                                     {
                                                         xmaxB = maxBiomass6;
                                                     }
-                                                    double potential = (xmaxB - siteBio + xcohort.Biomass);
+                                                    double potential = (xmaxB - siteBiomass + xcohort.Biomass);
                                                     /*  From BS 3.5 code - N/A here because no capacityReduction
                                                     //  Species can use new space from mortality immediately
                                                     //  but not in the case of capacity reduction due to harvesting.
@@ -3312,7 +3945,7 @@ namespace SiteVegCalc
                                                         indexValue = Math.Min(1, (xcohort.Biomass / potential));
                                                     weightSum += (indexValue * xcohort.Biomass);
                                                 }
-                                                groupBiomass = siteBio;
+                                                groupBiomass = siteBiomass;
                                             }
 
                                             cohortIndex += 1;
@@ -3346,7 +3979,10 @@ namespace SiteVegCalc
                                             double[] CoBioArray = new double[simYears + 11];
                                             double[] ANPPArray = new double[simYears + 11];
                                             double[] MortAgeArray = new double[simYears + 11];
-                                            double[] MortCompArray = new double[simYears + 11];                                    
+                                            double[] MortCompArray = new double[simYears + 11];
+                                            //Budworm
+                                            bool budwormHost = false;
+                                            //bool budwormDecid = false;
 
                                             if (cohort.Species == species1)
                                             {
@@ -3395,6 +4031,8 @@ namespace SiteVegCalc
                                                     MortAgeCoList1.Add(MortAgeArray);
                                                     MortCompCoList1.Add(MortCompArray);
                                                 }
+                                                //Budworm
+                                                budwormHost = budwormHost1;
 
                                             }
                                             else if (cohort.Species == species2)
@@ -3444,6 +4082,8 @@ namespace SiteVegCalc
                                                     MortAgeCoList2.Add(MortAgeArray);
                                                     MortCompCoList2.Add(MortCompArray);
                                                 }
+                                                //Budworm
+                                                budwormHost = budwormHost2;
                                             }
                                             else if (cohort.Species == species3)
                                             {
@@ -3492,6 +4132,8 @@ namespace SiteVegCalc
                                                     MortAgeCoList3.Add(MortAgeArray);
                                                     MortCompCoList3.Add(MortCompArray);
                                                 }
+                                                //Budworm
+                                                budwormHost = budwormHost3;
                                             }
                                             else if (cohort.Species == species4)
                                             {
@@ -3540,6 +4182,8 @@ namespace SiteVegCalc
                                                     MortAgeCoList4.Add(MortAgeArray);
                                                     MortCompCoList4.Add(MortCompArray);
                                                 }
+                                                //Budworm
+                                                budwormHost = budwormHost4;
                                             }
                                             else if (cohort.Species == species5)
                                             {
@@ -3588,6 +4232,8 @@ namespace SiteVegCalc
                                                     MortAgeCoList5.Add(MortAgeArray);
                                                     MortCompCoList5.Add(MortCompArray);
                                                 }
+                                                //Budworm
+                                                budwormHost = budwormHost5;
                                             }
                                             else if (cohort.Species == species6)
                                             {
@@ -3636,10 +4282,12 @@ namespace SiteVegCalc
                                                     MortAgeCoList6.Add(MortAgeArray);
                                                     MortCompCoList6.Add(MortCompArray);
                                                 }
+                                                //Budworm
+                                                budwormHost = budwormHost6;
                                             }
                                            
                                             // MAIN CALCULATIONS START HERE
-
+                                            
                                             int totalRemove = 0;
                                             if (rbAllCohorts.Checked)
                                             {
@@ -3650,6 +4298,7 @@ namespace SiteVegCalc
 
                                             double newBiomass = 0;
                                             double actualANPP = 0;
+                                            int annualLeafANPP = 0;
                                             age += 1;
                                             if (rbAgeList.Checked)
                                             {
@@ -3668,13 +4317,13 @@ namespace SiteVegCalc
                                             else
                                             {
                                                 double mortalityAgeProp = Calculations.ComputeAgeMortalityProp(X0, mortR, age);
-                                                if (rbV2.Checked)
+                                                if (rbV30.Checked)
                                                     mortalityAgeProp = Calculations.ComputeAgeMortalityPropV2(paramD, longevity, age);
                                                 double mortalityAge = bio * mortalityAgeProp * mortMod;
                                                 if (mortalityAge > bio)
                                                     mortalityAge = bio;
                                                 //  Potential biomass, equation 3 in Scheller and Mladenoff, 2004
-                                                double potentialBiomass = Math.Max(0, maxB - (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) + bio);
+                                                double potentialBiomass = Math.Max(0, maxB - siteBiomass + bio);
 
                                                 // separating cohorts within a group (layer)
                                                 double fractionB = bio / groupBiomass;
@@ -3691,13 +4340,14 @@ namespace SiteVegCalc
                                                 // Calculation of B_AP & B_PM
                                                 if (potentialBiomass > 0)
                                                 {
-                                                    if (rbV2.Checked)
+                                                    if (rbV30.Checked)
                                                     {
                                                         //  Ratio of cohort's actual biomass to potential biomass
                                                         B_AP = bio / potentialBiomass;
-                                                        B_PM = Calculations.CalculateCompetition(cohort, cohortList);
+                                                        // Modified to match B.S. 3.2 - should be changed back to cohortList - FIXME
+                                                        B_PM = Calculations.CalculateCompetition(cohort, updatedCohortList);
                                                     }
-                                                    else if ((rbV3.Checked))
+                                                    else if ((rbV35.Checked))
                                                     {
                                                         //  Ratio of cohort's actual biomass to potential biomass
                                                         B_AP = bio / potentialBiomass;
@@ -3706,21 +4356,21 @@ namespace SiteVegCalc
                                                         B_PM = Math.Min(1.0, potentialBiomass / maxB);
                                                     }
                                                 }
-                                                if (rbV3.Checked)
+                                                if (rbV35.Checked)
                                                 {
                                                     // Matches BS 3.5
-                                                    double weightedIndex = weightSum / siteBio;
+                                                    double weightedIndex = weightSum / siteBiomass;
                                                     B_AP = weightedIndex;
                                                     B_PM = 1.0;
                                                 }
 
-                                                if (rbV2.Checked || rbV3.Checked)
+                                                if (rbV30.Checked || rbV35.Checked)
                                                 {
                                                     // Proportion of maximum ANPP assigned to a cohort (main ANPP equation)
                                                     // Matches BS 3.5
                                                     propANPP = Calculations.ComputePropANPP(B_AP, B_PM, anppPower);
 
-                                                    if (rbV3.Checked)
+                                                    if (rbV35.Checked)
                                                     {
 
                                                         // Match BS 3.5
@@ -3737,39 +4387,73 @@ namespace SiteVegCalc
                                                     potANPP = Math.Min(maxA * B_PM, potANPP);
                                                 }
 
+                                                //Budworm
+                                                // apply budworm growth reduction
+                                                // all cohorts treated equally
+                                                if(cbBudGR.Checked)
+                                                    potANPP = potANPP - (growthReduction * potANPP);
+                                                //Budworm - END - apply growth reduction
+                                              
                                                 actualANPP = Math.Max(1, potANPP);
+                                                if (bio == 0)
+                                                    actualANPP = 0;   
 
-                                                //  Age mortality is discounted from ANPP to prevent the over-
-                                                //  estimation of mortality.  ANPP cannot be negative.
-                                                actualANPP = Math.Max(1, actualANPP - mortalityAge);
+                                                double netANPP = actualANPP;
+                                                if (rbV30.Checked)
+                                                {
+                                                    //  Age mortality is discounted from ANPP to prevent the over-
+                                                    //  estimation of mortality.  ANPP cannot be negative.
+                                                    netANPP = Math.Max(1, actualANPP - mortalityAge);
+                                                    if (bio == 0)
+                                                        netANPP = 0;
+                                                }
+                                                if (cbAgeMort.Checked)
+                                                {
+                                                    // Leaf portion of growth
+                                                    annualLeafANPP = (int)Math.Round((netANPP * 0.35));  // Use constant 0.35 leaf fraction here
+                                                }
+                                                else
+                                                {
+                                                    // Leaf portion of growth
+                                                    annualLeafANPP = (int)Math.Round((actualANPP * 0.35));  // Use constant 0.35 leaf fraction here
+                                                }
+
+                                                // Update Dead Biomass
+                                                // From BS 3.5; N/A - Forest Floor not tracked here
+                                                //ForestFloor.AddLitter(annualLeafANPP, species, site);
+
+                                                //Budworm
+                                                // calculate current host foliage (new leaf growth) (2)
+                                                currentFoliageList[cohortIndex] = annualLeafANPP;
+                                                if (budwormHost && (age >= minSuscAge))
+                                                    currentHostFoliage += annualLeafANPP;
+                                                //Budworm - END - calculate current host foliage
 
                                                 double mortalityGrowth = 0;
 
                                                 // Mortality Growth Equations
-                                                if (rbV2.Checked)
+                                                if (rbV30.Checked)
                                                 {
-                                                    //mortalityGrowth = Calculations.ComputeGrowthMortalityV2(maxA, paramY, paramR, B_AP, B_PM, bio, mortalityAge, actualANPP);
-                                                    mortalityGrowth = Calculations.ComputeGrowthMortalityV3(actualANPP, maxA, B_AP, 1.0, bio, mortalityAge, 0);
-
-
-                                                    //  Age-related mortality is discounted from growth-related
-                                                    //  mortality to prevent the under-estimation of mortality.  Cannot be negative.
-                                                    mortalityGrowth = Math.Max(0, mortalityGrowth - mortalityAge);
-                                                    //  Ensure that growth mortality does not exceed actualANPP.
-                                                    mortalityGrowth = Math.Min(mortalityGrowth, actualANPP);
-
+                                                    mortalityGrowth = Calculations.ComputeGrowthMortalityV3(netANPP, maxA, B_AP, B_PM, bio, mortalityAge, growthReduction);
+                                                    
                                                 }
-                                                else if (rbV3.Checked)
+                                                else if (rbV35.Checked)
                                                 {
                                                     // Matches BS 3.5
-                                                    mortalityGrowth = Calculations.ComputeGrowthMortality(actualANPP, maxA, B_AP, 1.0, bio, mortalityAge, 1.0);
+                                                    mortalityGrowth = Calculations.ComputeGrowthMortality(netANPP, maxA, B_AP, 1.0, bio, mortalityAge, 1.0);
 
-                                                    //  Ensure that growth mortality does not exceed actualANPP.
-                                                    mortalityGrowth = Math.Min(mortalityGrowth, actualANPP);
+                                                    
                                                 }
-
+                                                //  Age-related mortality is discounted from growth-related
+                                                //  mortality to prevent the under-estimation of mortality.  Cannot be negative.
+                                                mortalityGrowth = Math.Max(0, mortalityGrowth - mortalityAge);
+                                                //  Ensure that growth mortality does not exceed actualANPP.
+                                                mortalityGrowth = Math.Min(mortalityGrowth, netANPP);
                                                 //  Total mortality for the cohort
                                                 double totalMortality = mortalityAge + mortalityGrowth;
+
+                                                
+
                                                 bool killed = false;
                                                 if (rbAllCohorts.Checked)
                                                 {
@@ -3792,43 +4476,39 @@ namespace SiteVegCalc
                                                     if (((year + 1 - timestep) == removeYear) && (sppCount == 1))
                                                         totalMortality = totalMortality + (bio * removeProp);
                                                 }
+                                                if (bio == 0)
+                                                    killed = true;
                                                 double defoliationLoss = 0.0; // From BS 3.5; N/A here
                                                 // Matches BS 3.5
-                                                int deltaBiomass = (int)(actualANPP - totalMortality - defoliationLoss);
+                                                int deltaBiomass = (int)(netANPP - totalMortality - defoliationLoss);
 
                                                 // If reaches longevity, then removed
-                                                if (age >= cohort.Species.Longevity)
+                                                if (age  >= cohort.Species.Longevity)
                                                     newBiomass = 0;
                                                 else
                                                     newBiomass = Math.Max(0, bio + deltaBiomass);
 
-                                                // Update Dead Biomass
-                                                double annualLeafANPP = actualANPP * leafFraction;
-
-                                                // From BS 3.5; N/A - Forest Floor not tracked here
-                                                //ForestFloor.AddLitter(annualLeafANPP, species, site);
-
-                                                // Subtract annual leaf growth as that was taken care of above.            
-                                                totalMortality -= annualLeafANPP;
                                                 // Adjust if cohort completely removed
                                                 if ((((year + 1 - timestep) == removeYear) && (sppCount == 1) && (removeProp == 1.0))||killed)
                                                 {
                                                     totalMortality = bio;
                                                     newBiomass = 0;
-                                                    
                                                 }
 
-                                                // Assume that standing foliage is equal to this years annualLeafANPP * leaf longevity
-                                                // minus this years leaf ANPP.  This assumes that actual ANPP has been relatively constant 
-                                                // over the past 2 or 3 years (if coniferous).
-                                                double standing_nonwood = (annualLeafANPP * leafLong) - annualLeafANPP;
-                                                double standing_wood = Math.Max(0, bio - standing_nonwood);
-                                                double fractionStandingNonwood = standing_nonwood / bio;
-                                                //  Assume that the remaining mortality is divided proportionally
+                                                //  Assume that the mortality is divided proportionally
                                                 //  between the woody mass and non-woody mass (Niklaus & Enquist,
                                                 //  2002).   Do not include current years growth.
-                                                double mortality_nonwood = Math.Max(0.0, totalMortality * fractionStandingNonwood);
+                                                double mortality_nonwood = Math.Max(0.0, totalMortality * leafFraction);
                                                 double mortality_wood = Math.Max(0.0, totalMortality - mortality_nonwood);
+
+                                                //Budworm
+                                                if (bio > 0)
+                                                    totalFoliageAfterMort = totalFoliageAfterDefol - mortality_nonwood;
+                                                else
+                                                    totalFoliageAfterMort = 0;
+                                                if (budwormHost && (age >= minSuscAge)) 
+                                                    hostFoliageFall += totalFoliageAfterMort;
+
 
                                                 // Add mortality to dead biomass pool (currentMort)
                                                 currentMort += mortality_wood;
@@ -3839,7 +4519,7 @@ namespace SiteVegCalc
 
                                                 if ((year >= (timestep)) && (year <= (simYears + timestep)))
                                                 {
-                                                    ANPPArray[(year - (timestep))] = actualANPP;
+                                                    ANPPArray[(year - (timestep))] = netANPP;
                                                     MortAgeArray[(year - (timestep))] = mortalityAge;
                                                     MortCompArray[(year - (timestep))] = mortalityGrowth;
                                                     CoBioArray[(year - (timestep))] = cohort.Biomass;
@@ -4030,11 +4710,33 @@ namespace SiteVegCalc
 
                                                     Cohort newCohort = new Cohort(cohort.Species, (ushort)(cohort.Age + 1), (int)newBiomass);
                                                     newCohortList.Add(newCohort);
+                                                    // Added to match Biomass Succession v3.2 - should be removed - FIXME
+                                                    updatedCohortList[cohortIndex] = newCohort;
+
                                                     if ((cohort.Age) > maturityAge)
                                                     {
                                                         shadeClass = (byte)Math.Max(shadeClass, shadeTol);
                                                     }
-                                                    
+                                                    //Budworm
+                                                    double[] oldDefolHist = defolHistList[cohortIndex];
+                                                    double[] newDefolHist = new double[10];
+                                                    for (int i = 0; i < (oldDefolHist.Length - 1); i++)
+                                                    {
+                                                        newDefolHist[i + 1] = oldDefolHist[i];
+                                                    }
+                                                    newDefolHist[0] = 0;
+                                                    newDefolHistList.Add(newDefolHist);
+                                                    int newTotalFoliage = (int)(annualLeafANPP + totalFoliageAfterDefol * (1 - (1 / leafLong)));
+                                                    newTotalFoliageList.Add(newTotalFoliage);
+                                                    newCurrentFoliageList.Add(annualLeafANPP);
+                                                    if (budwormHost && ((cohort.Age+1) >= minSuscAge))
+                                                    {
+                                                        hostFoliage += newTotalFoliage;
+                                                        maxHostAge = Math.Max(maxHostAge, cohort.Age + 1);
+                                                    //double woodBio = newBiomass - totalFoliage;
+                                                    //newWoodList.Add(woodBio);
+                                                    }
+
                                                 }
                                             }
 
@@ -4061,7 +4763,7 @@ namespace SiteVegCalc
 
                                         deadWoodyBio = (deadWoodyBio + currentMort) * Math.Exp(-1.0 * totalDecayRate);
 
-                                        if ((rbV2.Checked) || (rbV3.Checked))
+                                        if ((rbV30.Checked) || (rbV35.Checked))
                                         {
                                             double B_AM = (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / (double)maxShadeBiomass;
 
@@ -4106,7 +4808,7 @@ namespace SiteVegCalc
                                             double myRand = random.Next(0, 1000000);
                                             double checkRand = myRand / 1000000;
                                             double suffLightMod = 1.0;
-                                            if (rbV2.Checked || rbV3.Checked)
+                                            if (rbV30.Checked || rbV35.Checked)
                                             {
                                                 List<double> lightList = sufficientLight[shadeTol1 - 1];
                                                 suffLightMod = lightList[(int)shadeClass];
@@ -4117,7 +4819,7 @@ namespace SiteVegCalc
                                                 {
                                                     initBiomass = 1;
                                                 }
-                                                else if (rbV2.Checked)
+                                                else// if (rbV35.Checked)
                                                 {
                                                     initBiomass = maxANPP1 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                     // Initial biomass cannot be greater than maxANPP
@@ -4125,16 +4827,31 @@ namespace SiteVegCalc
                                                     //  Initial biomass cannot be less than 1.
                                                     initBiomass = Math.Max(1.0, initBiomass);
                                                 }
-                                                else
+                                                /*else
                                                 {
                                                     initBiomass = 0.025 * maxBiomass * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                     // Initial biomass cannot be greater than maxANPP
                                                     initBiomass = Math.Min(maxANPP1, initBiomass);
                                                     //  Initial biomass cannot be less than 1.
                                                     initBiomass = Math.Max(1.0, initBiomass);
-                                                }
+                                                 
+                                                }*/
                                                 Cohort newCohort = new Cohort(species1, 1, (int)initBiomass);
                                                 newCohortList.Add(newCohort);
+                                                //Budworm
+                                                currentFoliage = (int)initBiomass * 0.35;
+                                                if (budwormHost1 && (1 >= minSuscAge))
+                                                {
+                                                    currentHostFoliage += currentFoliage;
+                                                    hostFoliage += currentFoliage;
+                                                    maxHostAge = Math.Max(maxHostAge, 1);
+                                                }
+                                                double[] newDefolHist = new double[10];
+                                                newDefolHistList.Add(newDefolHist);
+                                                newTotalFoliageList.Add((int)currentFoliage);
+                                                newCurrentFoliageList.Add((int)currentFoliage);
+                                             
+                                                //newWoodList.Add(initBiomass - currentFoliage);
                                             }
                                         }
                                     }
@@ -4162,7 +4879,7 @@ namespace SiteVegCalc
                                             double myRand = random.Next(0, 1000000);
                                             double checkRand = myRand / 1000000;
                                             double suffLightMod = 1.0;
-                                            if (rbV2.Checked || rbV3.Checked)
+                                            if (rbV30.Checked || rbV35.Checked)
                                             {
                                                 List<double> lightList = sufficientLight[shadeTol2 - 1];
                                                 suffLightMod = lightList[(int)shadeClass];
@@ -4173,7 +4890,7 @@ namespace SiteVegCalc
                                                 {
                                                     initBiomass2 = 1;
                                                 }
-                                                else if (rbV2.Checked)
+                                                else// if (rbV35.Checked)
                                                 {
                                                     initBiomass2 = maxANPP2 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                     // Initial biomass cannot be greater than maxANPP
@@ -4181,7 +4898,7 @@ namespace SiteVegCalc
                                                     //  Initial biomass cannot be less than 1.
                                                     initBiomass2 = Math.Max(1.0, initBiomass2);
                                                 }
-                                                else
+                                                /*else
                                                 {
                                                     initBiomass2 = 0.025 * maxBiomass2 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                     // Initial biomass cannot be greater than maxANPP
@@ -4189,9 +4906,22 @@ namespace SiteVegCalc
 
                                                     //  Initial biomass cannot be less than 1.
                                                     initBiomass2 = Math.Max(1.0, initBiomass2);
-                                                }
+                                                }*/
                                                 Cohort newCohort = new Cohort(species2, 1, (int)initBiomass2);
                                                 newCohortList.Add(newCohort);
+                                                //Budworm
+                                                currentFoliage = (int)initBiomass2 * 0.35;
+                                                if (budwormHost2 && (1 >= minSuscAge))
+                                                {
+                                                    currentHostFoliage += currentFoliage;
+                                                    hostFoliage += currentFoliage;
+                                                    maxHostAge = Math.Max(maxHostAge, 1);
+                                                }
+                                                double[] newDefolHist = new double[10];
+                                                newDefolHistList.Add(newDefolHist);
+                                                newTotalFoliageList.Add((int)currentFoliage);
+                                                newCurrentFoliageList.Add((int)currentFoliage);
+                                                //newWoodList.Add(initBiomass - currentFoliage);
                                             }
                                         }
                                     }
@@ -4219,7 +4949,7 @@ namespace SiteVegCalc
                                             double myRand = random.Next(0, 1000000);
                                             double checkRand = myRand / 1000000;
                                             double suffLightMod = 1.0;
-                                            if (rbV2.Checked || rbV3.Checked)
+                                            if (rbV30.Checked || rbV35.Checked)
                                             {
                                                 List<double> lightList = sufficientLight[shadeTol3 - 1];
                                                 suffLightMod = lightList[(int)shadeClass];
@@ -4230,7 +4960,7 @@ namespace SiteVegCalc
                                                 {
                                                     initBiomass3 = 1;
                                                 }
-                                                else if (rbV2.Checked)
+                                                else// if (rbV35.Checked)
                                                 {
                                                     initBiomass3 = maxANPP3 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                     // Initial biomass cannot be greater than maxANPP
@@ -4238,7 +4968,7 @@ namespace SiteVegCalc
                                                     //  Initial biomass cannot be less than 1.
                                                     initBiomass3 = Math.Max(1.0, initBiomass3);
                                                 }
-                                                else
+                                                /*else
                                                 {
                                                     initBiomass3 = 0.025 * maxBiomass3 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                     // Initial biomass cannot be greater than maxANPP
@@ -4246,9 +4976,22 @@ namespace SiteVegCalc
 
                                                     //  Initial biomass cannot be less than 1.
                                                     initBiomass3 = Math.Max(1.0, initBiomass3);
-                                                }
+                                                }*/
                                                 Cohort newCohort = new Cohort(species3, 1, (int)initBiomass3);
                                                 newCohortList.Add(newCohort);
+                                                //Budworm
+                                                currentFoliage = (int)initBiomass3 * 0.35;
+                                                if (budwormHost3 && (1 >= minSuscAge))
+                                                {
+                                                    currentHostFoliage += currentFoliage;
+                                                    hostFoliage += currentFoliage;
+                                                    maxHostAge = Math.Max(maxHostAge, 1);
+                                                }
+                                                double[] newDefolHist = new double[10];
+                                                newDefolHistList.Add(newDefolHist);
+                                                newTotalFoliageList.Add((int)currentFoliage);
+                                                newCurrentFoliageList.Add((int)currentFoliage);
+                                                //newWoodList.Add(initBiomass - currentFoliage);
                                             }
                                         }
                                     }
@@ -4276,7 +5019,7 @@ namespace SiteVegCalc
                                             double myRand = random.Next(0, 1000000);
                                             double checkRand = myRand / 1000000;
                                             double suffLightMod = 1.0;
-                                            if (rbV2.Checked || rbV3.Checked)
+                                            if (rbV30.Checked || rbV35.Checked)
                                             {
                                                 List<double> lightList = sufficientLight[shadeTol4 - 1];
                                                 suffLightMod = lightList[(int)shadeClass];
@@ -4287,7 +5030,7 @@ namespace SiteVegCalc
                                                 {
                                                     initBiomass4 = 1;
                                                 }
-                                                else if (rbV2.Checked)
+                                                else// if (rbV35.Checked)
                                                 {
                                                     initBiomass4 = maxANPP4 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                     // Initial biomass cannot be greater than maxANPP
@@ -4295,7 +5038,7 @@ namespace SiteVegCalc
                                                     //  Initial biomass cannot be less than 1.
                                                     initBiomass4 = Math.Max(1.0, initBiomass4);
                                                 }
-                                                else
+                                                /*else
                                                 {
                                                     initBiomass4 = 0.025 * maxBiomass4 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                     // Initial biomass cannot be greater than maxANPP
@@ -4303,9 +5046,22 @@ namespace SiteVegCalc
 
                                                     //  Initial biomass cannot be less than 1.
                                                     initBiomass4 = Math.Max(1.0, initBiomass4);
-                                                }
+                                                }*/
                                                 Cohort newCohort = new Cohort(species4, 1, (int)initBiomass4);
                                                 newCohortList.Add(newCohort);
+                                                //Budworm
+                                                currentFoliage = (int)initBiomass4 * 0.35;
+                                                if (budwormHost4 && (1 >= minSuscAge))
+                                                {
+                                                    currentHostFoliage += currentFoliage;
+                                                    hostFoliage += currentFoliage;
+                                                    maxHostAge = Math.Max(maxHostAge, 1);
+                                                }
+                                                double[] newDefolHist = new double[10];
+                                                newDefolHistList.Add(newDefolHist);
+                                                newTotalFoliageList.Add((int)currentFoliage);
+                                                newCurrentFoliageList.Add((int)currentFoliage);
+                                                //newWoodList.Add(initBiomass - currentFoliage);
                                             }
                                         }
                                     }
@@ -4333,7 +5089,7 @@ namespace SiteVegCalc
                                             double myRand = random.Next(0, 1000000);
                                             double checkRand = myRand / 1000000;
                                             double suffLightMod = 1.0;
-                                            if (rbV2.Checked || rbV3.Checked)
+                                            if (rbV30.Checked || rbV35.Checked)
                                             {
                                                 List<double> lightList = sufficientLight[shadeTol5 - 1];
                                                 suffLightMod = lightList[(int)shadeClass];
@@ -4344,7 +5100,7 @@ namespace SiteVegCalc
                                                 {
                                                     initBiomass5 = 1;
                                                 }
-                                                else if (rbV2.Checked)
+                                                else// if (rbV35.Checked)
                                                 {
                                                     initBiomass5 = maxANPP5 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                     // Initial biomass cannot be greater than maxANPP
@@ -4352,7 +5108,7 @@ namespace SiteVegCalc
                                                     //  Initial biomass cannot be less than 1.
                                                     initBiomass5 = Math.Max(1.0, initBiomass5);
                                                 }
-                                                else
+                                                /*else
                                                 {
                                                     initBiomass5 = 0.025 * maxBiomass5 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                     // Initial biomass cannot be greater than maxANPP
@@ -4360,9 +5116,22 @@ namespace SiteVegCalc
 
                                                     //  Initial biomass cannot be less than 1.
                                                     initBiomass5 = Math.Max(1.0, initBiomass5);
-                                                }
+                                                }*/
                                                 Cohort newCohort = new Cohort(species5, 1, (int)initBiomass5);
                                                 newCohortList.Add(newCohort);
+                                                //Budworm
+                                                currentFoliage = (int)initBiomass5 * 0.35;
+                                                if (budwormHost5 && (1 >= minSuscAge))
+                                                {
+                                                    currentHostFoliage += currentFoliage;
+                                                    hostFoliage += currentFoliage;
+                                                    maxHostAge = Math.Max(maxHostAge, 1);
+                                                }
+                                                double[] newDefolHist = new double[10];
+                                                newDefolHistList.Add(newDefolHist);
+                                                newTotalFoliageList.Add((int)currentFoliage);
+                                                newCurrentFoliageList.Add((int)currentFoliage);
+                                                //newWoodList.Add(initBiomass - currentFoliage);
                                             }
                                         }
                                     }
@@ -4390,7 +5159,7 @@ namespace SiteVegCalc
                                             double myRand = random.Next(0, 1000000);
                                             double checkRand = myRand / 1000000;
                                             double suffLightMod = 1.0;
-                                            if (rbV2.Checked || rbV3.Checked)
+                                            if (rbV30.Checked || rbV35.Checked)
                                             {
                                                 List<double> lightList = sufficientLight[shadeTol6 - 1];
                                                 suffLightMod = lightList[(int)shadeClass];
@@ -4401,7 +5170,7 @@ namespace SiteVegCalc
                                                 {
                                                     initBiomass6 = 1;
                                                 }
-                                                else if (rbV2.Checked)
+                                                else// if (rbV35.Checked)
                                                 {
                                                     initBiomass6 = maxANPP6 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                     // Initial biomass cannot be greater than maxANPP
@@ -4409,7 +5178,7 @@ namespace SiteVegCalc
                                                     //  Initial biomass cannot be less than 1.
                                                     initBiomass6 = Math.Max(1.0, initBiomass6);
                                                 }
-                                                else
+                                                /*else
                                                 {
                                                     initBiomass6 = 0.025 * maxBiomass6 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                     // Initial biomass cannot be greater than maxANPP
@@ -4417,9 +5186,22 @@ namespace SiteVegCalc
 
                                                     //  Initial biomass cannot be less than 1.
                                                     initBiomass6 = Math.Max(1.0, initBiomass6);
-                                                }
+                                                }*/
                                                 Cohort newCohort = new Cohort(species6, 1, (int)initBiomass6);
                                                 newCohortList.Add(newCohort);
+                                                //Budworm
+                                                currentFoliage = (int)initBiomass6 * 0.35;
+                                                if (budwormHost6 && (1 >= minSuscAge))
+                                                {
+                                                    currentHostFoliage += currentFoliage;
+                                                    hostFoliage += currentFoliage;
+                                                    maxHostAge = Math.Max(maxHostAge, 1);
+                                                }
+                                                double[] newDefolHist = new double[10];
+                                                newDefolHistList.Add(newDefolHist);
+                                                newTotalFoliageList.Add((int)currentFoliage);
+                                                newCurrentFoliageList.Add((int)currentFoliage);
+                                                //newWoodList.Add(initBiomass - currentFoliage);
                                             }
                                         }
                                     }
@@ -4456,7 +5238,7 @@ namespace SiteVegCalc
                                                         double myRand = random.Next(0, 1000000);
                                                         double checkRand = myRand / 1000000;
                                                         double suffLightMod = 1.0;
-                                                        if (rbV2.Checked || rbV3.Checked)
+                                                        if (rbV30.Checked || rbV35.Checked)
                                                         {
                                                             List<double> lightList = sufficientLight[shadeTol1 - 1];
                                                             suffLightMod = lightList[(int)shadeClass];
@@ -4468,7 +5250,7 @@ namespace SiteVegCalc
                                                             {
                                                                 initBiomass = 1;
                                                             }
-                                                            else if (rbV2.Checked)
+                                                            else// if (rbV35.Checked)
                                                             {
                                                                 initBiomass = maxANPP1 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                                 // Initial biomass cannot be greater than maxANPP
@@ -4476,16 +5258,29 @@ namespace SiteVegCalc
                                                                 //  Initial biomass cannot be less than 1.
                                                                 initBiomass = Math.Max(1.0, initBiomass);
                                                             }
-                                                            else
+                                                            /*else
                                                             {
                                                                 initBiomass = 0.025 * maxBiomass * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                                 // Initial biomass cannot be greater than maxANPP
                                                                 initBiomass = Math.Min(maxANPP1, initBiomass);
                                                                 //  Initial biomass cannot be less than 1.
                                                                 initBiomass = Math.Max(1.0, initBiomass);
-                                                            }
+                                                            }*/
                                                             Cohort newCohort = new Cohort(species1, 1, (int)initBiomass);
                                                             newCohortList.Add(newCohort);
+                                                            //Budworm
+                                                            currentFoliage = (int)initBiomass * 0.35;
+                                                            if (budwormHost1 && (1 >= minSuscAge))
+                                                            {
+                                                                currentHostFoliage += currentFoliage;
+                                                                hostFoliage += currentFoliage;
+                                                                maxHostAge = Math.Max(maxHostAge, 1);
+                                                            }
+                                                            double[] newDefolHist = new double[10];
+                                                            newDefolHistList.Add(newDefolHist);
+                                                            newTotalFoliageList.Add((int)currentFoliage);
+                                                            newCurrentFoliageList.Add((int)currentFoliage);
+                                                            //newWoodList.Add(initBiomass - currentFoliage);
 
                                                         }
                                                     }
@@ -4522,7 +5317,7 @@ namespace SiteVegCalc
                                                             double myRand = random.Next(0, 1000000);
                                                             double checkRand = myRand / 1000000;
                                                             double suffLightMod = 1.0;
-                                                            if (rbV2.Checked || rbV3.Checked)
+                                                            if (rbV30.Checked || rbV35.Checked)
                                                             {
                                                                 List<double> lightList = sufficientLight[shadeTol2 - 1];
                                                                 suffLightMod = lightList[(int)shadeClass];
@@ -4534,7 +5329,7 @@ namespace SiteVegCalc
                                                                 {
                                                                     initBiomass2 = 1;
                                                                 }
-                                                                else if (rbV2.Checked)
+                                                                else// if (rbV35.Checked)
                                                                 {
                                                                     initBiomass2 = maxANPP2 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                                     // Initial biomass cannot be greater than maxANPP
@@ -4542,7 +5337,7 @@ namespace SiteVegCalc
                                                                     //  Initial biomass cannot be less than 1.
                                                                     initBiomass2 = Math.Max(1.0, initBiomass2);
                                                                 }
-                                                                else
+                                                                /*else
                                                                 {
                                                                     initBiomass2 = 0.025 * maxBiomass2 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                                     // Initial biomass cannot be greater than maxANPP
@@ -4550,10 +5345,21 @@ namespace SiteVegCalc
 
                                                                     //  Initial biomass cannot be less than 1.
                                                                     initBiomass2 = Math.Max(1.0, initBiomass2);
-                                                                }
+                                                                }*/
                                                                 Cohort newCohort = new Cohort(species2, 1, (int)initBiomass2);
                                                                 newCohortList.Add(newCohort);
-
+                                                                //Budworm
+                                                                currentFoliage = (int)initBiomass2 * 0.35;
+                                                                if (budwormHost2 && (1 >= minSuscAge))
+                                                                {
+                                                                    currentHostFoliage += currentFoliage;
+                                                                    hostFoliage += currentFoliage;
+                                                                }
+                                                                double[] newDefolHist = new double[10];
+                                                                newDefolHistList.Add(newDefolHist);
+                                                                newTotalFoliageList.Add((int)currentFoliage);
+                                                                newCurrentFoliageList.Add((int)currentFoliage);
+                                                                //newWoodList.Add(initBiomass - currentFoliage);
 
                                                             }
                                                         }
@@ -4591,7 +5397,7 @@ namespace SiteVegCalc
                                                             double myRand = random.Next(0, 1000000);
                                                             double checkRand = myRand / 1000000;
                                                             double suffLightMod = 1.0;
-                                                            if (rbV2.Checked || rbV3.Checked)
+                                                            if (rbV30.Checked || rbV35.Checked)
                                                             {
                                                                 List<double> lightList = sufficientLight[shadeTol3 - 1];
                                                                 suffLightMod = lightList[(int)shadeClass];
@@ -4603,7 +5409,7 @@ namespace SiteVegCalc
                                                                 {
                                                                     initBiomass3 = 1;
                                                                 }
-                                                                else if (rbV2.Checked)
+                                                                else// if (rbV35.Checked)
                                                                 {
                                                                     initBiomass3 = maxANPP3 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                                     // Initial biomass cannot be greater than maxANPP
@@ -4611,7 +5417,7 @@ namespace SiteVegCalc
                                                                     //  Initial biomass cannot be less than 1.
                                                                     initBiomass3 = Math.Max(1.0, initBiomass3);
                                                                 }
-                                                                else
+                                                                /*else
                                                                 {
                                                                     initBiomass3 = 0.025 * maxBiomass3 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                                     // Initial biomass cannot be greater than maxANPP
@@ -4619,10 +5425,22 @@ namespace SiteVegCalc
 
                                                                     //  Initial biomass cannot be less than 1.
                                                                     initBiomass3 = Math.Max(1.0, initBiomass3);
-                                                                }
+                                                                }*/
                                                                 Cohort newCohort = new Cohort(species3, 1, (int)initBiomass3);
                                                                 newCohortList.Add(newCohort);
-
+                                                                //Budworm
+                                                                currentFoliage = (int)initBiomass3 * 0.35;
+                                                                if (budwormHost3 && (1 >= minSuscAge))
+                                                                {
+                                                                    currentHostFoliage += currentFoliage;
+                                                                    hostFoliage += currentFoliage;
+                                                                    maxHostAge = Math.Max(maxHostAge, 1);
+                                                                }
+                                                                double[] newDefolHist = new double[10];
+                                                                newDefolHistList.Add(newDefolHist);
+                                                                newTotalFoliageList.Add((int)currentFoliage);
+                                                                newCurrentFoliageList.Add((int)currentFoliage);
+                                                                //newWoodList.Add(initBiomass - currentFoliage);
                                                             }
                                                         }
                                                     }
@@ -4659,7 +5477,7 @@ namespace SiteVegCalc
                                                             double myRand = random.Next(0, 1000000);
                                                             double checkRand = myRand / 1000000;
                                                             double suffLightMod = 1.0;
-                                                            if (rbV2.Checked || rbV3.Checked)
+                                                            if (rbV30.Checked || rbV35.Checked)
                                                             {
                                                                 List<double> lightList = sufficientLight[shadeTol4 - 1];
                                                                 suffLightMod = lightList[(int)shadeClass];
@@ -4671,7 +5489,7 @@ namespace SiteVegCalc
                                                                 {
                                                                     initBiomass4 = 1;
                                                                 }
-                                                                else if (rbV2.Checked)
+                                                                else// if (rbV35.Checked)
                                                                 {
                                                                     initBiomass4 = maxANPP4 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                                     // Initial biomass cannot be greater than maxANPP
@@ -4679,7 +5497,7 @@ namespace SiteVegCalc
                                                                     //  Initial biomass cannot be less than 1.
                                                                     initBiomass4 = Math.Max(1.0, initBiomass4);
                                                                 }
-                                                                else
+                                                                /*else
                                                                 {
                                                                     initBiomass4 = 0.025 * maxBiomass4 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                                     // Initial biomass cannot be greater than maxANPP
@@ -4687,10 +5505,22 @@ namespace SiteVegCalc
 
                                                                     //  Initial biomass cannot be less than 1.
                                                                     initBiomass4 = Math.Max(1.0, initBiomass4);
-                                                                }
+                                                                }*/
                                                                 Cohort newCohort = new Cohort(species4, 1, (int)initBiomass4);
                                                                 newCohortList.Add(newCohort);
-
+                                                                //Budworm
+                                                                currentFoliage = (int)initBiomass4 * 0.35;
+                                                                if (budwormHost4 && (1 >= minSuscAge))
+                                                                {
+                                                                    currentHostFoliage += currentFoliage;
+                                                                    hostFoliage += currentFoliage;
+                                                                    maxHostAge = Math.Max(maxHostAge, 1);
+                                                                }
+                                                                double[] newDefolHist = new double[10];
+                                                                newDefolHistList.Add(newDefolHist);
+                                                                newTotalFoliageList.Add((int)currentFoliage);
+                                                                newCurrentFoliageList.Add((int)currentFoliage);
+                                                                //newWoodList.Add(initBiomass - currentFoliage);
                                                             }
                                                         }
                                                     }
@@ -4727,7 +5557,7 @@ namespace SiteVegCalc
                                                             double myRand = random.Next(0, 1000000);
                                                             double checkRand = myRand / 1000000;
                                                             double suffLightMod = 1.0;
-                                                            if (rbV2.Checked || rbV3.Checked)
+                                                            if (rbV30.Checked || rbV35.Checked)
                                                             {
                                                                 List<double> lightList = sufficientLight[shadeTol5 - 1];
                                                                 suffLightMod = lightList[(int)shadeClass];
@@ -4739,7 +5569,7 @@ namespace SiteVegCalc
                                                                 {
                                                                     initBiomass5 = 1;
                                                                 }
-                                                                else if (rbV2.Checked)
+                                                                else// if (rbV35.Checked)
                                                                 {
                                                                     initBiomass5 = maxANPP5 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                                     // Initial biomass cannot be greater than maxANPP
@@ -4747,7 +5577,7 @@ namespace SiteVegCalc
                                                                     //  Initial biomass cannot be less than 1.
                                                                     initBiomass5 = Math.Max(1.0, initBiomass5);
                                                                 }
-                                                                else
+                                                                /*else
                                                                 {
                                                                     initBiomass5 = 0.025 * maxBiomass5 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                                     // Initial biomass cannot be greater than maxANPP
@@ -4755,10 +5585,22 @@ namespace SiteVegCalc
 
                                                                     //  Initial biomass cannot be less than 1.
                                                                     initBiomass5 = Math.Max(1.0, initBiomass5);
-                                                                }
+                                                                }*/
                                                                 Cohort newCohort = new Cohort(species5, 1, (int)initBiomass5);
                                                                 newCohortList.Add(newCohort);
-
+                                                                //Budworm
+                                                                currentFoliage = (int)initBiomass5 * 0.35;
+                                                                if (budwormHost5 && (1 >= minSuscAge))
+                                                                {
+                                                                    currentHostFoliage += currentFoliage;
+                                                                    hostFoliage += currentFoliage;
+                                                                    maxHostAge = Math.Max(maxHostAge, 1);
+                                                                }
+                                                                double[] newDefolHist = new double[10];
+                                                                newDefolHistList.Add(newDefolHist);
+                                                                newTotalFoliageList.Add((int)currentFoliage);
+                                                                newCurrentFoliageList.Add((int)currentFoliage);
+                                                                //newWoodList.Add(initBiomass - currentFoliage);
                                                             }
                                                         }
                                                     }
@@ -4795,7 +5637,7 @@ namespace SiteVegCalc
                                                             double myRand = random.Next(0, 1000000);
                                                             double checkRand = myRand / 1000000;
                                                             double suffLightMod = 1.0;
-                                                            if (rbV2.Checked || rbV3.Checked)
+                                                            if (rbV30.Checked || rbV35.Checked)
                                                             {
                                                                 List<double> lightList = sufficientLight[shadeTol6 - 1];
                                                                 suffLightMod = lightList[(int)shadeClass];
@@ -4807,7 +5649,7 @@ namespace SiteVegCalc
                                                                 {
                                                                     initBiomass6 = 1;
                                                                 }
-                                                                else if (rbV2.Checked)
+                                                                else// if (rbV35.Checked)
                                                                 {
                                                                     initBiomass6 = maxANPP6 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                                     // Initial biomass cannot be greater than maxANPP
@@ -4815,7 +5657,7 @@ namespace SiteVegCalc
                                                                     //  Initial biomass cannot be less than 1.
                                                                     initBiomass6 = Math.Max(1.0, initBiomass6);
                                                                 }
-                                                                else
+                                                                /*else
                                                                 {
                                                                     initBiomass6 = 0.025 * maxBiomass6 * Math.Exp(-1.6 * (newBioSum1 + newBioSum2 + newBioSum3 + newBioSum4 + newBioSum5 + newBioSum6) / siteMaxBio);
                                                                     // Initial biomass cannot be greater than maxANPP
@@ -4823,10 +5665,22 @@ namespace SiteVegCalc
 
                                                                     //  Initial biomass cannot be less than 1.
                                                                     initBiomass6 = Math.Max(1.0, initBiomass6);
-                                                                }
+                                                                }*/
                                                                 Cohort newCohort = new Cohort(species6, 1, (int)initBiomass6);
                                                                 newCohortList.Add(newCohort);
-
+                                                                //Budworm
+                                                                currentFoliage = (int)initBiomass6 * 0.35;
+                                                                if (budwormHost6 && (1 >= minSuscAge))
+                                                                {
+                                                                    currentHostFoliage += currentFoliage;
+                                                                    hostFoliage += currentFoliage;
+                                                                    maxHostAge = Math.Max(maxHostAge, 1);
+                                                                }
+                                                                double[] newDefolHist = new double[10];
+                                                                newDefolHistList.Add(newDefolHist);
+                                                                newTotalFoliageList.Add((int)currentFoliage);
+                                                                newCurrentFoliageList.Add((int)currentFoliage);
+                                                                //newWoodList.Add(initBiomass - currentFoliage);
                                                             }
                                                         }
                                                     }
@@ -4835,9 +5689,11 @@ namespace SiteVegCalc
                                             }
                                         }
                                     }
+                                    
+
                                     //First years up to timestep are spin-up (not recorded)
                                     if ((year >= (timestep)) && (year <= (simYears + timestep)))
-                                    {
+                                    {                                       
                                         shadeClassArray[(year - (timestep))] = shadeClass;
                                         numCohortsArray[(year - (timestep))] = cohortCount1;
                                         numCohortsArray2[(year - (timestep))] = cohortCount2;
@@ -4854,6 +5710,20 @@ namespace SiteVegCalc
                                         cohortArray1[(year - (timestep))] = cohort1Bio;
                                         cohortArray2[(year - (timestep))] = cohort2Bio;
                                         deadWoodArray[(year - (timestep))] = deadWoodyBio;
+                                        //Budworm - add values to arrays
+                                        budwormDensArray[(year - (timestep))] = budwormDensitySpring;
+                                        budwormCountArray[(year - (timestep))] = budwormCountSpring;
+                                        budEnemyDensArray[(year - (timestep))] = enemyDensitySpring;
+                                        budEnemyCountArray[(year - (timestep))] = enemyCountWinter;
+                                        pctDefoliationArray[(year - (timestep))] = (pctDefol/100);
+                                        siteDefoliationArray[(year - (timestep))] = siteDefol;
+                                        hostFoliageArray[(year - (timestep))] = hostFoliage;
+                                        currentHostFoliageArray[(year - (timestep))] = currentHostFoliage;
+                                        hostFoliageFallArray[(year - (timestep))] = hostFoliageFall;
+                                        currentHostFoliageFallArray[(year - (timestep))] = currentHostFoliageFall;
+                                        budwormMortalityArray[(year - (timestep))] = totalSBWMortality;
+                                        //Budworm - END - add values to arrays
+
                                     }
                                     if ((year >= (timestep - 1)) && (year <= (simYears + timestep - 1)))
                                     {
@@ -4867,44 +5737,125 @@ namespace SiteVegCalc
                                     bioSum5 = newBioSum5 + (int)initBiomass5;
                                     bioSum6 = newBioSum6 + (int)initBiomass6;
                                     bioSumTotal = bioSum1 + bioSum2 + bioSum3 + bioSum4 + bioSum5 + bioSum6;
-                                   
+
                                     cohortList = newCohortList;
+                                    //Budworm
+                                    // Add Emigration and Immigration functions - FIXME
+                                    // Calculate LDD/SDD ratio (18)
+                                    double LDDHabitat = 0;
+                                    double LDDFlight = 0;
+                                    double LDDRatio = 0;
+                                    if (cbEmigration.Checked)
+                                    {
+                                        if ((siteDefol > minLDD) && (siteDefol <= halfLDD))
+                                        {
+                                            double m1 = 0;
+                                            if ((halfLDD - minLDD) > 0)
+                                            {
+                                                m1 = 0.5 / (halfLDD - minLDD);
+                                            }
+                                            double b1 = 0.5 - (m1 * halfLDD);
+                                            LDDHabitat = m1 * siteDefol + b1;
+                                        }
+                                        else if ((siteDefol > halfLDD) && (siteDefol <= maxLDD))
+                                        {
+                                            double m2 = 0;
+                                            if ((maxLDD - halfLDD) > 0)
+                                            {
+                                                m2 = 0.5 / (maxLDD - halfLDD);
+                                            }
+                                            double b2 = 1.0 - (m2 * maxLDD);
+                                            LDDHabitat = m2 * siteDefol + b2;
+                                        }
+                                        else if (siteDefol > maxLDD)
+                                            LDDHabitat = 1.0;
+
+                                        double slope = (maxLDDProp - (1 - maxLDDProp)) / (1.0 - 0.46);
+                                        double intercept = maxLDDProp - slope;
+                                        if (cbPositiveFecund.Checked)
+                                        {
+                                            if (rprimeZ < 0.46)
+                                                LDDFlight = 0.0;
+                                            else
+                                                LDDFlight = slope * rprimeZ + intercept;
+                                        }
+                                        else
+                                        {
+                                            double slope2 = (-1.0) * slope;
+                                            double intercept2 = (-1.0) * intercept + 1.0;
+                                            if (rprimeZ < 0.46)
+                                                LDDFlight = maxLDDProp;
+                                            else
+                                                LDDFlight = slope2 * rprimeZ + intercept2;
+                                        }
+                                        LDDRatio = LDDHabitat * LDDFlight;
+                                    }
+                                    // Calculate LDD dispersers (18b)
+                                    double LDDout = eggCountFall *  LDDRatio;
+                                    // Calculate SDD dispersers (18b)
+                                    // for site model assume SDD stay on site
+                                    double SDDout = 0;
+                                    // Distribute LDD dispersers (19)
+                                    // for site model assume no immigrants
+                                    double LDDin = 0;
+                                    // Distribute SDD dispersers (20)
+                                    // for site model assume emigrants = immigrants
+                                    double SDDin = 0;
+
+                                     //First years up to timestep are spin-up (not recorded)
+                                    if ((year >= (timestep)) && (year <= (simYears + timestep)))
+                                    {
+                                        emigrationArray[(year - (timestep))] = LDDout + SDDout - LDDin - SDDin;
+                                    }
+                                    budwormCount = eggCountFall - LDDout - SDDout + LDDin + SDDin;
+
+
+                                    defolHistList = newDefolHistList;
+                                    currentFoliageList = newCurrentFoliageList;
+                                    totalFoliageList = newTotalFoliageList;
+                                    //woodList = newWoodList;
 
                                     lastGroupIndex = groupIndex;
 
                                 }
 
-                                if (rbV2.Checked || rbV3.Checked)
+                                if (rbV30.Checked || rbV35.Checked)
                                 {
                                     if (numSpecies == 6)
                                     {
                                         GraphPane pane1 = CreateGraph(graph1, "Biomass", bioSumArray1, bioSumArray2, bioSumArray3, bioSumArray4, bioSumArray5, bioSumArray6, c);
                                         pane1.XAxis.Scale.Max = simYears;
+                                        pane1.YAxis.Title.Text = "Biomass (g/m2)";
                                     }
                                     if (numSpecies == 5)
                                     {
                                         GraphPane pane1 = CreateGraph(graph1, "Biomass", bioSumArray1, bioSumArray2, bioSumArray3, bioSumArray4, bioSumArray5, c);
                                         pane1.XAxis.Scale.Max = simYears;
+                                        pane1.YAxis.Title.Text = "Biomass (g/m2)";
                                     }
                                     if (numSpecies == 4)
                                     {
                                         GraphPane pane1 = CreateGraph(graph1, "Biomass", bioSumArray1, bioSumArray2, bioSumArray3, bioSumArray4, c);
                                         pane1.XAxis.Scale.Max = simYears;
+                                        pane1.YAxis.Title.Text = "Biomass (g/m2)";
                                     }
                                     else if (numSpecies == 3)
                                     {
                                         GraphPane pane1 = CreateGraph(graph1, "Biomass", bioSumArray1, bioSumArray2, bioSumArray3, c);
                                         pane1.XAxis.Scale.Max = simYears;
+                                        pane1.YAxis.Title.Text = "Biomass (g/m2)";
                                     }
                                     else if (numSpecies == 2)
                                     {
                                         GraphPane pane1 = CreateGraph(graph1, "Biomass", bioSumArray1, bioSumArray2, c);
                                         pane1.XAxis.Scale.Max = simYears;
+                                        pane1.YAxis.Title.Text = "Biomass (g/m2)";
                                     }
                                     else
                                     {
                                         GraphPane pane1 = CreateGraph(graph1, "Biomass", bioSumArray1, c);
                                         pane1.XAxis.Scale.Max = simYears;
+                                        pane1.YAxis.Title.Text = "Biomass (g/m2)";
                                     }
 
                                     GraphPane pane2 = CreateGraph(graph2, "Percent Shade", pctShadeArray, c);
@@ -4913,12 +5864,15 @@ namespace SiteVegCalc
 
                                     GraphPane pane6 = CreateGraph(graph6, "Cohort ANPP", ANPPCoList, c);
                                     pane6.XAxis.Scale.Max = simYears;
+                                    pane6.YAxis.Title.Text = "ANPP (g/m2)";
 
                                     GraphPane pane9 = CreateGraph(graph9, "Cohort Biomass", coBioList, c);
                                     pane9.XAxis.Scale.Max = simYears;
+                                    pane9.YAxis.Title.Text = "Biomass (g/m2)";
 
                                     GraphPane pane10 = CreateGraph(graph10, "Dead Woody Biomass", deadWoodArray, c);
                                     pane10.XAxis.Scale.Max = simYears;
+                                    pane10.YAxis.Title.Text = "Biomass (g/m2)";
 
                                     graph1.Refresh();
                                     graph2.Refresh();
@@ -4972,46 +5926,131 @@ namespace SiteVegCalc
                                 graph3.Refresh();
                                 graph4.Refresh();
 
+                                //Budworm - Graph outputs
+                                // graph of budworm density
+                                GraphPane pane5 = CreateGraph(graph_BudwormD, "Budworm Density", budwormDensArray, c);
+                                pane5.YAxis.Type = AxisType.Linear;
+                                pane5.YAxis.Scale.Min = 0;
+                                pane5.YAxis.Title.Text = "Budworm Density (#/g current host foliage)";
+                                //pane5.YAxis.Scale.MajorStep = 1;
+                                //pane5.YAxis.Type = AxisType.Log;
+                                pane5.XAxis.Scale.Max = simYears;
+                                graph_BudwormD.AxisChange();
+                                graph_BudwormD.Refresh();
+
+                                // graph of budworm count
+                                GraphPane pane7 = CreateGraph(graph_BudwormC, "Budworm Count", budwormCountArray, c);
+                                pane7.YAxis.Title.Text = "Budworm Count (#/m2)";
+                                //pane7.YAxis.Scale.Max = 10;
+                                //pane7.YAxis.Scale.MajorStep = 1;
+                                pane7.XAxis.Scale.Max = simYears;
+                                graph_BudwormC.Refresh();
+
+                                // graph of enemy density
+                                GraphPane pane8 = CreateGraph(graph_EnemyDens, "Enemy Density", budEnemyDensArray, c);
+                                pane8.YAxis.Type = AxisType.Linear;
+                                pane8.YAxis.Scale.Min = 0;
+                                pane8.YAxis.Title.Text = "Enemy Density (#/L2 budworm)";
+                                //pane8.YAxis.Scale.MajorStep = 1;
+                                //pane8.YAxis.Type = AxisType.Log;
+                                pane8.XAxis.Scale.Max = simYears;
+                                graph_EnemyDens.AxisChange();
+                                graph_EnemyDens.Refresh();
+
+                                // graph of enemy count
+                                GraphPane pane11 = CreateGraph(graph_EnemyCount, "Enemy Count", budEnemyCountArray, c);
+                                pane11.YAxis.Title.Text = "Enemy Count (#/m2)";
+                                //pane11.YAxis.Scale.Max = 10;
+                                //pane11.YAxis.Scale.MajorStep = 1;
+                                pane11.XAxis.Scale.Max = simYears;
+                                graph_EnemyCount.Refresh();
+
+                                // graph of foliage
+                                GraphPane pane12 = CreateGraph(graph_HostFoliage, "Current Host Foliage", currentHostFoliageArray, c);
+                                pane12.YAxis.Title.Text = "Host Foliage (g/m2)";
+                                //pane12.YAxis.Scale.Max = 10;
+                                //pane12.YAxis.Scale.MajorStep = 1;
+                                pane12.XAxis.Scale.Max = simYears;
+                                graph_HostFoliage.Refresh();
+
+                                // graph of prop defoliation
+                                GraphPane pane13 = CreateGraph(graph_PropDefol, "Proportion Defoliation", pctDefoliationArray, c);
+                                pane13.YAxis.Scale.Max = 1;
+                                //pane13.YAxis.Scale.MajorStep = 1;
+                                pane13.XAxis.Scale.Max = simYears;
+                                graph_PropDefol.Refresh();
+
+                                // graph of budworm density
+                                GraphPane pane14 = CreateGraph(graph_LogPopDens, "Log Population Density", budwormDensArray,budEnemyDensArray, c);
+                                pane14.YAxis.Type = AxisType.Log;
+                                pane14.AxisChange();
+                                //pane14.YAxis.Scale.Min = Math.Min(Calculations.MinNonZeroInArray(budwormDensArray), Calculations.MinNonZeroInArray(budEnemyDensArray));
+                                pane14.YAxis.Scale.Min = 0.000000001;
+                                pane14.YAxis.Title.Text = "Population Density (budworm & enemy)";
+                                pane14.XAxis.Scale.Max = simYears;
+                                //graph_LogPopDens.AxisChange();
+                                graph_LogPopDens.Refresh();
+
+                                // graph of SBW mortality
+                                GraphPane pane15 = CreateGraph(graph_SBWmortality, "SBW Mortality", budwormMortalityArray, c);
+                                pane15.XAxis.Scale.Max = simYears;
+                                pane15.YAxis.Title.Text = "Mortality Biomass (g/m2)";
+                                graph_SBWmortality.Refresh();
+
+                                // graph of SBW net migration
+                                GraphPane pane16 = CreateGraph(graph_SBWmigration, "SBW Migration", emigrationArray, c);
+                                pane16.XAxis.Scale.Max = simYears;
+                                pane16.YAxis.Title.Text = "Net Migration (count)";
+                                graph_SBWmigration.Refresh();
+
+                                //Budworm - END - budworm graphs
 
                                 if (checkBoxLog.Checked)
                                 {
-                                    //Create log textfile
+                                    //Create output log textfile
+                                    StringBuilder sb = new StringBuilder();
+                                    if (numSpecies == 6)
+                                    {
+                                        string[] header = new string[] { "Year", "Biomass1", "Biomass2", "Biomass3", "Biomass4", "Biomass5", "Biomass6", "PctShade", "ShadeClass", "NumCohorts1", "NumCohorts2", "NumCohorts3", "NumCohorts4", "NumCohorts5", "NumCohorts6", "DeadWoodyBio", "BudwormDensity", "BudwormCount", "EnemyDensity", "EnemyCount", "HostFoliage", "CurrentHostFoliage","PropDefoliation" };
+                                        sb.AppendLine(string.Join(",", header));
+                                        for (int index = 0; index < bioSumArray1.Length; index++)
+                                        {
+                                            string[] output = new string[]{
+                                            index.ToString(),
+                                            bioSumArray1[index].ToString(),
+                                            bioSumArray2[index].ToString(),
+                                            bioSumArray3[index].ToString(),
+                                            bioSumArray4[index].ToString(),                            
+                                            bioSumArray5[index].ToString(),                           
+                                            bioSumArray6[index].ToString(),
+                                            pctShadeArray[index].ToString(),
+                                            shadeClassArray[index].ToString(),
+                                            numCohortsArray[index].ToString(),
+                                            numCohortsArray2[index].ToString(),
+                                            numCohortsArray3[index].ToString(),
+                                            numCohortsArray4[index].ToString(),
+                                            numCohortsArray5[index].ToString(),
+                                            numCohortsArray6[index].ToString(),
+                                            deadWoodArray[index].ToString(),
+                                            budwormDensArray[index].ToString(),
+                                            budwormCountArray[index].ToString(),
+                                            budEnemyDensArray[index].ToString(),
+                                            budEnemyCountArray[index].ToString(),
+                                            hostFoliageArray[index].ToString(),
+                                            currentHostFoliageArray[index].ToString(),
+                                            pctDefoliationArray[index].ToString()
+                                            };
+                                            sb.AppendLine(string.Join(",", output));
+                                        }
 
-                                   StringBuilder sb = new StringBuilder();
-                                   if (numSpecies == 6)
-                                   {
-                                       string[] header = new string[] { "Year", "Biomass1", "Biomass2", "Biomass3", "Biomass4", "Biomass5", "Biomass6", "PctShade", "ShadeClass", "NumCohorts1", "NumCohorts2", "NumCohorts3", "NumCohorts4", "NumCohorts5", "NumCohorts6", "DeadWoodyBio" };
-                                       sb.AppendLine(string.Join(",", header));
-                                       for (int index = 0; index < bioSumArray1.Length; index++)
-                                       {
-                                           string[] output = new string[]{
-                            index.ToString(),
-                            bioSumArray1[index].ToString(),
-                            bioSumArray2[index].ToString(),
-                            bioSumArray3[index].ToString(),
-                            bioSumArray4[index].ToString(),                            
-                            bioSumArray5[index].ToString(),                           
-                            bioSumArray6[index].ToString(),
-                            pctShadeArray[index].ToString(),
-                            shadeClassArray[index].ToString(),
-                            numCohortsArray[index].ToString(),
-                            numCohortsArray2[index].ToString(),
-                            numCohortsArray3[index].ToString(),
-                            numCohortsArray4[index].ToString(),
-                            numCohortsArray5[index].ToString(),
-                            numCohortsArray6[index].ToString(),
-                            deadWoodArray[index].ToString()};
-                                           sb.AppendLine(string.Join(",", output));
-                                       }
-
-                                   }
-                                   else if (numSpecies == 5)
-                                   {
-                                       string[] header = new string[] { "Year", "Biomass1", "Biomass2", "Biomass3", "Biomass4", "Biomass5", "PctShade", "ShadeClass", "NumCohorts1", "NumCohorts2", "NumCohorts3", "NumCohorts4", "NumCohorts5", "DeadWoodyBio" };
-                                       sb.AppendLine(string.Join(",", header));
-                                       for (int index = 0; index < bioSumArray1.Length; index++)
-                                       {
-                                           string[] output = new string[]{
+                                    }
+                                    else if (numSpecies == 5)
+                                    {
+                                        string[] header = new string[] { "Year", "Biomass1", "Biomass2", "Biomass3", "Biomass4", "Biomass5", "PctShade", "ShadeClass", "NumCohorts1", "NumCohorts2", "NumCohorts3", "NumCohorts4", "NumCohorts5", "DeadWoodyBio", "BudwormDensity", "BudwormCount", "EnemyDensity", "EnemyCount", "HostFoliage", "CurrentHostFoliage", "PropDefoliation" };
+                                        sb.AppendLine(string.Join(",", header));
+                                        for (int index = 0; index < bioSumArray1.Length; index++)
+                                        {
+                                            string[] output = new string[]{
                             index.ToString(),
                             bioSumArray1[index].ToString(),
                             bioSumArray2[index].ToString(),
@@ -5025,14 +6064,21 @@ namespace SiteVegCalc
                             numCohortsArray3[index].ToString(),
                             numCohortsArray4[index].ToString(),
                             numCohortsArray5[index].ToString(),
-                            deadWoodArray[index].ToString()};
-                                           sb.AppendLine(string.Join(",", output));
-                                       }
+                            deadWoodArray[index].ToString(),
+                                            budwormDensArray[index].ToString(),
+                                            budwormCountArray[index].ToString(),
+                                            budEnemyDensArray[index].ToString(),
+                                            budEnemyCountArray[index].ToString(),
+                                            hostFoliageArray[index].ToString(),
+                                            currentHostFoliageArray[index].ToString(),
+                                            pctDefoliationArray[index].ToString()};
+                                            sb.AppendLine(string.Join(",", output));
+                                        }
 
-                                   }
+                                    }
                                     else if (numSpecies == 4)
                                     {
-                                        string[] header = new string[] { "Year", "Biomass1", "Biomass2", "Biomass3", "Biomass4", "PctShade", "ShadeClass", "NumCohorts1", "NumCohorts2", "NumCohorts3", "NumCohorts4", "DeadWoodyBio" };
+                                        string[] header = new string[] { "Year", "Biomass1", "Biomass2", "Biomass3", "Biomass4", "PctShade", "ShadeClass", "NumCohorts1", "NumCohorts2", "NumCohorts3", "NumCohorts4", "DeadWoodyBio", "BudwormDensity", "BudwormCount", "EnemyDensity", "EnemyCount", "HostFoliage", "CurrentHostFoliage", "PropDefoliation" };
                                         sb.AppendLine(string.Join(",", header));
                                         for (int index = 0; index < bioSumArray1.Length; index++)
                                         {
@@ -5048,14 +6094,21 @@ namespace SiteVegCalc
                             numCohortsArray2[index].ToString(),
                             numCohortsArray3[index].ToString(),
                             numCohortsArray4[index].ToString(),
-                            deadWoodArray[index].ToString()};
+                            deadWoodArray[index].ToString(),
+                                            budwormDensArray[index].ToString(),
+                                            budwormCountArray[index].ToString(),
+                                            budEnemyDensArray[index].ToString(),
+                                            budEnemyCountArray[index].ToString(),
+                                            hostFoliageArray[index].ToString(),
+                                            currentHostFoliageArray[index].ToString(),
+                                            pctDefoliationArray[index].ToString()};
                                             sb.AppendLine(string.Join(",", output));
                                         }
 
                                     }
                                     else if (numSpecies == 3)
                                     {
-                                        string[] header = new string[] { "Year", "Biomass1", "Biomass2", "Biomass3", "PctShade", "ShadeClass", "NumCohorts1", "NumCohorts2", "NumCohorts3",  "DeadWoodyBio" };
+                                        string[] header = new string[] { "Year", "Biomass1", "Biomass2", "Biomass3", "PctShade", "ShadeClass", "NumCohorts1", "NumCohorts2", "NumCohorts3", "DeadWoodyBio", "BudwormDensity", "BudwormCount", "EnemyDensity", "EnemyCount", "HostFoliage", "CurrentHostFoliage", "PropDefoliation" };
                                         sb.AppendLine(string.Join(",", header));
                                         for (int index = 0; index < bioSumArray1.Length; index++)
                                         {
@@ -5069,14 +6122,21 @@ namespace SiteVegCalc
                             numCohortsArray[index].ToString(),
                             numCohortsArray2[index].ToString(),
                             numCohortsArray3[index].ToString(),
-                            deadWoodArray[index].ToString()};
+                            deadWoodArray[index].ToString(),
+                                            budwormDensArray[index].ToString(),
+                                            budwormCountArray[index].ToString(),
+                                            budEnemyDensArray[index].ToString(),
+                                            budEnemyCountArray[index].ToString(),
+                                            hostFoliageArray[index].ToString(),
+                                            currentHostFoliageArray[index].ToString(),
+                                            pctDefoliationArray[index].ToString()};
                                             sb.AppendLine(string.Join(",", output));
                                         }
 
                                     }
                                     else if (numSpecies == 2)
                                     {
-                                        string[] header = new string[] { "Year", "Biomass1", "Biomass2", "PctShade", "ShadeClass", "NumCohorts1", "NumCohorts2", "DeadWoodyBio" };
+                                        string[] header = new string[] { "Year", "Biomass1", "Biomass2", "PctShade", "ShadeClass", "NumCohorts1", "NumCohorts2", "DeadWoodyBio", "BudwormDensity", "BudwormCount", "EnemyDensity", "EnemyCount", "HostFoliage", "CurrentHostFoliage", "PropDefoliation" };
                                         sb.AppendLine(string.Join(",", header));
                                         for (int index = 0; index < bioSumArray1.Length; index++)
                                         {
@@ -5088,15 +6148,22 @@ namespace SiteVegCalc
                             shadeClassArray[index].ToString(),
                             numCohortsArray[index].ToString(),
                             numCohortsArray2[index].ToString(),
-                            deadWoodArray[index].ToString()};
+                            deadWoodArray[index].ToString(),
+                                            budwormDensArray[index].ToString(),
+                                            budwormCountArray[index].ToString(),
+                                            budEnemyDensArray[index].ToString(),
+                                            budEnemyCountArray[index].ToString(),
+                                            hostFoliageArray[index].ToString(),
+                                            currentHostFoliageArray[index].ToString(),
+                                            pctDefoliationArray[index].ToString()};
                                             sb.AppendLine(string.Join(",", output));
                                         }
 
                                     }
                                     else
                                     {
-                                        string[] header = new string[] { "Year", "Biomass", "PctShade", "ShadeClass", "NumCohorts", "Cohort1Bio", "Cohort1LAI", "Cohort2Bio", "DeadWoodyBio" };
-                                       
+                                        string[] header = new string[] { "Year", "Biomass", "PctShade", "ShadeClass", "NumCohorts", "Cohort1Bio", "Cohort1LAI", "Cohort2Bio", "DeadWoodyBio", "BudwormDensity", "BudwormCount", "EnemyDensity", "EnemyCount", "HostFoliage", "CurrentHostFoliage", "PropDefoliation" };
+
                                         sb.AppendLine(string.Join(",", header));
                                         for (int index = 0; index < bioSumArray1.Length; index++)
                                         {
@@ -5109,11 +6176,48 @@ namespace SiteVegCalc
                                     cohortArray1[index].ToString(),
                                     LAIArray1[index].ToString(),
                                     cohortArray2[index].ToString(),
-                                    deadWoodArray[index].ToString()};
+                                    deadWoodArray[index].ToString(),
+                                            budwormDensArray[index].ToString(),
+                                            budwormCountArray[index].ToString(),
+                                            budEnemyDensArray[index].ToString(),
+                                            budEnemyCountArray[index].ToString(),
+                                            hostFoliageArray[index].ToString(),
+                                            currentHostFoliageArray[index].ToString(),
+                                            pctDefoliationArray[index].ToString()};
                                             sb.AppendLine(string.Join(",", output));
                                         }
                                     }
                                     File.WriteAllText(outTextFile, sb.ToString());
+
+                                    //Create budworm parameter log textfile
+                                    StringBuilder paramString = new StringBuilder();
+                                    string[] paramHeader = new string[] { "rm", "r'm", "b", "b'", "c'", "c", "a'", "InitEnemyDens", "InitBudDens", "OverwinterMean", "OverwinterStd", "PredationMean", "PredationStd", "Mating_a", "Mating_b", "DecidProtect", "PhenolLimitMean", "PhenolLimitStd", "FoodLimit_b''", "FoodLimit_a''", "FoodLimit_Deltaa''", "FoodLimit_Deltab''","GrowthReduction","Mortality" };
+                                    paramString.AppendLine(string.Join(",", paramHeader));
+                                    string[] paramValues = new string[]{budwormrm.ToString(),
+                                        budwormrprimem.ToString(),
+                                        budwormb.ToString(),budwormbprime.ToString(),
+                                        budwormcprime.ToString(),
+                                        budwormc.ToString(),
+                                        budwormaprime.ToString(),
+                                        budEnemyDensity0.ToString(),
+                                        budwormDensity0.ToString(),
+                                        budwormWinterMean.ToString(),
+                                        budwormWinterStdev.ToString(),
+                                        budwormPredationMean.ToString(),
+                                        budwormPredationStdev.ToString(),
+                                        matingA.ToString(),
+                                        matingB.ToString(),
+                                        decidProtectDmax2.ToString(),
+                                        phenolLimitMean.ToString(),
+                                        phenolLimitStdev.ToString(),
+                                        budwormbprime2.ToString(),
+                                        budwormaprime2.ToString(),
+                                        budwormdeltaaprime2.ToString(),
+                                        budwormdeltabprime2.ToString(),
+                                        cbBudGR.Checked.ToString(),
+                                        cbBudmort.Checked.ToString()};
+                                   paramString.AppendLine(string.Join(",",paramValues));
+                                   File.WriteAllText(paramTextFile, paramString.ToString());
                                 }
                             }
                             rangeCount++;
@@ -5129,7 +6233,7 @@ namespace SiteVegCalc
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            repCount = 0;
+            repCount = 1;
             this.Close();
         }
 
@@ -5150,7 +6254,7 @@ namespace SiteVegCalc
                 list.Add(index, bio);
                 index++;
             }
-            string myLabel = repCount.ToString();
+            string myLabel = (repCount-1).ToString();
             if (menuBatchMode.Checked && !cbRange.Checked)
                 c = Color.FromArgb(2, 0, 0, 0);
             LineItem curve = myPane.AddCurve(myLabel, list, c, SymbolType.None);
@@ -5237,7 +6341,7 @@ namespace SiteVegCalc
                 list2.Add(index, bio);
                 index++;
             }
-            string myLabel = repCount.ToString();
+            string myLabel = (repCount-1).ToString();
             if (menuBatchMode.Checked && !cbRange.Checked)
                 c = Color.FromArgb(2, 0, 0, 0);
             LineItem curve = myPane.AddCurve(myLabel+"(1)", list, c, SymbolType.None);
@@ -5300,7 +6404,7 @@ namespace SiteVegCalc
                 list3.Add(index, bio);
                 index++;
             }
-            string myLabel = repCount.ToString();
+            string myLabel = (repCount-1).ToString();
             if (menuBatchMode.Checked && !cbRange.Checked)
                 c = Color.FromArgb(2, 0, 0, 0);
             LineItem curve = myPane.AddCurve(myLabel+"(1)", list, c, SymbolType.None);
@@ -5388,7 +6492,7 @@ namespace SiteVegCalc
                 list4.Add(index, bio);
                 index++;
             }
-            string myLabel = repCount.ToString();
+            string myLabel = (repCount-1).ToString();
             if (menuBatchMode.Checked && !cbRange.Checked)
                 c = Color.FromArgb(2, 0, 0, 0);
             LineItem curve = myPane.AddCurve(myLabel + "(1)", list, c, SymbolType.None);
@@ -5497,7 +6601,7 @@ namespace SiteVegCalc
                 list5.Add(index, bio);
                 index++;
             }
-            string myLabel = repCount.ToString();
+            string myLabel = (repCount-1).ToString();
             if (menuBatchMode.Checked && !cbRange.Checked)
                 c = Color.FromArgb(2, 0, 0, 0);
             LineItem curve = myPane.AddCurve(myLabel + "(1)", list, c, SymbolType.None);
@@ -5627,7 +6731,7 @@ namespace SiteVegCalc
                 list6.Add(index, bio);
                 index++;
             }
-            string myLabel = repCount.ToString();
+            string myLabel = (repCount-1).ToString();
             if (menuBatchMode.Checked && !cbRange.Checked)
                 c = Color.FromArgb(2, 0, 0, 0);
             LineItem curve = myPane.AddCurve(myLabel + "(1)", list, c, SymbolType.None);
@@ -5744,7 +6848,7 @@ namespace SiteVegCalc
                             list.Add(index, bio);
                             index++;
                         }
-                        string myLabel = repCount.ToString();
+                        string myLabel = (repCount-1).ToString();
                         if (menuBatchMode.Checked && !cbRange.Checked)
                         {
                             if(sppCount == 1)
@@ -5874,7 +6978,7 @@ namespace SiteVegCalc
                         list.Add(index, bio);
                         index++;
                     }
-                    string myLabel = repCount.ToString();
+                    string myLabel = (repCount-1).ToString();
                     if (menuBatchMode.Checked && !cbRange.Checked)
                     {
                         if (sppCount == 1)
@@ -5970,6 +7074,45 @@ namespace SiteVegCalc
             GraphPane myPane10 = graph10.GraphPane;
             myPane10.CurveList.Clear();
             myPane10.GraphObjList.Clear();
+            //Budworm - Clear budworm graphs
+            GraphPane myPane5 = graph_BudwormD.GraphPane;
+            myPane5.CurveList.Clear();
+            myPane5.GraphObjList.Clear();
+            graph_BudwormD.Refresh();
+            GraphPane myPane7 = graph_BudwormC.GraphPane;
+            myPane7.CurveList.Clear();
+            myPane7.GraphObjList.Clear();
+            graph_BudwormC.Refresh();
+            GraphPane myPane8 = graph_EnemyDens.GraphPane;
+            myPane8.CurveList.Clear();
+            myPane8.GraphObjList.Clear();
+            graph_EnemyDens.Refresh();
+            GraphPane myPane11 = graph_EnemyCount.GraphPane;
+            myPane11.CurveList.Clear();
+            myPane11.GraphObjList.Clear();
+            graph_EnemyCount.Refresh();
+            GraphPane myPane12 = graph_HostFoliage.GraphPane;
+            myPane12.CurveList.Clear();
+            myPane12.GraphObjList.Clear();
+            graph_HostFoliage.Refresh();
+            GraphPane myPane13 = graph_PropDefol.GraphPane;
+            myPane13.CurveList.Clear();
+            myPane13.GraphObjList.Clear();
+            graph_PropDefol.Refresh();
+            GraphPane myPane14 = graph_LogPopDens.GraphPane;
+            myPane14.CurveList.Clear();
+            myPane14.GraphObjList.Clear();
+            graph_LogPopDens.Refresh();
+            GraphPane myPane15 = graph_SBWmortality.GraphPane;
+            myPane15.CurveList.Clear();
+            myPane15.GraphObjList.Clear();
+            graph_SBWmortality.Refresh();
+            GraphPane myPane16 = graph_SBWmigration.GraphPane;
+            myPane16.CurveList.Clear();
+            myPane16.GraphObjList.Clear();
+            graph_SBWmigration.Refresh();
+            //Budworm - END - clear budworm graphs
+
             graph1.Refresh();
             graph2.Refresh();
             graph3.Refresh();
@@ -5977,13 +7120,14 @@ namespace SiteVegCalc
             graph6.Refresh();
             graph9.Refresh();
             graph10.Refresh();
-            repCount = 0;
+            
+            repCount = 1;
 
         }
 
         private void rbVer_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbV2.Checked)
+            if (rbV30.Checked)
             {
                 label9.Enabled = true;
                 tbLeaf.Enabled = true;
@@ -6098,10 +7242,10 @@ namespace SiteVegCalc
                 tbMatAge3.Enabled = false;
                 tbMatAge4.Enabled = false;
                 tbMatAge5.Enabled = false;
-                tbMatAge6.Enabled = false;
+                tbMatAge5.Enabled = false;
 
             }
-            else if (rbV3.Checked)
+            else if (rbV35.Checked)
             {
                 label9.Enabled = true;
                 tbLeaf.Enabled = true;
@@ -6409,13 +7553,13 @@ namespace SiteVegCalc
         private void tbLeaf_Leave(object sender, EventArgs e)
         {
             TextBox testBox = (TextBox)sender;
-            double test;
+            int test;
             try
             {
-                test = double.Parse(testBox.Text);
+                test = int.Parse(testBox.Text);
                 if ((test <= 0))
                 {
-                    string mesg = "Leaf longevity must be greater than 0.";
+                    string mesg = "Leaf longevity must be an integer greater than 0.";
                     MessageBox.Show(mesg, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     testBox.Focus();
                     testBox.SelectAll();
@@ -6423,7 +7567,7 @@ namespace SiteVegCalc
             }
             catch
             {
-                string mesg = "Leaf longevity must be greater than 0.";
+                string mesg = "Leaf longevity must be an integer greater than 0.";
                 MessageBox.Show(mesg, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 testBox.Focus();
                 testBox.SelectAll();
@@ -6584,7 +7728,7 @@ namespace SiteVegCalc
 
         private void menuBatchMode_Click(object sender, EventArgs e)
         {
-            if (menuBatchMode.Checked)
+            if (menuBatchMode.Checked)  //Change checked to unchecked
             {
                 menuBatchMode.Checked = false;
                 label11.Enabled = false;
@@ -6624,13 +7768,13 @@ namespace SiteVegCalc
                 }
 
             }
-            else
+            else  // Change unchecked to checked
             {
                 menuBatchMode.Checked = true;
                 label11.Enabled = true;
                 tbBatch.Enabled = true;
                 checkBoxBatch.Checked = true;
-                if (rbV2.Checked || rbV3.Checked)
+                if (rbV30.Checked || rbV35.Checked)
                 {
                     cbRange.Enabled = true;
                     if (cbRange.Checked)
@@ -6719,12 +7863,14 @@ namespace SiteVegCalc
                 menuOutputLog.Checked = false;
                 checkBoxLog.Checked = false;
                 cbOutputFolder.Enabled = false;
+                tbBaseFileName.Enabled = false;
             }
             else
             {
                 menuOutputLog.Checked = true;
                 checkBoxLog.Checked = true;
                 cbOutputFolder.Enabled = true;
+                tbBaseFileName.Enabled = true;
             }
         }
 
@@ -6992,6 +8138,19 @@ namespace SiteVegCalc
                     GraphPane pane10 = CreateGraphPoints(graph10, "Dead Wood", refArray);
                     graph10.Refresh();
                 }
+                //Budworm
+                // plot graphs
+                else if (graphName == "Budworm Density")
+                {
+                    GraphPane pane5 = CreateGraphPoints(graph_BudwormD, "Budworm Density", refArray);
+                    graph_BudwormD.Refresh();
+                }
+                else if (graphName == "Budworm Count")
+                {
+                    GraphPane pane7 = CreateGraphPoints(graph_BudwormC, "Budworm Count", refArray);
+                    graph_BudwormC.Refresh();
+                }
+                //Budworm - END - plot graphs
             }
 
         }
@@ -7023,6 +8182,16 @@ namespace SiteVegCalc
                     if (age1 > (a.Species.Longevity * effAge4))
                         age1 = a.Species.Longevity * effAge4;
                 }
+                if ((a.Species.Index == 4) && shrub5)
+                {
+                    if (age1 > (a.Species.Longevity * effAge5))
+                        age1 = a.Species.Longevity * effAge5;
+                }
+                if ((a.Species.Index == 5) && shrub6)
+                {
+                    if (age1 > (a.Species.Longevity * effAge6))
+                        age1 = a.Species.Longevity * effAge6;
+                }
                 if ((b.Species.Index == 0) && shrub1)
                 {
                     if (age2 > (b.Species.Longevity * effAge1))
@@ -7042,6 +8211,16 @@ namespace SiteVegCalc
                 {
                     if (age2 > (b.Species.Longevity * effAge4))
                         age2 = b.Species.Longevity * effAge4;
+                } 
+                if ((b.Species.Index == 4) && shrub5)
+                {
+                    if (age2 > (b.Species.Longevity * effAge5))
+                        age2 = b.Species.Longevity * effAge5;
+                }
+                if ((b.Species.Index == 5) && shrub6)
+                {
+                    if (age2 > (b.Species.Longevity * effAge6))
+                        age2 = b.Species.Longevity * effAge6;
                 }
                 if (age1 > age2)
                     return 1;
@@ -9002,6 +10181,288 @@ namespace SiteVegCalc
                 tbOutputFolder.Enabled = false;
         }
 
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            //save graphs
+            GraphPane myPane1 = graph1.GraphPane;
+            string graphFN1 = baseFileName+"_Biomass" + (repCount - 1).ToString() + ".bmp";
+            string outGraph1 = Path.Combine(dirName, graphFN1);
+            myPane1.GetImage().Save(outGraph1);
+
+            GraphPane myPane2 = graph2.GraphPane;
+            string graphFN2 = baseFileName + "_PercentShade" + (repCount - 1).ToString() + ".bmp";
+            string outGraph2 = Path.Combine(dirName, graphFN2);
+            myPane2.GetImage().Save(outGraph2);
+
+            GraphPane myPane3 = graph3.GraphPane;
+            string graphFN3 = baseFileName + "_ShadeClass" + (repCount - 1).ToString() + ".bmp";
+            string outGraph3 = Path.Combine(dirName, graphFN3);
+            myPane3.GetImage().Save(outGraph3);
+
+            GraphPane myPane4 = graph4.GraphPane;
+            string graphFN4 = baseFileName + "_NumCohorts" + (repCount - 1).ToString() + ".bmp";
+            string outGraph4 = Path.Combine(dirName, graphFN4);
+            myPane4.GetImage().Save(outGraph4);
+
+            GraphPane myPane5 = graph_BudwormD.GraphPane;
+            string graphFN5 = baseFileName + "_BudwormDensity" + (repCount - 1).ToString() + ".bmp";
+            string outGraph5 = Path.Combine(dirName, graphFN5);
+            myPane5.GetImage().Save(outGraph5);
+
+            GraphPane myPane6 = graph6.GraphPane;
+            string graphFN6 = baseFileName + "_CohortANPP" + (repCount - 1).ToString() + ".bmp";
+            string outGraph6 = Path.Combine(dirName, graphFN6);
+            myPane6.GetImage().Save(outGraph6);
+
+            GraphPane myPane7 = graph_BudwormC.GraphPane;
+            string graphFN7 = baseFileName + "_BudwormCount" + (repCount - 1).ToString() + ".bmp";
+            string outGraph7 = Path.Combine(dirName, graphFN7);
+            myPane7.GetImage().Save(outGraph7);
+
+            GraphPane myPane8 = graph_EnemyDens.GraphPane;
+            string graphFN8 = baseFileName + "_EnemyDensity" + (repCount - 1).ToString() + ".bmp";
+            string outGraph8 = Path.Combine(dirName, graphFN8);
+            myPane8.GetImage().Save(outGraph8);
+
+            GraphPane myPane9 = graph9.GraphPane;
+            string graphFN9 = baseFileName + "_CohortBiomass" + (repCount - 1).ToString() + ".bmp";
+            string outGraph9 = Path.Combine(dirName, graphFN9);
+            myPane9.GetImage().Save(outGraph9);
+
+            GraphPane myPane10 = graph10.GraphPane;
+            string graphFN10 = baseFileName + "_DeadWoodyBio" + (repCount - 1).ToString() + ".bmp";
+            string outGraph10 = Path.Combine(dirName, graphFN10);
+            myPane10.GetImage().Save(outGraph10);
+
+            GraphPane myPane11 = graph_EnemyCount.GraphPane;
+            string graphFN11 = baseFileName + "_EnemyCount" + (repCount - 1).ToString() + ".bmp";
+            string outGraph11 = Path.Combine(dirName, graphFN11);
+            myPane11.GetImage().Save(outGraph11);
+
+            GraphPane myPane12 = graph_HostFoliage.GraphPane;
+            string graphFN12 = baseFileName + "_HostFoliage" + (repCount - 1).ToString() + ".bmp";
+            string outGraph12 = Path.Combine(dirName, graphFN12);
+            myPane12.GetImage().Save(outGraph12);
+
+            GraphPane myPane13 = graph_PropDefol.GraphPane;
+            string graphFN13 = baseFileName + "_PropDefol" + (repCount - 1).ToString() + ".bmp";
+            string outGraph13 = Path.Combine(dirName, graphFN13);
+            myPane13.GetImage().Save(outGraph13);
+
+            GraphPane myPane14 = graph_LogPopDens.GraphPane;
+            string graphFN14 = baseFileName + "_LogPopDens" + (repCount - 1).ToString() + ".bmp";
+            string outGraph14 = Path.Combine(dirName, graphFN14);
+            myPane14.GetImage().Save(outGraph14);
+        }
+
+        private void budwormToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+            //Budworm - Declare input parameters
+            string budwormStartYear = "0";
+            string budwormrm = "0";
+            string budwormrprimem = "0";
+            string budwormb = "0";
+            string budwormbprime = "0";
+            string budwormc = "0";
+            string budwormcprime = "0";
+            string budwormaprime = "0";
+            string budEnemyDensity0 = "0";
+            string budwormDensity0 = "0";
+            string budwormMaxDensity = "0";
+            string budwormWinterMean = "1";
+            string budwormWinterStdev = "0";
+            string budwormPredationMean = "1";
+            string budwormPredationStdev = "0";
+            string matingA = "0";
+            string matingB = "0";
+            string matingC = "1";
+            string decidProtectDmax1 = "0";
+            string decidProtectDmax2 = "0";
+            string phenolLimitMean = "1";
+            string phenolLimitStdev = "0";
+            string defolFecundityCheck = "1";
+            string growthReductionCheck = "1";
+            string mortalityCheck = "1";
+            string defolLambda = "0.255";
+            string emigrationCheck = "1";
+            string minLDD = "0";
+            string halfLDD = "0";
+            string maxLDD = "0";
+            string maxLDDProp = "0";
+            string positiveFecundCheck = "1";
+            string minSuscAge = "0";
+            string ageMortCheck = "1";
+            string predM = "1";
+            string predN = "1";
+            string preyM = "1";
+            string preyN = "1";
+            //Budworm - END - Declare input parameters
+
+            //Budworm - Read parameter values from text boxes
+            budwormStartYear = (tbBudStartYear.Text);
+            budwormrm = (tbBudrm.Text);
+            budwormrprimem = (tbBudrprimem.Text);
+            budwormb = (tbBudb.Text);
+            budwormbprime = (tbBudbprime.Text);
+            budwormc = (tbBudc.Text);
+            budwormcprime = (tbBudcprime.Text);
+            budwormaprime = (tbBudaprime.Text);
+            budEnemyDensity0 = (tbBudx0.Text);
+            budwormDensity0 =(tbBudy0.Text);
+            budwormMaxDensity = (tbBudMaxDensity.Text);
+            budwormWinterMean = (tbBudWinterMean.Text);
+            budwormWinterStdev = (tbBudWinterStdev.Text);
+            budwormPredationMean = (tbBudPredationMean.Text);
+            budwormPredationStdev =(tbBudPredationStdev.Text);
+            matingA = (tbAlleeShape.Text);
+            matingB = (tbAlleeScale.Text);
+            matingC = (tbMatingC.Text);
+            decidProtectDmax1 = (tbDecidProtectD1.Text);
+            decidProtectDmax2 = (tbDecidProtectD2.Text);
+            phenolLimitMean = (tbBudPhenolMean.Text);
+            phenolLimitStdev = (tbBudPhenolStdev.Text);
+            if (cbDefolFecund.Checked) defolFecundityCheck = "1"; else defolFecundityCheck = "0";
+            if (cbBudGR.Checked) growthReductionCheck = "1"; else growthReductionCheck = "0";
+            if (cbBudmort.Checked) mortalityCheck = "1"; else mortalityCheck = "0";
+            defolLambda = (tbDefolLambda.Text);
+            if (cbEmigration.Checked) emigrationCheck = "1"; else emigrationCheck = "0";
+            minLDD = (tbMinLDD.Text);
+            halfLDD = (tbHalfLDD.Text);
+            maxLDD = (tbMaxLDD.Text);
+            maxLDDProp = (tbMaxLDDProp.Text);
+            if (cbPositiveFecund.Checked) positiveFecundCheck = "1"; else positiveFecundCheck = "0";
+            minSuscAge =(tbMinSuscAge.Text);
+            if (cbAgeMort.Checked) ageMortCheck = "1"; else ageMortCheck = "0";
+            predM = (tbPredM.Text);
+            predN = (tbPredN.Text);
+            preyM = (tbPreyM.Text);
+            preyN = (tbPreyN.Text);
+
+            List<string> paramList = new List<string>();
+            paramList.Add(budwormStartYear);
+            paramList.Add(budwormrm);
+            paramList.Add(budwormrprimem);
+            paramList.Add(budwormb);
+            paramList.Add(budwormbprime);
+            paramList.Add(budwormc);
+            paramList.Add(budwormcprime);
+            paramList.Add(budwormaprime);
+            paramList.Add(budEnemyDensity0);
+            paramList.Add(budwormDensity0);
+            paramList.Add(budwormMaxDensity);
+            paramList.Add(budwormWinterMean);
+            paramList.Add(budwormWinterStdev);
+            paramList.Add(budwormPredationMean);
+            paramList.Add(budwormPredationStdev);
+            paramList.Add(matingA);
+            paramList.Add(matingB);
+            paramList.Add(matingC);
+            paramList.Add(decidProtectDmax1);
+            paramList.Add(decidProtectDmax2);
+            paramList.Add(phenolLimitMean);
+            paramList.Add(phenolLimitStdev);
+            paramList.Add(defolFecundityCheck);
+            paramList.Add(growthReductionCheck);
+            paramList.Add(mortalityCheck);
+            paramList.Add(defolLambda);
+            paramList.Add(emigrationCheck);
+            paramList.Add(minLDD);
+            paramList.Add(halfLDD);
+            paramList.Add(maxLDD);
+            paramList.Add(maxLDDProp);
+            paramList.Add(positiveFecundCheck);
+            paramList.Add(minSuscAge);
+            paramList.Add(ageMortCheck);
+            paramList.Add(predM);
+            paramList.Add(predN);
+            paramList.Add(preyM);
+            paramList.Add(preyN);
+            
+            bool runSave = false;
+            Form4 saveForm = new Form4();
+            saveForm.ShowDialog();
+            runSave = saveForm.cbSave.Checked;
+
+            if (runSave)
+            {
+                string outTextFile = saveForm.tbFileName.Text;
+                StringBuilder sb = new StringBuilder();
+
+                foreach (string s in paramList)
+                {
+                    sb.AppendLine(s);
+                }
+                File.WriteAllText(outTextFile, sb.ToString());
+            }
+
+        }
+
+        private void budwormToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            bool runLoad = false;
+            Form5 loadForm = new Form5();
+            loadForm.ShowDialog();
+            runLoad = loadForm.cbLoad.Checked;
+
+            string fileName = loadForm.tbFileName.Text;
+            StreamReader fileReader;
+            fileReader = new StreamReader(fileName);
+            string line;
+
+            List<string> paramList = new List<string>();
+
+            do
+            {
+                line = fileReader.ReadLine();
+
+                string[] inputList = Regex.Split(line, "\\s+");
+                paramList.Add(inputList[0]);
+
+
+            } while (!fileReader.EndOfStream);
+
+            tbBudStartYear.Text = paramList[0];
+            tbBudrm.Text = paramList[1];
+            tbBudrprimem.Text = paramList[2];
+            tbBudb.Text = paramList[3];
+            tbBudbprime.Text = paramList[4];
+            tbBudc.Text = paramList[5];
+            tbBudcprime.Text = paramList[6];
+            tbBudaprime.Text = paramList[7];
+            tbBudx0.Text = paramList[8];
+            tbBudy0.Text = paramList[9];
+            tbBudMaxDensity.Text = paramList[10];
+            tbBudWinterMean.Text = paramList[11];
+            tbBudWinterStdev.Text = paramList[12];
+            tbBudPredationMean.Text = paramList[13];
+            tbBudPredationStdev.Text = paramList[14];
+            tbAlleeShape.Text = paramList[15];
+            tbAlleeScale.Text = paramList[16];
+            tbMatingC.Text = paramList[17];
+            tbDecidProtectD1.Text = paramList[18];
+            tbDecidProtectD2.Text = paramList[19];
+            tbBudPhenolMean.Text = paramList[20];
+            tbBudPhenolStdev.Text = paramList[21];
+            if (paramList[22] == "1") cbDefolFecund.Checked = true; else cbDefolFecund.Checked = false;
+            if (paramList[23] == "1") cbBudGR.Checked = true; else cbBudGR.Checked = false;
+            if (paramList[24] == "1") cbBudmort.Checked = true; else cbBudmort.Checked = false;
+            tbDefolLambda.Text = paramList[25];
+            if (paramList[26] == "1") cbEmigration.Checked = true; else cbEmigration.Checked = false;
+            tbMinLDD.Text = paramList[27];
+            tbHalfLDD.Text = paramList[28];
+            tbMaxLDD.Text = paramList[29];
+            tbMaxLDDProp.Text = paramList[30];
+            if (paramList[31] == "1") cbPositiveFecund.Checked = true; else cbPositiveFecund.Checked = false;
+            tbMinSuscAge.Text = paramList[32];
+            if (paramList[33] == "1") cbAgeMort.Checked = true; else cbAgeMort.Checked = false;
+            tbPredM.Text = paramList[34];
+            tbPredN.Text = paramList[35];
+            tbPreyM.Text = paramList[36];
+            tbPreyN.Text = paramList[37];
+
+        }
 
         private void cbRandSeed_CheckedChanged(object sender, EventArgs e)
         {
@@ -9016,6 +10477,7 @@ namespace SiteVegCalc
                 tbRandSeed.Enabled = false;
             }
         }
+
 
 
 

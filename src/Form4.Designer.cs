@@ -1,4 +1,4 @@
-﻿namespace SiteVegCalc
+﻿namespace L2_Site_Budworm
 {
     partial class Form4
     {
@@ -109,7 +109,7 @@
             this.Controls.Add(this.tbFileName);
             this.Controls.Add(this.loadButton);
             this.Name = "Form4";
-            this.Text = "Save Species Parameters";
+            this.Text = "Save Parameters";
             this.ResumeLayout(false);
             this.PerformLayout();
 
