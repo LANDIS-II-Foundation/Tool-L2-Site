@@ -3877,7 +3877,7 @@ namespace SiteVegCalc
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
-            this.Text = "LANDIS-II-Site v2.4";
+            this.Text = "LANDIS-II-Site v2.4.1";
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
