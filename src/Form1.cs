@@ -3749,7 +3749,7 @@ namespace SiteVegCalc
                                                 if (rbV2.Checked)
                                                 {
                                                     //mortalityGrowth = Calculations.ComputeGrowthMortalityV2(maxA, paramY, paramR, B_AP, B_PM, bio, mortalityAge, actualANPP);
-                                                    mortalityGrowth = Calculations.ComputeGrowthMortalityV3(actualANPP, maxA, B_AP, 1.0, bio, mortalityAge, 0);
+                                                    mortalityGrowth = Calculations.ComputeGrowthMortalityV3(actualANPP, maxA, B_AP, B_PM, bio, mortalityAge, 0);
 
 
                                                     //  Age-related mortality is discounted from growth-related

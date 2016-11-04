@@ -408,7 +408,7 @@ namespace SiteVegCalc
             this.tbLandMaxBio.Name = "tbLandMaxBio";
             this.tbLandMaxBio.Size = new System.Drawing.Size(50, 20);
             this.tbLandMaxBio.TabIndex = 26;
-            this.tbLandMaxBio.Text = "25535";
+            this.tbLandMaxBio.Text = "24926";
             this.tbLandMaxBio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbLandMaxBio, "Maximum aboveground biomass (kg/ha)");
             // 
@@ -416,9 +416,9 @@ namespace SiteVegCalc
             // 
             this.tbRelBio5.Location = new System.Drawing.Point(79, 136);
             this.tbRelBio5.Name = "tbRelBio5";
-            this.tbRelBio5.Size = new System.Drawing.Size(30, 20);
+            this.tbRelBio5.Size = new System.Drawing.Size(41, 20);
             this.tbRelBio5.TabIndex = 18;
-            this.tbRelBio5.Text = "80";
+            this.tbRelBio5.Text = "60";
             this.tbRelBio5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbRelBio5, "Percent sunlight that defines the lower limit for each shade class (%)");
             // 
@@ -426,9 +426,9 @@ namespace SiteVegCalc
             // 
             this.tbRelBio4.Location = new System.Drawing.Point(79, 114);
             this.tbRelBio4.Name = "tbRelBio4";
-            this.tbRelBio4.Size = new System.Drawing.Size(30, 20);
+            this.tbRelBio4.Size = new System.Drawing.Size(41, 20);
             this.tbRelBio4.TabIndex = 17;
-            this.tbRelBio4.Text = "50";
+            this.tbRelBio4.Text = "37.5";
             this.tbRelBio4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbRelBio4, "Percent sunlight that defines the lower limit for each shade class (%)");
             // 
@@ -436,9 +436,9 @@ namespace SiteVegCalc
             // 
             this.tbRelBio3.Location = new System.Drawing.Point(79, 92);
             this.tbRelBio3.Name = "tbRelBio3";
-            this.tbRelBio3.Size = new System.Drawing.Size(30, 20);
+            this.tbRelBio3.Size = new System.Drawing.Size(41, 20);
             this.tbRelBio3.TabIndex = 16;
-            this.tbRelBio3.Text = "40";
+            this.tbRelBio3.Text = "30";
             this.tbRelBio3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbRelBio3, "Percent sunlight that defines the lower limit for each shade class (%)");
             // 
@@ -446,9 +446,9 @@ namespace SiteVegCalc
             // 
             this.tbRelBio2.Location = new System.Drawing.Point(79, 70);
             this.tbRelBio2.Name = "tbRelBio2";
-            this.tbRelBio2.Size = new System.Drawing.Size(30, 20);
+            this.tbRelBio2.Size = new System.Drawing.Size(41, 20);
             this.tbRelBio2.TabIndex = 15;
-            this.tbRelBio2.Text = "30";
+            this.tbRelBio2.Text = "22.5";
             this.tbRelBio2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbRelBio2, "Percent sunlight that defines the lower limit for each shade class (%)");
             // 
@@ -456,9 +456,9 @@ namespace SiteVegCalc
             // 
             this.tbRelBio1.Location = new System.Drawing.Point(79, 48);
             this.tbRelBio1.Name = "tbRelBio1";
-            this.tbRelBio1.Size = new System.Drawing.Size(30, 20);
+            this.tbRelBio1.Size = new System.Drawing.Size(41, 20);
             this.tbRelBio1.TabIndex = 14;
-            this.tbRelBio1.Text = "15";
+            this.tbRelBio1.Text = "11.25";
             this.tbRelBio1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbRelBio1, "Percent sunlight that defines the lower limit for each shade class (%)");
             // 
@@ -1122,7 +1122,7 @@ namespace SiteVegCalc
             this.tbLongevity.Name = "tbLongevity";
             this.tbLongevity.Size = new System.Drawing.Size(40, 20);
             this.tbLongevity.TabIndex = 11;
-            this.tbLongevity.Text = "130";
+            this.tbLongevity.Text = "230";
             this.tbLongevity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbLongevity, "Species longevity in years");
             this.tbLongevity.Leave += new System.EventHandler(this.tbLongevity_Leave);
@@ -1144,7 +1144,7 @@ namespace SiteVegCalc
             this.tbLongevity2.Name = "tbLongevity2";
             this.tbLongevity2.Size = new System.Drawing.Size(40, 20);
             this.tbLongevity2.TabIndex = 20;
-            this.tbLongevity2.Text = "160";
+            this.tbLongevity2.Text = "200";
             this.tbLongevity2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbLongevity2, "Species longevity in years");
             this.tbLongevity2.Leave += new System.EventHandler(this.tbLongevity_Leave);
@@ -1166,7 +1166,7 @@ namespace SiteVegCalc
             this.tbPower3.Name = "tbPower3";
             this.tbPower3.Size = new System.Drawing.Size(40, 20);
             this.tbPower3.TabIndex = 44;
-            this.tbPower3.Text = "1.0";
+            this.tbPower3.Text = "0.62";
             this.tbPower3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbPower3, "Power coefficient that regulates the steepness of ANPP curve.  A lower value resu" +
         "lts in maximum ANPP being reached faster.");
@@ -1177,7 +1177,7 @@ namespace SiteVegCalc
             this.tbLongevity3.Name = "tbLongevity3";
             this.tbLongevity3.Size = new System.Drawing.Size(40, 20);
             this.tbLongevity3.TabIndex = 29;
-            this.tbLongevity3.Text = "175";
+            this.tbLongevity3.Text = "250";
             this.tbLongevity3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbLongevity3, "Species longevity in years");
             this.tbLongevity3.Leave += new System.EventHandler(this.tbLongevity_Leave);
@@ -1188,7 +1188,7 @@ namespace SiteVegCalc
             this.tbPower2.Name = "tbPower2";
             this.tbPower2.Size = new System.Drawing.Size(40, 20);
             this.tbPower2.TabIndex = 29;
-            this.tbPower2.Text = "0.7";
+            this.tbPower2.Text = "0.62";
             this.tbPower2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbPower2, "Power coefficient that regulates the steepness of ANPP curve.  A lower value resu" +
         "lts in maximum ANPP being reached faster.");
@@ -1221,7 +1221,7 @@ namespace SiteVegCalc
             this.tbPower1.Name = "tbPower1";
             this.tbPower1.Size = new System.Drawing.Size(40, 20);
             this.tbPower1.TabIndex = 14;
-            this.tbPower1.Text = "1.0";
+            this.tbPower1.Text = "0.62";
             this.tbPower1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbPower1, "Power coefficient that regulates the steepness of ANPP curve.  A lower value resu" +
         "lts in maximum ANPP being reached faster.");
@@ -1288,7 +1288,7 @@ namespace SiteVegCalc
             this.tbANPPmax.Name = "tbANPPmax";
             this.tbANPPmax.Size = new System.Drawing.Size(40, 20);
             this.tbANPPmax.TabIndex = 9;
-            this.tbANPPmax.Text = "550";
+            this.tbANPPmax.Text = "615";
             this.tbANPPmax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbANPPmax, "Maximum annual net primary productivity (kg/ha/year)");
             this.tbANPPmax.Leave += new System.EventHandler(this.tbANPPMax_Leave);
@@ -1313,7 +1313,7 @@ namespace SiteVegCalc
             this.tbANPPmax2.Name = "tbANPPmax2";
             this.tbANPPmax2.Size = new System.Drawing.Size(40, 20);
             this.tbANPPmax2.TabIndex = 24;
-            this.tbANPPmax2.Text = "580";
+            this.tbANPPmax2.Text = "606";
             this.tbANPPmax2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbANPPmax2, "Maximum annual net primary productivity (kg/ha/year)");
             this.tbANPPmax2.Leave += new System.EventHandler(this.tbANPPMax_Leave);
@@ -1324,7 +1324,7 @@ namespace SiteVegCalc
             this.tbBioMax2.Name = "tbBioMax2";
             this.tbBioMax2.Size = new System.Drawing.Size(50, 20);
             this.tbBioMax2.TabIndex = 27;
-            this.tbBioMax2.Text = "25320";
+            this.tbBioMax2.Text = "24926";
             this.tbBioMax2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbBioMax2, "Maximum aboveground biomass (kg/ha)");
             this.tbBioMax2.Leave += new System.EventHandler(this.tbBiomassMax_Leave);
@@ -1349,7 +1349,7 @@ namespace SiteVegCalc
             this.tbANPPmax3.Name = "tbANPPmax3";
             this.tbANPPmax3.Size = new System.Drawing.Size(40, 20);
             this.tbANPPmax3.TabIndex = 39;
-            this.tbANPPmax3.Text = "750";
+            this.tbANPPmax3.Text = "624";
             this.tbANPPmax3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbANPPmax3, "Maximum annual net primary productivity (kg/ha/year)");
             this.tbANPPmax3.Leave += new System.EventHandler(this.tbANPPMax_Leave);
@@ -1360,7 +1360,7 @@ namespace SiteVegCalc
             this.tbBioMax3.Name = "tbBioMax3";
             this.tbBioMax3.Size = new System.Drawing.Size(50, 20);
             this.tbBioMax3.TabIndex = 42;
-            this.tbBioMax3.Text = "25535";
+            this.tbBioMax3.Text = "23400";
             this.tbBioMax3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbBioMax3, "Maximum aboveground biomass (kg/ha)");
             this.tbBioMax3.Leave += new System.EventHandler(this.tbBiomassMax_Leave);
@@ -1395,7 +1395,7 @@ namespace SiteVegCalc
             this.tbBioMax.Name = "tbBioMax";
             this.tbBioMax.Size = new System.Drawing.Size(50, 20);
             this.tbBioMax.TabIndex = 12;
-            this.tbBioMax.Text = "17091";
+            this.tbBioMax.Text = "23142";
             this.tbBioMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbBioMax, "Maximum aboveground biomass (kg/ha)");
             this.tbBioMax.Leave += new System.EventHandler(this.tbBiomassMax_Leave);
@@ -1934,7 +1934,7 @@ namespace SiteVegCalc
             this.tbMortShape3.Name = "tbMortShape3";
             this.tbMortShape3.Size = new System.Drawing.Size(40, 20);
             this.tbMortShape3.TabIndex = 74;
-            this.tbMortShape3.Text = "10";
+            this.tbMortShape3.Text = "10.5";
             this.tbMortShape3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMortShape3, "Mortality Curve Shape Parameter (5-25); Determines how quickly age-related mortal" +
         "ity begins");
@@ -1945,7 +1945,7 @@ namespace SiteVegCalc
             this.tbMortShape2.Name = "tbMortShape2";
             this.tbMortShape2.Size = new System.Drawing.Size(40, 20);
             this.tbMortShape2.TabIndex = 72;
-            this.tbMortShape2.Text = "10";
+            this.tbMortShape2.Text = "11";
             this.tbMortShape2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMortShape2, "Mortality Curve Shape Parameter (5-25); Determines how quickly age-related mortal" +
         "ity begins");
@@ -1956,7 +1956,7 @@ namespace SiteVegCalc
             this.tbMortShape1.Name = "tbMortShape1";
             this.tbMortShape1.Size = new System.Drawing.Size(40, 20);
             this.tbMortShape1.TabIndex = 70;
-            this.tbMortShape1.Text = "10";
+            this.tbMortShape1.Text = "10.5";
             this.tbMortShape1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMortShape1, "Mortality Curve Shape Parameter (5-25); Determines how quickly age-related mortal" +
         "ity begins");
@@ -3877,7 +3877,7 @@ namespace SiteVegCalc
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
-            this.Text = "LANDIS-II-Site v2.4.1";
+            this.Text = "LANDIS-II-Site v2.4.2";
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
