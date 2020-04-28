@@ -3488,7 +3488,7 @@ namespace L2_Site_Budworm
                                 double budEnemyDensity = budEnemyDensity0;
                                 double budwormDensity = budwormDensity0;
                                 double budwormCount = 0;
-                                double budEnemyCount = 0;
+                                double enemyCount = 0;
                                 //double sumDefoliation = 0;
                                 double currentHostFoliage = 0;  // Current host foliage by site
                                 double hostFoliage = 0;   // Host foliage by site
@@ -3617,56 +3617,62 @@ namespace L2_Site_Budworm
                                     if ((year - timestep) == budwormStartYear) // at simulation year 0 use density values from the parameter inputs
                                     {
                                         budwormCount = budwormDensity0 * currentHostFoliage;
-                                        budEnemyCount = budEnemyDensity0 * budwormCount;
+                                        enemyCount = budEnemyDensity0 * budwormCount;
                                     }
                                     else if ((year - timestep) < budwormStartYear)
                                     {
                                         budwormCount = 0;
-                                        budEnemyCount = 0;
+                                        enemyCount = 0;
                                     }
                                    
 
                                     // apply stochastic winter survival (3)
                                     double budwormCountSpring = budwormCount * winterSurvival;
-                                    // calculate budworm density (4)
-                                    double budwormDensitySpring = 0;
-                                    if(currentHostFoliage > 0)
-                                        budwormDensitySpring = budwormCountSpring / currentHostFoliage;
-                                    else
-                                    {
-                                        if (budwormCountSpring > 0)
-                                            budwormDensitySpring = budwormMaxDensity;
-                                    }
-                                    // spatial average filter budworm density (5) - not applied in L2-Site
-                                    double budwormDensityL2 = budwormDensitySpring;
 
-                                    //Apply scaling parameters (6)
-                                    double budwormDensityL2Scaled = Math.Pow((budwormDensityL2 / preyM), (1.0 / preyN));
+                                // spatial average filter budworm counts to simulate L2 dispersal (4) - not applied in L2-Site
+                                double filteredBudwormSpring = budwormCountSpring;
 
-                                    // calculate budworm L2 count (7)
-                                    double budwormCountL2 = budwormDensityL2Scaled * currentHostFoliage;
+                                // calculate budworm density (5)
+                                double filteredDensitySpring = 0;
+                                if (currentHostFoliage > 0)
+                                    filteredDensitySpring = filteredBudwormSpring / currentHostFoliage;
+                                else
+                                {
+                                    if (filteredBudwormSpring > 0)
+                                        filteredDensitySpring = budwormMaxDensity;
+                                }
+                                double budwormDensityL2_yt = filteredDensitySpring;
 
-                                    if ((year - timestep) == budwormStartYear) // at simulation year 0 use density values from the parameter inputs
-                                    {
-                                        budEnemyCount = budEnemyDensity0 * budwormCountSpring;
-                                    }
-                                    else if ((year - timestep) < budwormStartYear)
-                                    {
-                                        budEnemyCount = 0;
-                                    }
+                                // spatial filter-average to simulate natural enemy dispersal (6)
+                                double filteredEnemyCount = enemyCount;
 
-                                    // calculate enemy density (8)
-                                    double enemyDensitySpring = 0;
+                                 // Rescale budworm density (7)
+                                 double budwormDensityL2Scaled = Math.Pow((budwormDensityL2_yt / preyM), (1.0 / preyN));
+
+                                 // Convert L2 budworm density to counts (8)
+                                 double budwormCountL2 = budwormDensityL2Scaled * currentHostFoliage;
+
+                                if ((year - timestep) == budwormStartYear) // at simulation year 0 use density values from the parameter inputs
+                                {
+                                    enemyCount = budEnemyDensity0 * budwormCountSpring;
+                                }
+                                else if ((year - timestep) < budwormStartYear)
+                                {
+                                    enemyCount = 0;
+                                }
+
+                                    // Calculate spring enemy density (9)
+                                    double enemyDensitySpring_xt = 0;
                                     if (budwormCountSpring > 0)
-                                        enemyDensitySpring = budEnemyCount / budwormCountSpring;
-                                    //Apply scaling parameters (9)
-                                    double enemyDensitySpringScaled = Math.Pow((enemyDensitySpring / predM), (1.0 / predN));
+                                    enemyDensitySpring_xt = enemyCount / budwormCountSpring;
+                                    // Rescale enemy density (10)
+                                    double enemyDensitySpringScaled = Math.Pow((enemyDensitySpring_xt / predM), (1.0 / predN));
      
-                                    // calculate mating effect (10a)
+                                    // calculate mating effect (11a)
                                     //double alleeEffect = Calculations.HillFunction(alleeShape, alleeHalfSat, budwormDensityL2);
-                                    double matingEffect = Calculations.ProportionMatedFunction(matingA, matingB, matingC, budwormDensityL2);
+                                    double matingEffect = Calculations.ProportionMatedFunction(matingA, matingB, matingC, budwormDensityL2_yt);
 
-                                    // calculate deciduous protection effect (10b)
+                                    // calculate deciduous protection effect (11b)
                                     double decidProtect1 = 0;
                                     double decidProtect2 = 0;
                                     if (siteBiomass > 0)
@@ -3675,25 +3681,26 @@ namespace L2_Site_Budworm
                                         decidProtect2 = decidBiomass / siteBiomass * decidProtectDmax2;  // parasite community composition effect
                                     }
 
-                                    // recruitment functions (11)
-                                    double ryx = 1 - Math.Exp((-1 * budwormb * budwormDensityL2Scaled) - decidProtect2);
-                                    double rxy = Math.Exp(-1 * budwormc * enemyDensitySpringScaled);
-                                    double rt = budwormrm * ryx * rxy;
+                                    // recruitment functions (12)
+                                    double ryx = 1 - Math.Exp((-1 * budwormb * budwormDensityL2_yt) - decidProtect2); // confirmed with spreadsheet
+                                    double rxy = Math.Exp(-1 * budwormc * enemyDensitySpring_xt); // confirmed with spreadsheet
+                                    double rt = budwormrm * ryx * rxy;  //confirmed with spreadsheet
                                     double fecundity = 216.8;
 
                                     // calculate r't (rprimet) without foliage dependence
-                                    double rprimeyx = Math.Exp((-1 * (budwormbprime + decidProtect1) * Math.Pow(budwormDensityL2Scaled, budwormaprime)));
-                                    double rprimexy = Math.Exp(-1 * (budwormcprime * enemyDensitySpringScaled));
-                                    double rprimet = fecundity * budwormrprimem * rprimeyx * rprimexy * matingEffect;
+                                    double rprimeyx = Math.Exp((-1 * (budwormbprime + decidProtect1) * Math.Pow(budwormDensityL2_yt, budwormaprime)));  //confirmed with spreadsheet
+                                    double rprimexy = Math.Exp(-1 * (budwormcprime * enemyDensitySpring_xt));  //confirmed with spreadsheet
+                                    double rprimet = fecundity * budwormrprimem * rprimeyx * rprimexy * matingEffect;  //confirmed with spreadsheet
 
                                     // Host Tree Damage
-                                    // Calculate defoliation (12)
+                                    // Calculate defoliation (15)
                                     // Use Regniere and You 1991; Eq. 13
                                     //double defolPopulationComp = 0.385; // Product of indivudual instar [lambda + (1-lambda)*S]
                                     double allLarvalSurvival = rprimeyx * rprimexy;
-                                    double defolPopulationComp = (defolLambda + (1.0-defolLambda)* allLarvalSurvival); // Product of indivudual instar [lambda + (1-lambda)*S]
+                                    //double defolPopulationComp = (defolLambda + (1.0-defolLambda)* allLarvalSurvival); // Product of indivudual instar [lambda + (1-lambda)*S]
+                                    double defolPopulationComp = (defolLambda + (1.0 - defolLambda) * 1);  //confirmed with spreadsheet if defolLambda = 0.255
                                     double etaDefol = 870; // mg foliage removed per budworm
-                                    double pctDefol = 100 * etaDefol * 0.001 * budwormDensityL2 * defolPopulationComp; //convert mg to g (0.001)
+                                    double pctDefol = 100 * etaDefol * 0.001 * budwormDensityL2_yt * defolPopulationComp; //convert mg to g (0.001)
                                     // cap defoliation at 100%
                                     pctDefol = Math.Min(pctDefol, 100);
                                     // do not allow damage if no budworm
@@ -3702,35 +3709,35 @@ namespace L2_Site_Budworm
 
                                     // calculate r''t (rprime2t) with defoliation effect on fecundity
                                     // calculate defoliation effect on fecundity
-                                    double rprimeZ = (-0.0054 * pctDefol + 1); //Nealis & Regniere 2004, Fig 2
+                                    double rprimeZ = Calculations.CalculateRprimeZ(pctDefol); //Nealis & Regniere 2004, Fig 2
 
-                                    double rprime2t = fecundity * budwormrprimem * rprimeZ * rprimeyx * rprimexy * matingEffect;
+                                    double rprime2t = fecundity * budwormrprimem * rprimeZ * rprimeyx * rprimexy * matingEffect;  //confirmed with spreadsheet
 
-                                    // calculate enemy density following recruitment (11)
-                                    double enemyDensitySummer = enemyDensitySpring * rt;
+                                    // calculate enemy density following recruitment (12)
+                                    double enemyDensitySummer = enemyDensitySpringScaled * rt;
 
-                                    // calculate budworm density following recruitment 11)
+                                    // calculate budworm density following recruitment 12)
                                     double budwormDensitySummer = 0;
                                     if (cbDefolFecund.Checked)  // Defoliation-adjusted fecundity
                                     {
                                         if (year < timestep)
-                                            budwormDensitySummer = Math.Max(budwormDensitySpring * rprime2t, budwormDensity0); // Don't allow to go to 0 during spin-up
+                                            budwormDensitySummer = Math.Max(budwormDensityL2_yt * rprime2t, budwormDensity0); // Don't allow to go to 0 during spin-up
                                         else
-                                            budwormDensitySummer = Math.Max(budwormDensitySpring * rprime2t, 0);
+                                            budwormDensitySummer = Math.Max(budwormDensityL2_yt * rprime2t, 0);
                                     }
                                     else  // No Defoliation-adjusted fecundity
                                     {
                                         if (year < timestep)
-                                            budwormDensitySummer = Math.Max(budwormDensitySpring * rprimet, budwormDensity0); // Don't allow to go to 0 during spin-up
+                                            budwormDensitySummer = Math.Max(budwormDensityL2_yt * rprimet, budwormDensity0); // Don't allow to go to 0 during spin-up
                                         else
-                                            budwormDensitySummer = Math.Max(budwormDensitySpring * rprimet, 0);
+                                            budwormDensitySummer = Math.Max(budwormDensityL2_yt * rprimet, 0);
                                     }
 
                                    
                                     // calculate number of budworm and enemies (13)
                                     double budwormCountSummer = budwormDensitySummer * currentHostFoliage;
                                     double enemyCountWinter = enemyDensitySummer * budwormCountSummer;
-                                    budEnemyCount = enemyCountWinter;
+                                    enemyCount = enemyCountWinter;
 
                                     // apply stochastic predation (14a)
                                     double budwormCountFall = budwormCountSummer * randPredation;
@@ -5711,9 +5718,9 @@ namespace L2_Site_Budworm
                                         cohortArray2[(year - (timestep))] = cohort2Bio;
                                         deadWoodArray[(year - (timestep))] = deadWoodyBio;
                                         //Budworm - add values to arrays
-                                        budwormDensArray[(year - (timestep))] = budwormDensitySpring;
+                                        budwormDensArray[(year - (timestep))] = filteredDensitySpring;
                                         budwormCountArray[(year - (timestep))] = budwormCountSpring;
-                                        budEnemyDensArray[(year - (timestep))] = enemyDensitySpring;
+                                        budEnemyDensArray[(year - (timestep))] = enemyDensitySpring_xt;
                                         budEnemyCountArray[(year - (timestep))] = enemyCountWinter;
                                         pctDefoliationArray[(year - (timestep))] = (pctDefol/100);
                                         siteDefoliationArray[(year - (timestep))] = siteDefol;
@@ -5740,38 +5747,39 @@ namespace L2_Site_Budworm
 
                                     cohortList = newCohortList;
                                     //Budworm
-                                    // Add Emigration and Immigration functions - FIXME
+                                    // Add Emigration and Immigration functions
                                     // Calculate LDD/SDD ratio (18)
                                     double LDDHabitat = 0;
                                     double LDDFlight = 0;
                                     double LDDRatio = 0;
                                     if (cbEmigration.Checked)
                                     {
-                                        if ((siteDefol > minLDD) && (siteDefol <= halfLDD))
+                                        double m = 0;
+                                        double b = 1;
+                                        if (siteDefol < minLDD)
+                                            b = 0;
+                                        else if ((siteDefol > minLDD) && (siteDefol <= halfLDD))
                                         {
-                                            double m1 = 0;
                                             if ((halfLDD - minLDD) > 0)
                                             {
-                                                m1 = 0.5 / (halfLDD - minLDD);
+                                                m = 0.5 / (halfLDD - minLDD);
                                             }
-                                            double b1 = 0.5 - (m1 * halfLDD);
-                                            LDDHabitat = m1 * siteDefol + b1;
+                                            b = 0.5 - (m * halfLDD);
                                         }
                                         else if ((siteDefol > halfLDD) && (siteDefol <= maxLDD))
                                         {
-                                            double m2 = 0;
                                             if ((maxLDD - halfLDD) > 0)
                                             {
-                                                m2 = 0.5 / (maxLDD - halfLDD);
+                                                m = 0.5 / (maxLDD - halfLDD);
                                             }
-                                            double b2 = 1.0 - (m2 * maxLDD);
-                                            LDDHabitat = m2 * siteDefol + b2;
+                                            b = 1.0 - (m * maxLDD);
                                         }
-                                        else if (siteDefol > maxLDD)
-                                            LDDHabitat = 1.0;
+                                        LDDHabitat = m * siteDefol + b;  //confirmed with spreadsheet
+                                        //if (siteDefol > maxLDD)
+                                        //    LDDHabitat = 1.0;
 
-                                        double slope = (maxLDDProp - (1 - maxLDDProp)) / (1.0 - 0.46);
-                                        double intercept = maxLDDProp - slope;
+                                        double slope = (maxLDDProp - (1 - maxLDDProp)) / (1.0 - 0.46);  //confirmed with spreadsheet
+                                        double intercept = maxLDDProp - slope;  //confirmed with spreadsheet
                                         if (cbPositiveFecund.Checked)
                                         {
                                             if (rprimeZ < 0.46)
@@ -5779,7 +5787,7 @@ namespace L2_Site_Budworm
                                             else
                                                 LDDFlight = slope * rprimeZ + intercept;
                                         }
-                                        else
+                                        else  // confirmed with spreadsheet
                                         {
                                             double slope2 = (-1.0) * slope;
                                             double intercept2 = (-1.0) * intercept + 1.0;

@@ -3404,7 +3404,7 @@ namespace L2_Site_Budworm
             this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1074, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1091, 24);
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -5535,7 +5535,7 @@ namespace L2_Site_Budworm
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1091, 782);
+            this.ClientSize = new System.Drawing.Size(1108, 782);
             this.Controls.Add(this.cbRandSeed);
             this.Controls.Add(this.label99);
             this.Controls.Add(this.tbRandSeed);
@@ -5562,7 +5562,7 @@ namespace L2_Site_Budworm
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
-            this.Text = "LANDIS-II-Site-Budworm v6.18";
+            this.Text = "LANDIS-II-Site-Budworm v6.20";
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);

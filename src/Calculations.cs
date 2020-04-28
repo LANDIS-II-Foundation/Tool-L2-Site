@@ -263,7 +263,7 @@ namespace L2_Site_Budworm
         // 3-parameter mating effect
         public static double ProportionMatedFunction(double a, double b, double c, double x)
         {
-            double y = 1.0 - Math.Exp(-1.0 * Math.Pow(a,c) * x - b);
+            double y = 1.0 - Math.Exp(-1.0 * a * Math.Pow(x,c) - b);  // Confirmed with spreadsheet
             return y;
         }
         public static double MinNonZeroInArray(double[] inputArray)
@@ -286,5 +286,12 @@ namespace L2_Site_Budworm
             }
             return min;
         }
+        //Calculate rprimez
+        //Nealis & Regniere 2004, Fig 2
+        public static double CalculateRprimeZ(double pctDefoliation)
+        {
+            return (-0.0054 * pctDefoliation + 1);  // confirmed with spreadsheet
+        }
+
     }
 }
