@@ -578,7 +578,7 @@ namespace L2_Site_Budworm
             // 
             this.tbRelBio5.Location = new System.Drawing.Point(79, 136);
             this.tbRelBio5.Name = "tbRelBio5";
-            this.tbRelBio5.Size = new System.Drawing.Size(30, 20);
+            this.tbRelBio5.Size = new System.Drawing.Size(41, 20);
             this.tbRelBio5.TabIndex = 18;
             this.tbRelBio5.Text = "60";
             this.tbRelBio5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -588,7 +588,7 @@ namespace L2_Site_Budworm
             // 
             this.tbRelBio4.Location = new System.Drawing.Point(79, 114);
             this.tbRelBio4.Name = "tbRelBio4";
-            this.tbRelBio4.Size = new System.Drawing.Size(30, 20);
+            this.tbRelBio4.Size = new System.Drawing.Size(41, 20);
             this.tbRelBio4.TabIndex = 17;
             this.tbRelBio4.Text = "37.5";
             this.tbRelBio4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -598,7 +598,7 @@ namespace L2_Site_Budworm
             // 
             this.tbRelBio3.Location = new System.Drawing.Point(79, 92);
             this.tbRelBio3.Name = "tbRelBio3";
-            this.tbRelBio3.Size = new System.Drawing.Size(30, 20);
+            this.tbRelBio3.Size = new System.Drawing.Size(41, 20);
             this.tbRelBio3.TabIndex = 16;
             this.tbRelBio3.Text = "30";
             this.tbRelBio3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -608,7 +608,7 @@ namespace L2_Site_Budworm
             // 
             this.tbRelBio2.Location = new System.Drawing.Point(79, 70);
             this.tbRelBio2.Name = "tbRelBio2";
-            this.tbRelBio2.Size = new System.Drawing.Size(30, 20);
+            this.tbRelBio2.Size = new System.Drawing.Size(41, 20);
             this.tbRelBio2.TabIndex = 15;
             this.tbRelBio2.Text = "22.5";
             this.tbRelBio2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -618,7 +618,7 @@ namespace L2_Site_Budworm
             // 
             this.tbRelBio1.Location = new System.Drawing.Point(79, 48);
             this.tbRelBio1.Name = "tbRelBio1";
-            this.tbRelBio1.Size = new System.Drawing.Size(30, 20);
+            this.tbRelBio1.Size = new System.Drawing.Size(41, 20);
             this.tbRelBio1.TabIndex = 14;
             this.tbRelBio1.Text = "11.25";
             this.tbRelBio1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
