@@ -3,7 +3,7 @@
   <asmv1:assemblyIdentity name="L2_Site_Budworm.exe" version="1.0.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="L2_Site_Budworm" version="2.5.0.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="L2_Site_Budworm" version="2.5.2.0" language="neutral" processorArchitecture="msil" />
     <commandLine file="L2_Site_Budworm.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -58,13 +58,13 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="L2_Site_Budworm.exe" size="268288">
-      <assemblyIdentity name="L2_Site_Budworm" version="2.5.0.0" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="L2_Site_Budworm" version="2.5.2.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>j9BVepRvBtUqsWDD09hpz0Up5jg=</dsig:DigestValue>
+        <dsig:DigestValue>Mv7C0SIjL3TPMKcVJdglJJFkmF0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

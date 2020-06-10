@@ -3647,7 +3647,7 @@ namespace L2_Site_Budworm
                                 double budwormDensityL2Scaled = Math.Pow((budwormDensityL2_yt / preyM), (1.0 / preyN));
 
                                 // Convert L2 budworm density to counts (8)
-                                double budwormCountL2 = budwormDensityL2Scaled * currentHostFoliage;
+                                double budwormCountL2 = budwormDensityL2_yt * currentHostFoliage;
 
                                 if ((year - timestep) == budwormStartYear) // at simulation year 0 use density values from the parameter inputs
                                 {
