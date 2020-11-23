@@ -1379,7 +1379,7 @@ namespace L2_Site_Budworm
             this.tbSEC.Name = "tbSEC";
             this.tbSEC.Size = new System.Drawing.Size(40, 20);
             this.tbSEC.TabIndex = 5;
-            this.tbSEC.Text = "0.040";
+            this.tbSEC.Text = "0.050";
             this.tbSEC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbSEC, "Species establishment probability (0-1)");
             this.tbSEC.Leave += new System.EventHandler(this.tbEstab_Leave);
@@ -1391,7 +1391,7 @@ namespace L2_Site_Budworm
             this.tbSEC2.Name = "tbSEC2";
             this.tbSEC2.Size = new System.Drawing.Size(40, 20);
             this.tbSEC2.TabIndex = 10;
-            this.tbSEC2.Text = "0.098";
+            this.tbSEC2.Text = "0.067";
             this.tbSEC2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbSEC2, "Species establishment probability (0-1)");
             this.tbSEC2.Leave += new System.EventHandler(this.tbEstab_Leave);
@@ -1402,7 +1402,7 @@ namespace L2_Site_Budworm
             this.tbSEC3.Name = "tbSEC3";
             this.tbSEC3.Size = new System.Drawing.Size(40, 20);
             this.tbSEC3.TabIndex = 15;
-            this.tbSEC3.Text = "0.093";
+            this.tbSEC3.Text = "0.080";
             this.tbSEC3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbSEC3, "Species establishment probability (0-1)");
             this.tbSEC3.Leave += new System.EventHandler(this.tbEstab_Leave);
@@ -1453,7 +1453,7 @@ namespace L2_Site_Budworm
             this.tbLeaf2.Name = "tbLeaf2";
             this.tbLeaf2.Size = new System.Drawing.Size(40, 20);
             this.tbLeaf2.TabIndex = 22;
-            this.tbLeaf2.Text = "11";
+            this.tbLeaf2.Text = "4";
             this.tbLeaf2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbLeaf2, "Average longevity of a leaf or needle (years)");
             this.tbLeaf2.Leave += new System.EventHandler(this.tbLeaf_Leave);
@@ -1681,7 +1681,7 @@ namespace L2_Site_Budworm
             this.tbANPPmax.Name = "tbANPPmax";
             this.tbANPPmax.Size = new System.Drawing.Size(40, 20);
             this.tbANPPmax.TabIndex = 9;
-            this.tbANPPmax.Text = "391";
+            this.tbANPPmax.Text = "606";
             this.tbANPPmax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbANPPmax, "Maximum annual net primary productivity (kg/ha/year)");
             this.tbANPPmax.Leave += new System.EventHandler(this.tbANPPMax_Leave);
@@ -1705,7 +1705,7 @@ namespace L2_Site_Budworm
             this.tbANPPmax2.Name = "tbANPPmax2";
             this.tbANPPmax2.Size = new System.Drawing.Size(40, 20);
             this.tbANPPmax2.TabIndex = 24;
-            this.tbANPPmax2.Text = "379";
+            this.tbANPPmax2.Text = "625";
             this.tbANPPmax2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbANPPmax2, "Maximum annual net primary productivity (kg/ha/year)");
             this.tbANPPmax2.Leave += new System.EventHandler(this.tbANPPMax_Leave);
@@ -1740,7 +1740,7 @@ namespace L2_Site_Budworm
             this.tbANPPmax3.Name = "tbANPPmax3";
             this.tbANPPmax3.Size = new System.Drawing.Size(40, 20);
             this.tbANPPmax3.TabIndex = 39;
-            this.tbANPPmax3.Text = "378";
+            this.tbANPPmax3.Text = "624";
             this.tbANPPmax3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbANPPmax3, "Maximum annual net primary productivity (kg/ha/year)");
             this.tbANPPmax3.Leave += new System.EventHandler(this.tbANPPMax_Leave);
@@ -2178,8 +2178,9 @@ namespace L2_Site_Budworm
             this.tbSppName4.Name = "tbSppName4";
             this.tbSppName4.Size = new System.Drawing.Size(60, 20);
             this.tbSppName4.TabIndex = 35;
-            this.tbSppName4.Text = "poputre";
+            this.tbSppName4.Text = "poputrem";
             this.toolTip1.SetToolTip(this.tbSppName4, "Species name (no restrictions)");
+            this.tbSppName4.TextChanged += new System.EventHandler(this.tbSppName4_TextChanged);
             // 
             // tbLeaf4
             // 
@@ -2233,7 +2234,7 @@ namespace L2_Site_Budworm
             this.tbANPPmax4.Name = "tbANPPmax4";
             this.tbANPPmax4.Size = new System.Drawing.Size(40, 20);
             this.tbANPPmax4.TabIndex = 54;
-            this.tbANPPmax4.Text = "330";
+            this.tbANPPmax4.Text = "594";
             this.tbANPPmax4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbANPPmax4, "Maximum annual net primary productivity (kg/ha/year)");
             this.tbANPPmax4.Leave += new System.EventHandler(this.tbANPPMax_Leave);
@@ -2244,7 +2245,7 @@ namespace L2_Site_Budworm
             this.tbPower4.Name = "tbPower4";
             this.tbPower4.Size = new System.Drawing.Size(40, 20);
             this.tbPower4.TabIndex = 59;
-            this.tbPower4.Text = "0.62";
+            this.tbPower4.Text = "0.55";
             this.tbPower4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbPower4, "Power coefficient that regulates the steepness of ANPP curve.  A lower value resu" +
         "lts in maximum ANPP being reached faster.");
@@ -2296,7 +2297,7 @@ namespace L2_Site_Budworm
             this.tbSEC4.Name = "tbSEC4";
             this.tbSEC4.Size = new System.Drawing.Size(40, 20);
             this.tbSEC4.TabIndex = 20;
-            this.tbSEC4.Text = "0.067";
+            this.tbSEC4.Text = "0.055";
             this.tbSEC4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbSEC4, "Species establishment probability (0-1)");
             this.tbSEC4.Leave += new System.EventHandler(this.tbEstab_Leave);
@@ -2385,7 +2386,7 @@ namespace L2_Site_Budworm
             this.tbMatAge3.Name = "tbMatAge3";
             this.tbMatAge3.Size = new System.Drawing.Size(40, 20);
             this.tbMatAge3.TabIndex = 44;
-            this.tbMatAge3.Text = "15";
+            this.tbMatAge3.Text = "30";
             this.tbMatAge3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMatAge3, "Reproductive Maturity Age");
             // 
@@ -2867,7 +2868,7 @@ namespace L2_Site_Budworm
             this.tbMaxVegAge5.Name = "tbMaxVegAge5";
             this.tbMaxVegAge5.Size = new System.Drawing.Size(40, 20);
             this.tbMaxVegAge5.TabIndex = 70;
-            this.tbMaxVegAge5.Text = "100";
+            this.tbMaxVegAge5.Text = "175";
             this.tbMaxVegAge5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMaxVegAge5, "Maximum Age of Vegetative Reproduction (Resprout)");
             // 
@@ -2887,7 +2888,7 @@ namespace L2_Site_Budworm
             this.tbVegProb5.Name = "tbVegProb5";
             this.tbVegProb5.Size = new System.Drawing.Size(40, 20);
             this.tbVegProb5.TabIndex = 68;
-            this.tbVegProb5.Text = "0.5";
+            this.tbVegProb5.Text = "1.0";
             this.tbVegProb5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbVegProb5, "Vegetative Reproduction Probability (0-1)");
             // 
@@ -2898,7 +2899,7 @@ namespace L2_Site_Budworm
             this.tbMatAge5.Name = "tbMatAge5";
             this.tbMatAge5.Size = new System.Drawing.Size(40, 20);
             this.tbMatAge5.TabIndex = 67;
-            this.tbMatAge5.Text = "25";
+            this.tbMatAge5.Text = "10";
             this.tbMatAge5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMatAge5, "Reproductive Maturity Age");
             // 
@@ -2908,7 +2909,7 @@ namespace L2_Site_Budworm
             this.tbDecay5.Name = "tbDecay5";
             this.tbDecay5.Size = new System.Drawing.Size(40, 20);
             this.tbDecay5.TabIndex = 66;
-            this.tbDecay5.Text = "0.080";
+            this.tbDecay5.Text = "0.042";
             this.tbDecay5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbDecay5, "Woody biomass decay rate (proportion/year)");
             // 
@@ -2929,7 +2930,7 @@ namespace L2_Site_Budworm
             this.tbShadeTol5.Name = "tbShadeTol5";
             this.tbShadeTol5.Size = new System.Drawing.Size(40, 20);
             this.tbShadeTol5.TabIndex = 64;
-            this.tbShadeTol5.Text = "2";
+            this.tbShadeTol5.Text = "1";
             this.tbShadeTol5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbShadeTol5, "Shade tolerance class (1-5)");
             this.tbShadeTol5.Leave += new System.EventHandler(this.tbShadeTol_Leave);
@@ -2940,7 +2941,7 @@ namespace L2_Site_Budworm
             this.tbLongevity5.Name = "tbLongevity5";
             this.tbLongevity5.Size = new System.Drawing.Size(40, 20);
             this.tbLongevity5.TabIndex = 63;
-            this.tbLongevity5.Text = "100";
+            this.tbLongevity5.Text = "175";
             this.tbLongevity5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbLongevity5, "Species longevity in years");
             this.tbLongevity5.Leave += new System.EventHandler(this.tbLongevity_Leave);
@@ -2951,7 +2952,7 @@ namespace L2_Site_Budworm
             this.tbSppName5.Name = "tbSppName5";
             this.tbSppName5.Size = new System.Drawing.Size(60, 20);
             this.tbSppName5.TabIndex = 61;
-            this.tbSppName5.Text = "Spp5";
+            this.tbSppName5.Text = "pinubank";
             this.toolTip1.SetToolTip(this.tbSppName5, "Species name (no restrictions)");
             // 
             // tbLeaf5
@@ -2960,7 +2961,7 @@ namespace L2_Site_Budworm
             this.tbLeaf5.Name = "tbLeaf5";
             this.tbLeaf5.Size = new System.Drawing.Size(40, 20);
             this.tbLeaf5.TabIndex = 65;
-            this.tbLeaf5.Text = "1";
+            this.tbLeaf5.Text = "2.3";
             this.tbLeaf5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbLeaf5, "Average longevity of a leaf or needle (years)");
             this.tbLeaf5.Leave += new System.EventHandler(this.tbLeaf_Leave);
@@ -3075,7 +3076,7 @@ namespace L2_Site_Budworm
             this.tbMortShape5.Name = "tbMortShape5";
             this.tbMortShape5.Size = new System.Drawing.Size(40, 20);
             this.tbMortShape5.TabIndex = 87;
-            this.tbMortShape5.Text = "10";
+            this.tbMortShape5.Text = "9.8";
             this.tbMortShape5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbMortShape5, "Mortality Curve Shape Parameter (5-25); Determines how quickly age-related mortal" +
         "ity begins");
@@ -3110,7 +3111,7 @@ namespace L2_Site_Budworm
             this.tbBioMax5.Name = "tbBioMax5";
             this.tbBioMax5.Size = new System.Drawing.Size(50, 20);
             this.tbBioMax5.TabIndex = 79;
-            this.tbBioMax5.Text = "20000";
+            this.tbBioMax5.Text = "23500";
             this.tbBioMax5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbBioMax5, "Maximum aboveground biomass (kg/ha)");
             this.tbBioMax5.Leave += new System.EventHandler(this.tbBiomassMax_Leave);
@@ -3121,7 +3122,7 @@ namespace L2_Site_Budworm
             this.tbANPPmax5.Name = "tbANPPmax5";
             this.tbANPPmax5.Size = new System.Drawing.Size(40, 20);
             this.tbANPPmax5.TabIndex = 78;
-            this.tbANPPmax5.Text = "500";
+            this.tbANPPmax5.Text = "666";
             this.tbANPPmax5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbANPPmax5, "Maximum annual net primary productivity (kg/ha/year)");
             this.tbANPPmax5.Leave += new System.EventHandler(this.tbANPPMax_Leave);
@@ -3132,7 +3133,7 @@ namespace L2_Site_Budworm
             this.tbPower5.Name = "tbPower5";
             this.tbPower5.Size = new System.Drawing.Size(40, 20);
             this.tbPower5.TabIndex = 81;
-            this.tbPower5.Text = "1.0";
+            this.tbPower5.Text = "0.62";
             this.tbPower5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbPower5, "Power coefficient that regulates the steepness of ANPP curve.  A lower value resu" +
         "lts in maximum ANPP being reached faster.");
@@ -3252,7 +3253,7 @@ namespace L2_Site_Budworm
             this.tbSEC5.Name = "tbSEC5";
             this.tbSEC5.Size = new System.Drawing.Size(40, 20);
             this.tbSEC5.TabIndex = 25;
-            this.tbSEC5.Text = "0.0";
+            this.tbSEC5.Text = "0.048";
             this.tbSEC5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.tbSEC5, "Species establishment probability (0-1)");
             this.tbSEC5.Leave += new System.EventHandler(this.tbEstab_Leave);
@@ -4384,7 +4385,7 @@ namespace L2_Site_Budworm
             this.tbMatingC.Name = "tbMatingC";
             this.tbMatingC.Size = new System.Drawing.Size(30, 20);
             this.tbMatingC.TabIndex = 133;
-            this.tbMatingC.Text = "1";
+            this.tbMatingC.Text = "0";
             this.tbMatingC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tbBudMaxDensity
@@ -4411,7 +4412,7 @@ namespace L2_Site_Budworm
             this.tbDecidProtectD1.Name = "tbDecidProtectD1";
             this.tbDecidProtectD1.Size = new System.Drawing.Size(30, 20);
             this.tbDecidProtectD1.TabIndex = 130;
-            this.tbDecidProtectD1.Text = "1.0";
+            this.tbDecidProtectD1.Text = "0";
             this.tbDecidProtectD1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label100
@@ -4438,7 +4439,7 @@ namespace L2_Site_Budworm
             this.tbPreyM.Name = "tbPreyM";
             this.tbPreyM.Size = new System.Drawing.Size(30, 20);
             this.tbPreyM.TabIndex = 127;
-            this.tbPreyM.Text = "1.67";
+            this.tbPreyM.Text = "1.0";
             this.tbPreyM.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label98
@@ -4562,7 +4563,7 @@ namespace L2_Site_Budworm
             this.tbMaxLDDProp.Name = "tbMaxLDDProp";
             this.tbMaxLDDProp.Size = new System.Drawing.Size(30, 20);
             this.tbMaxLDDProp.TabIndex = 113;
-            this.tbMaxLDDProp.Text = "0.80";
+            this.tbMaxLDDProp.Text = "0.61";
             this.tbMaxLDDProp.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label63
@@ -4608,7 +4609,7 @@ namespace L2_Site_Budworm
             this.tbMaxLDD.Name = "tbMaxLDD";
             this.tbMaxLDD.Size = new System.Drawing.Size(30, 20);
             this.tbMaxLDD.TabIndex = 108;
-            this.tbMaxLDD.Text = "0.80";
+            this.tbMaxLDD.Text = "0.9";
             this.tbMaxLDD.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label91
@@ -4626,7 +4627,7 @@ namespace L2_Site_Budworm
             this.tbHalfLDD.Name = "tbHalfLDD";
             this.tbHalfLDD.Size = new System.Drawing.Size(30, 20);
             this.tbHalfLDD.TabIndex = 106;
-            this.tbHalfLDD.Text = "0.5";
+            this.tbHalfLDD.Text = "0.85";
             this.tbHalfLDD.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label90
@@ -4644,7 +4645,7 @@ namespace L2_Site_Budworm
             this.tbMinLDD.Name = "tbMinLDD";
             this.tbMinLDD.Size = new System.Drawing.Size(30, 20);
             this.tbMinLDD.TabIndex = 104;
-            this.tbMinLDD.Text = "0.25";
+            this.tbMinLDD.Text = "0.7";
             this.tbMinLDD.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label89
@@ -4703,6 +4704,8 @@ namespace L2_Site_Budworm
             // cbDefolFecund
             // 
             this.cbDefolFecund.AutoSize = true;
+            this.cbDefolFecund.Checked = true;
+            this.cbDefolFecund.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbDefolFecund.Location = new System.Drawing.Point(6, 539);
             this.cbDefolFecund.Name = "cbDefolFecund";
             this.cbDefolFecund.Size = new System.Drawing.Size(177, 17);
@@ -4801,7 +4804,7 @@ namespace L2_Site_Budworm
             this.tbDecidProtectD2.Name = "tbDecidProtectD2";
             this.tbDecidProtectD2.Size = new System.Drawing.Size(30, 20);
             this.tbDecidProtectD2.TabIndex = 83;
-            this.tbDecidProtectD2.Text = "0.1";
+            this.tbDecidProtectD2.Text = "0";
             this.tbDecidProtectD2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label59
@@ -4828,7 +4831,7 @@ namespace L2_Site_Budworm
             this.tbAlleeScale.Name = "tbAlleeScale";
             this.tbAlleeScale.Size = new System.Drawing.Size(30, 20);
             this.tbAlleeScale.TabIndex = 80;
-            this.tbAlleeScale.Text = "2";
+            this.tbAlleeScale.Text = "5";
             this.tbAlleeScale.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label56
@@ -4912,6 +4915,8 @@ namespace L2_Site_Budworm
             // cbBudmort
             // 
             this.cbBudmort.AutoSize = true;
+            this.cbBudmort.Checked = true;
+            this.cbBudmort.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbBudmort.Location = new System.Drawing.Point(5, 589);
             this.cbBudmort.Name = "cbBudmort";
             this.cbBudmort.Size = new System.Drawing.Size(65, 17);
@@ -5015,7 +5020,7 @@ namespace L2_Site_Budworm
             this.tbBudaprime.Name = "tbBudaprime";
             this.tbBudaprime.Size = new System.Drawing.Size(41, 20);
             this.tbBudaprime.TabIndex = 52;
-            this.tbBudaprime.Text = "1";
+            this.tbBudaprime.Text = "0.3";
             this.tbBudaprime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label62
@@ -5066,6 +5071,8 @@ namespace L2_Site_Budworm
             // cbBudGR
             // 
             this.cbBudGR.AutoSize = true;
+            this.cbBudGR.Checked = true;
+            this.cbBudGR.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbBudGR.Location = new System.Drawing.Point(6, 564);
             this.cbBudGR.Name = "cbBudGR";
             this.cbBudGR.Size = new System.Drawing.Size(112, 17);
@@ -5115,7 +5122,7 @@ namespace L2_Site_Budworm
             this.tbBudcprime.Name = "tbBudcprime";
             this.tbBudcprime.Size = new System.Drawing.Size(41, 20);
             this.tbBudcprime.TabIndex = 22;
-            this.tbBudcprime.Text = "12";
+            this.tbBudcprime.Text = "6";
             this.tbBudcprime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label50
@@ -5133,7 +5140,7 @@ namespace L2_Site_Budworm
             this.tbBudb.Name = "tbBudb";
             this.tbBudb.Size = new System.Drawing.Size(41, 20);
             this.tbBudb.TabIndex = 20;
-            this.tbBudb.Text = "14";
+            this.tbBudb.Text = "17.129";
             this.tbBudb.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label49
@@ -5151,7 +5158,7 @@ namespace L2_Site_Budworm
             this.tbBudrprimem.Name = "tbBudrprimem";
             this.tbBudrprimem.Size = new System.Drawing.Size(41, 20);
             this.tbBudrprimem.TabIndex = 18;
-            this.tbBudrprimem.Text = "0.03";
+            this.tbBudrprimem.Text = "0.032";
             this.tbBudrprimem.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label48
@@ -5169,7 +5176,7 @@ namespace L2_Site_Budworm
             this.tbBudrm.Name = "tbBudrm";
             this.tbBudrm.Size = new System.Drawing.Size(41, 20);
             this.tbBudrm.TabIndex = 16;
-            this.tbBudrm.Text = "2.4";
+            this.tbBudrm.Text = "4.3";
             this.tbBudrm.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label47
@@ -5562,7 +5569,7 @@ namespace L2_Site_Budworm
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
-            this.Text = "LANDIS-II-Site-Budworm v7.31";
+            this.Text = "LANDIS-II-Site-Budworm v7.32";
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);

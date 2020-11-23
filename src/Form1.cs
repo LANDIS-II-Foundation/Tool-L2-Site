@@ -3711,7 +3711,7 @@ namespace L2_Site_Budworm
                                 double rprime2t = fecundity * budwormrprimem * rprimeZ * rprimeyx * rprimexy * matingEffect;  //confirmed with spreadsheet
 
                                 // calculate enemy density following recruitment (12)
-                                double enemyDensitySummer = enemyDensitySpringScaled * rt;
+                                double enemyDensitySummer = enemyDensitySpring_xt * rt;
 
                                 // calculate budworm density following recruitment 12)
                                 double budwormDensitySummer = 0;
@@ -10498,11 +10498,9 @@ namespace L2_Site_Budworm
             }
         }
 
+        private void tbSppName4_TextChanged(object sender, EventArgs e)
+        {
 
-
-
-
-
-
+        }
     }
 }

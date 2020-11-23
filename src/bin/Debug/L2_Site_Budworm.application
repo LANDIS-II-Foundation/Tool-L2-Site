@@ -4,14 +4,14 @@
   <description asmv2:publisher="L2_Site_Budworm" asmv2:product="L2_Site_Budworm" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <deployment install="true" mapFileExtensions="true" />
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="L2_Site_Budworm.exe.manifest" size="7545">
+    <dependentAssembly dependencyType="install" codebase="L2_Site_Budworm.exe.manifest" size="7547">
       <assemblyIdentity name="L2_Site_Budworm.exe" version="1.0.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>1K862oRBcoD0cWOmXS6RK6bZfBI=</dsig:DigestValue>
+        <dsig:DigestValue>mKZeDslcjF1vdzlNwInrsNW1lEI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
